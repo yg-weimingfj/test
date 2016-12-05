@@ -7,17 +7,78 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB0604041DF1573E005839DB /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0604031DF1573E005839DB /* RegisterViewController.swift */; };
+		AB0604091DF17C73005839DB /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0604081DF17C73005839DB /* ForgetPasswordViewController.swift */; };
+		AB269B001DF5083500CFE95B /* DefaultHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269AFF1DF5083500CFE95B /* DefaultHttp.swift */; };
+		AB269B4D1DF50A4400CFE95B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB269B401DF50A3C00CFE95B /* Alamofire.framework */; };
+		AB269B4E1DF50A4400CFE95B /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB269B401DF50A3C00CFE95B /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ABEA386B1DEFB44A0074A234 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEA386A1DEFB44A0074A234 /* AppDelegate.swift */; };
-		ABEA386D1DEFB44A0074A234 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEA386C1DEFB44A0074A234 /* ViewController.swift */; };
 		ABEA38701DEFB44A0074A234 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABEA386E1DEFB44A0074A234 /* Main.storyboard */; };
 		ABEA38731DEFB44A0074A234 /* DriverIos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABEA38711DEFB44A0074A234 /* DriverIos.xcdatamodeld */; };
 		ABEA38751DEFB44A0074A234 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABEA38741DEFB44A0074A234 /* Assets.xcassets */; };
 		ABEA38781DEFB44A0074A234 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABEA38761DEFB44A0074A234 /* LaunchScreen.storyboard */; };
 		ABEA38831DEFB44A0074A234 /* DriverIosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEA38821DEFB44A0074A234 /* DriverIosTests.swift */; };
 		ABEA388E1DEFB44A0074A234 /* DriverIosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEA388D1DEFB44A0074A234 /* DriverIosUITests.swift */; };
+		ABEA389E1DEFB4D50074A234 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEA389D1DEFB4D50074A234 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AB269B3F1DF50A3C00CFE95B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS";
+		};
+		AB269B411DF50A3C00CFE95B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS Tests";
+		};
+		AB269B431DF50A3C00CFE95B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
+			remoteInfo = "Alamofire macOS";
+		};
+		AB269B451DF50A3C00CFE95B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F829C6B21A7A94F100A2CD59;
+			remoteInfo = "Alamofire macOS Tests";
+		};
+		AB269B471DF50A3C00CFE95B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CF626EF1BA7CB3E0011A099;
+			remoteInfo = "Alamofire tvOS";
+		};
+		AB269B491DF50A3C00CFE95B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CF626F81BA7CB3E0011A099;
+			remoteInfo = "Alamofire tvOS Tests";
+		};
+		AB269B4B1DF50A3C00CFE95B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E4202FE01B667AA100C997FB;
+			remoteInfo = "Alamofire watchOS";
+		};
+		AB269B4F1DF50A4400CFE95B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS";
+		};
 		ABEA387F1DEFB44A0074A234 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ABEA385F1DEFB44A0074A234 /* Project object */;
@@ -34,10 +95,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AB269B511DF50A4400CFE95B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AB269B4E1DF50A4400CFE95B /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		AB0604031DF1573E005839DB /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		AB0604081DF17C73005839DB /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
+		AB269AFF1DF5083500CFE95B /* DefaultHttp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultHttp.swift; sourceTree = "<group>"; };
+		AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../../../Downloads/Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		ABEA38671DEFB44A0074A234 /* DriverIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriverIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABEA386A1DEFB44A0074A234 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ABEA386C1DEFB44A0074A234 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ABEA386F1DEFB44A0074A234 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ABEA38721DEFB44A0074A234 /* DriverIos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DriverIos.xcdatamodel; sourceTree = "<group>"; };
 		ABEA38741DEFB44A0074A234 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +127,7 @@
 		ABEA38891DEFB44A0074A234 /* DriverIosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DriverIosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABEA388D1DEFB44A0074A234 /* DriverIosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverIosUITests.swift; sourceTree = "<group>"; };
 		ABEA388F1DEFB44A0074A234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABEA389D1DEFB4D50074A234 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB269B4D1DF50A4400CFE95B /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,9 +156,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB269B351DF50A3C00CFE95B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB269B401DF50A3C00CFE95B /* Alamofire.framework */,
+				AB269B421DF50A3C00CFE95B /* Alamofire iOS Tests.xctest */,
+				AB269B441DF50A3C00CFE95B /* Alamofire.framework */,
+				AB269B461DF50A3C00CFE95B /* Alamofire macOS Tests.xctest */,
+				AB269B481DF50A3C00CFE95B /* Alamofire.framework */,
+				AB269B4A1DF50A3C00CFE95B /* Alamofire tvOS Tests.xctest */,
+				AB269B4C1DF50A3C00CFE95B /* Alamofire.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		ABEA385E1DEFB44A0074A234 = {
 			isa = PBXGroup;
 			children = (
+				AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */,
 				ABEA38691DEFB44A0074A234 /* DriverIos */,
 				ABEA38811DEFB44A0074A234 /* DriverIosTests */,
 				ABEA388C1DEFB44A0074A234 /* DriverIosUITests */,
@@ -99,13 +194,13 @@
 		ABEA38691DEFB44A0074A234 /* DriverIos */ = {
 			isa = PBXGroup;
 			children = (
-				ABEA386A1DEFB44A0074A234 /* AppDelegate.swift */,
-				ABEA386C1DEFB44A0074A234 /* ViewController.swift */,
+				ABEA389C1DEFB47D0074A234 /* Supporting Files */,
 				ABEA386E1DEFB44A0074A234 /* Main.storyboard */,
-				ABEA38741DEFB44A0074A234 /* Assets.xcassets */,
-				ABEA38761DEFB44A0074A234 /* LaunchScreen.storyboard */,
-				ABEA38791DEFB44A0074A234 /* Info.plist */,
+				AB0604081DF17C73005839DB /* ForgetPasswordViewController.swift */,
 				ABEA38711DEFB44A0074A234 /* DriverIos.xcdatamodeld */,
+				ABEA389D1DEFB4D50074A234 /* LoginViewController.swift */,
+				AB0604031DF1573E005839DB /* RegisterViewController.swift */,
+				AB269AFF1DF5083500CFE95B /* DefaultHttp.swift */,
 			);
 			path = DriverIos;
 			sourceTree = "<group>";
@@ -128,6 +223,17 @@
 			path = DriverIosUITests;
 			sourceTree = "<group>";
 		};
+		ABEA389C1DEFB47D0074A234 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ABEA386A1DEFB44A0074A234 /* AppDelegate.swift */,
+				ABEA38741DEFB44A0074A234 /* Assets.xcassets */,
+				ABEA38761DEFB44A0074A234 /* LaunchScreen.storyboard */,
+				ABEA38791DEFB44A0074A234 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,10 +244,12 @@
 				ABEA38631DEFB44A0074A234 /* Sources */,
 				ABEA38641DEFB44A0074A234 /* Frameworks */,
 				ABEA38651DEFB44A0074A234 /* Resources */,
+				AB269B511DF50A4400CFE95B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AB269B501DF50A4400CFE95B /* PBXTargetDependency */,
 			);
 			name = DriverIos;
 			productName = DriverIos;
@@ -191,12 +299,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = weiming;
 				TargetAttributes = {
 					ABEA38661DEFB44A0074A234 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 99B46ZN53C;
+						DevelopmentTeam = YZF2QX5937;
 						ProvisioningStyle = Automatic;
 					};
 					ABEA387D1DEFB44A0074A234 = {
@@ -224,6 +332,12 @@
 			mainGroup = ABEA385E1DEFB44A0074A234;
 			productRefGroup = ABEA38681DEFB44A0074A234 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = AB269B351DF50A3C00CFE95B /* Products */;
+					ProjectRef = AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				ABEA38661DEFB44A0074A234 /* DriverIos */,
@@ -232,6 +346,58 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		AB269B401DF50A3C00CFE95B /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = AB269B3F1DF50A3C00CFE95B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AB269B421DF50A3C00CFE95B /* Alamofire iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire iOS Tests.xctest";
+			remoteRef = AB269B411DF50A3C00CFE95B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AB269B441DF50A3C00CFE95B /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = AB269B431DF50A3C00CFE95B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AB269B461DF50A3C00CFE95B /* Alamofire macOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire macOS Tests.xctest";
+			remoteRef = AB269B451DF50A3C00CFE95B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AB269B481DF50A3C00CFE95B /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = AB269B471DF50A3C00CFE95B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AB269B4A1DF50A3C00CFE95B /* Alamofire tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire tvOS Tests.xctest";
+			remoteRef = AB269B491DF50A3C00CFE95B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AB269B4C1DF50A3C00CFE95B /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = AB269B4B1DF50A3C00CFE95B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		ABEA38651DEFB44A0074A234 /* Resources */ = {
@@ -265,9 +431,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABEA386D1DEFB44A0074A234 /* ViewController.swift in Sources */,
+				ABEA389E1DEFB4D50074A234 /* LoginViewController.swift in Sources */,
+				AB269B001DF5083500CFE95B /* DefaultHttp.swift in Sources */,
 				ABEA38731DEFB44A0074A234 /* DriverIos.xcdatamodeld in Sources */,
+				AB0604091DF17C73005839DB /* ForgetPasswordViewController.swift in Sources */,
 				ABEA386B1DEFB44A0074A234 /* AppDelegate.swift in Sources */,
+				AB0604041DF1573E005839DB /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +459,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		AB269B501DF50A4400CFE95B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Alamofire iOS";
+			targetProxy = AB269B4F1DF50A4400CFE95B /* PBXContainerItemProxy */;
+		};
 		ABEA38801DEFB44A0074A234 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = ABEA38661DEFB44A0074A234 /* DriverIos */;
@@ -340,6 +514,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -390,6 +565,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -418,26 +594,36 @@
 		ABEA38931DEFB44A0074A234 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 99B46ZN53C;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = YZF2QX5937;
 				INFOPLIST_FILE = DriverIos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.weimingfj.driver.DriverIos;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yunba.carrier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		ABEA38941DEFB44A0074A234 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 99B46ZN53C;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = YZF2QX5937;
 				INFOPLIST_FILE = DriverIos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.weimingfj.driver.DriverIos;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yunba.carrier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -518,6 +704,7 @@
 				ABEA38941DEFB44A0074A234 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ABEA38951DEFB44A0074A234 /* Build configuration list for PBXNativeTarget "DriverIosTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +713,7 @@
 				ABEA38971DEFB44A0074A234 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ABEA38981DEFB44A0074A234 /* Build configuration list for PBXNativeTarget "DriverIosUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +722,7 @@
 				ABEA389A1DEFB44A0074A234 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
