@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FA6381C1DF6B4B600D23293 /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6381B1DF6B4B600D23293 /* HomePage.storyboard */; };
+		0FA638201DF6B50C00D23293 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA6381E1DF6B50C00D23293 /* ImageHelper.swift */; };
+		0FA638211DF6B50C00D23293 /* ImageVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA6381F1DF6B50C00D23293 /* ImageVIewExtension.swift */; };
+		0FA638251DF6B53000D23293 /* SliderGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA638221DF6B53000D23293 /* SliderGalleryController.swift */; };
+		0FA638261DF6B53000D23293 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA638231DF6B53000D23293 /* HomePageController.swift */; };
+		0FA638271DF6B53000D23293 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA638241DF6B53000D23293 /* HomeController.swift */; };
 		0FE0D4701DF66658000FE7E1 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE0D4631DF6664D000FE7E1 /* Alamofire.framework */; };
 		0FE0D4711DF66658000FE7E1 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE0D4631DF6664D000FE7E1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0FE0D4791DF69FC8000FE7E1 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE0D4751DF69FC8000FE7E1 /* HomeController.swift */; };
-		0FE0D47A1DF69FC8000FE7E1 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE0D4761DF69FC8000FE7E1 /* HomePageController.swift */; };
-		0FE0D47B1DF69FC8000FE7E1 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE0D4771DF69FC8000FE7E1 /* ImageHelper.swift */; };
-		0FE0D47C1DF69FC8000FE7E1 /* ImageVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE0D4781DF69FC8000FE7E1 /* ImageVIewExtension.swift */; };
-		0FE0D47F1DF69FED000FE7E1 /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FE0D47D1DF69FED000FE7E1 /* HomePage.storyboard */; };
-		0FE0D4851DF6A1F5000FE7E1 /* SliderGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE0D4841DF6A1F5000FE7E1 /* SliderGalleryController.swift */; };
 		AB0604041DF1573E005839DB /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0604031DF1573E005839DB /* RegisterViewController.swift */; };
 		AB0604091DF17C73005839DB /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0604081DF17C73005839DB /* ForgetPasswordViewController.swift */; };
 		AB1813C41DF659950002B84D /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1813C31DF659950002B84D /* CustomTabBarController.swift */; };
@@ -126,13 +126,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0FA6381B1DF6B4B600D23293 /* HomePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
+		0FA6381E1DF6B50C00D23293 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		0FA6381F1DF6B50C00D23293 /* ImageVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVIewExtension.swift; sourceTree = "<group>"; };
+		0FA638221DF6B53000D23293 /* SliderGalleryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderGalleryController.swift; sourceTree = "<group>"; };
+		0FA638231DF6B53000D23293 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
+		0FA638241DF6B53000D23293 /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		0FE0D4571DF6664D000FE7E1 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
-		0FE0D4751DF69FC8000FE7E1 /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeController.swift; path = ../../carriers/carriers/HomeController.swift; sourceTree = "<group>"; };
-		0FE0D4761DF69FC8000FE7E1 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePageController.swift; path = ../../carriers/carriers/HomePageController.swift; sourceTree = "<group>"; };
-		0FE0D4771DF69FC8000FE7E1 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageHelper.swift; path = ../../carriers/carriers/ImageHelper.swift; sourceTree = "<group>"; };
-		0FE0D4781DF69FC8000FE7E1 /* ImageVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageVIewExtension.swift; path = ../../carriers/carriers/ImageVIewExtension.swift; sourceTree = "<group>"; };
-		0FE0D47E1DF69FED000FE7E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ../../carriers/carriers/Base.lproj/HomePage.storyboard; sourceTree = "<group>"; };
-		0FE0D4841DF6A1F5000FE7E1 /* SliderGalleryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderGalleryController.swift; path = ../../carriers/carriers/SliderGalleryController.swift; sourceTree = "<group>"; };
 		AB0604031DF1573E005839DB /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		AB0604081DF17C73005839DB /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		AB1813C31DF659950002B84D /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
@@ -188,6 +188,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FA6381A1DF6B48A00D23293 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				0FA638221DF6B53000D23293 /* SliderGalleryController.swift */,
+				0FA638231DF6B53000D23293 /* HomePageController.swift */,
+				0FA638241DF6B53000D23293 /* HomeController.swift */,
+				0FA6381D1DF6B4F800D23293 /* imageHelper */,
+				0FA6381B1DF6B4B600D23293 /* HomePage.storyboard */,
+			);
+			name = HomePage;
+			sourceTree = "<group>";
+		};
+		0FA6381D1DF6B4F800D23293 /* imageHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0FA6381E1DF6B50C00D23293 /* ImageHelper.swift */,
+				0FA6381F1DF6B50C00D23293 /* ImageVIewExtension.swift */,
+			);
+			name = imageHelper;
+			sourceTree = "<group>";
+		};
 		0FE0D4581DF6664D000FE7E1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,19 +221,6 @@
 				0FE0D46F1DF6664D000FE7E1 /* Alamofire.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		0FE0D4741DF69EF7000FE7E1 /* homepage */ = {
-			isa = PBXGroup;
-			children = (
-				0FE0D4841DF6A1F5000FE7E1 /* SliderGalleryController.swift */,
-				0FE0D47D1DF69FED000FE7E1 /* HomePage.storyboard */,
-				0FE0D4751DF69FC8000FE7E1 /* HomeController.swift */,
-				0FE0D4761DF69FC8000FE7E1 /* HomePageController.swift */,
-				0FE0D4771DF69FC8000FE7E1 /* ImageHelper.swift */,
-				0FE0D4781DF69FC8000FE7E1 /* ImageVIewExtension.swift */,
-			);
-			name = homepage;
 			sourceTree = "<group>";
 		};
 		AB269B6C1DF5597800CFE95B /* RAMAnimatedTabBarController */ = {
@@ -310,7 +318,7 @@
 		ABEA38691DEFB44A0074A234 /* DriverIos */ = {
 			isa = PBXGroup;
 			children = (
-				0FE0D4741DF69EF7000FE7E1 /* homepage */,
+				0FA6381A1DF6B48A00D23293 /* HomePage */,
 				AB269B6C1DF5597800CFE95B /* RAMAnimatedTabBarController */,
 				ABEA389C1DEFB47D0074A234 /* Supporting Files */,
 				ABEA386E1DEFB44A0074A234 /* Main.storyboard */,
@@ -524,7 +532,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FE0D47F1DF69FED000FE7E1 /* HomePage.storyboard in Resources */,
+				0FA6381C1DF6B4B600D23293 /* HomePage.storyboard in Resources */,
 				ABEA38781DEFB44A0074A234 /* LaunchScreen.storyboard in Resources */,
 				ABEA38751DEFB44A0074A234 /* Assets.xcassets in Resources */,
 				ABEA38701DEFB44A0074A234 /* Main.storyboard in Resources */,
@@ -553,26 +561,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB269B7D1DF5597800CFE95B /* RAMFrameItemAnimation.swift in Sources */,
+				0FA638261DF6B53000D23293 /* HomePageController.swift in Sources */,
+				0FA638271DF6B53000D23293 /* HomeController.swift in Sources */,
 				AB269B811DF5597800CFE95B /* RAMAnimatedTabBarController.swift in Sources */,
 				AB1813C41DF659950002B84D /* CustomTabBarController.swift in Sources */,
 				ABEA389E1DEFB4D50074A234 /* LoginViewController.swift in Sources */,
-				0FE0D4851DF6A1F5000FE7E1 /* SliderGalleryController.swift in Sources */,
 				AB2F6B481DF5642300AC94BD /* TabViewController.swift in Sources */,
 				AB269B7C1DF5597800CFE95B /* RAMBounceAnimation.swift in Sources */,
+				0FA638211DF6B50C00D23293 /* ImageVIewExtension.swift in Sources */,
 				AB269B001DF5083500CFE95B /* DefaultHttp.swift in Sources */,
-				0FE0D47B1DF69FC8000FE7E1 /* ImageHelper.swift in Sources */,
 				AB269B7E1DF5597800CFE95B /* RAMFumeAnimation.swift in Sources */,
-				0FE0D4791DF69FC8000FE7E1 /* HomeController.swift in Sources */,
-				0FE0D47C1DF69FC8000FE7E1 /* ImageVIewExtension.swift in Sources */,
 				ABEA38731DEFB44A0074A234 /* DriverIos.xcdatamodeld in Sources */,
 				AB0604091DF17C73005839DB /* ForgetPasswordViewController.swift in Sources */,
 				AB269B831DF5597800CFE95B /* RAMItemAnimationProtocol.swift in Sources */,
+				0FA638251DF6B53000D23293 /* SliderGalleryController.swift in Sources */,
 				ABEA386B1DEFB44A0074A234 /* AppDelegate.swift in Sources */,
 				AB269B821DF5597800CFE95B /* RAMBadge.swift in Sources */,
 				AB0604041DF1573E005839DB /* RegisterViewController.swift in Sources */,
 				AB269B7F1DF5597800CFE95B /* RAMRotationAnimation.swift in Sources */,
 				AB269B801DF5597800CFE95B /* RAMTransitionItemAnimations.swift in Sources */,
-				0FE0D47A1DF69FC8000FE7E1 /* HomePageController.swift in Sources */,
+				0FA638201DF6B50C00D23293 /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,14 +621,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0FE0D47D1DF69FED000FE7E1 /* HomePage.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0FE0D47E1DF69FED000FE7E1 /* Base */,
-			);
-			name = HomePage.storyboard;
-			sourceTree = "<group>";
-		};
 		ABEA386E1DEFB44A0074A234 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
