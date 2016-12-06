@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AdSupport
 @IBDesignable
 class LoginViewController: UIViewController {
     @IBOutlet var loginTabButton: UISegmentedControl!
@@ -29,6 +30,8 @@ class LoginViewController: UIViewController {
     
     @IBOutlet var loginCell: UILabel!
     @IBOutlet var loginButton: UIButton!
+    let  defaulthttp = DefaultHttp()
+    let appsecret = "D2A10FA7A00811E6A78508606EF343DB"
     
     var isCounting = false {
         willSet {
@@ -127,9 +130,34 @@ class LoginViewController: UIViewController {
         }
     }
     @IBAction func loginButton(_ sender: UIButton) {
-        errorLabel.text = "验证码错误，请重新输入"
-        errorLabel.isHidden = false
-        voiceView.isHidden = true
+        
+        let passd5 = passEncryption(passtext: passwordTexField.text!, appEncryotion: appsecret)
+        let uuid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String
+        
+        let des : Dictionary<String,Any> = ["token":"","mobile_no":passwordPhoneTextField.text!,"user_pwd":passd5,"method":"yunba.carrier.v1.user.login","device_mark":uuid,"time":strNowTime]
+        
+        defaulthttp.httopost(parame: des){results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    let sb = UIStoryboard(name: "Main", bundle:nil)
+                    let vc = sb.instantiateViewController(withIdentifier: "forgetPasswordViewController") as! ForgetPasswordViewController
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    let info:String = results["resultInfo"] as! String!
+                    self.tishi(st: info)
+                }
+            }
+            print("JSON: \(results)")
+            
+        }
+
+//        errorLabel.text = "验证码错误，请重新输入"
+//        errorLabel.isHidden = false
+//        voiceView.isHidden = true
         
     }
     func openVoice(){
@@ -163,6 +191,59 @@ class LoginViewController: UIViewController {
         des.type = "13131313"
         
     }
+    //密码加密
+    func passEncryption(passtext:String,appEncryotion:String) -> String {
+        var i = 0
+        var bytes: [UInt8] = [UInt8]()
+        for ch in passtext.utf8 {
+            bytes.append(ch.advanced(by:0))
+        }
+        
+        var bytes2:[UInt8] = [UInt8]()
+        for ch in appEncryotion.utf8 {
+            bytes2.append(ch.advanced(by:0))
+        }
+        var bytes3:[UInt8] = [UInt8]()
+        for ch in bytes{
+            bytes3.append(ch^bytes2[i%bytes2.count])
+            i+=1
+        }
+        return ioshex(types: bytes3)
+    }
+    func ioshex(types:[UInt8]) -> String {
+        var res:[String] = [String]()
+        var j = 0
+        var encryptionOne:UInt8
+        var encryptionTwo:UInt8
+        
+        let hexDigits:[String] = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
+        for _ in types {
+            encryptionOne = types[j]>>4&0x0f
+            encryptionTwo = types[j]&0x0f
+            
+            res.append(hexDigits[encryptionOne.hashValue])
+            res.append(hexDigits[encryptionTwo.hashValue])
+            j+=1
+            
+        }
+        var passend = ""
+        for vars in res{
+            passend += vars
+        }
+        return passend
+    }
+    
+    func tishi(st:String){
+        let alertController = UIAlertController(title: st,
+                                                message: nil, preferredStyle: .alert)
+        //显示提示框
+        self.present(alertController, animated: true, completion: nil)
+        //1秒钟后自动消失
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.presentedViewController?.dismiss(animated: false, completion: nil)
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
