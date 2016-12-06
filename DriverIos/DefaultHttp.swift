@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 //let httpurl = "http://192.168.1.248:8082/liner-client/liner/android"
-let httpurl = "http://apitest.yunba.com:20082/liner-client/liner/android"
+let httpurl = "http://apitest.yunba.com:20082/service_client/open/cargoapp"
 class DefaultHttp{
     enum HTTPMethod: String {
         case options = "OPTIONS"
@@ -25,7 +25,7 @@ class DefaultHttp{
     }
     func httopost(parame:Dictionary<String,Any>,call:@escaping (_ results:([String:Any]))->Void){
         let parameters: Parameters = parame
-   
+        print("请求参数：\(parameters)")
         
         Alamofire.request(httpurl,method: .post,parameters:parameters).validate().responseJSON{ response in
             switch response.result {
