@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 //let httpurl = "http://192.168.1.248:8082/liner-client/liner/android"
-let httpurl = "http://apitest.yunba.com:20082/service_client/open/cargoapp"
+let httpurl = "http://apitest.yunba.com:20082/service_client/open/cargoapp/ios"
 class DefaultHttp{
     enum HTTPMethod: String {
         case options = "OPTIONS"

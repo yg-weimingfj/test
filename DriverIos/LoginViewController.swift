@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var loginCell: UILabel!
     @IBOutlet var loginButton: UIButton!
     let  defaulthttp = DefaultHttp()
-    let appsecret = "D2A10FA7A00811E6A78508606EF343DB"
+    let appsecret = "weimingfj_ios_app_secret"
     
     var isCounting = false {
         willSet {
