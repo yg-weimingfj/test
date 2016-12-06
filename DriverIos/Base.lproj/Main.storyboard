@@ -526,6 +526,7 @@
                                 </state>
                                 <connections>
                                     <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EAg-Zs-zQy"/>
+                                    <segue destination="kK9-rx-g2l" kind="presentation" id="qZP-ni-8e2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -553,6 +554,84 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOM-jA-ba9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-381.15942028985512" y="62.771739130434788"/>
+        </scene>
+        <!--222-->
+        <scene sceneID="yfw-R6-a4k">
+            <objects>
+                <viewController id="jiO-2J-u5J" customClass="TabViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="w0O-1M-opy"/>
+                        <viewControllerLayoutGuide type="bottom" id="mTV-sE-Kuf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Nx-uF-Pr6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="222" image="mainTabIconUnSelected" selectedImage="mainTabIconSelected" id="Sj3-sj-pzu" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="animation" destination="qo9-Wr-Yb6" id="rs7-pQ-LdE"/>
+                        </connections>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Re1-Se-stv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="qo9-Wr-Yb6" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="-207" y="1455"/>
+        </scene>
+        <!--首页-->
+        <scene sceneID="RC5-ii-rEc">
+            <objects>
+                <viewController id="YNI-4c-N5x" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rsp-Mh-Gds"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZIW-DR-V7j"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tWq-wD-A2h">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="首页" image="mainTabIconUnSelected" selectedImage="mainTabIconSelected" id="zjT-gZ-Hhu" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="animation" destination="PkZ-7U-gaQ" id="xtb-q1-TKG"/>
+                        </connections>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LCO-dE-hQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="PkZ-7U-gaQ" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="-206" y="768"/>
+        </scene>
+        <!--Custom Tab Bar Controller-->
+        <scene sceneID="p4P-4r-CLZ">
+            <objects>
+                <tabBarController id="kK9-rx-g2l" customClass="CustomTabBarController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translucent="NO" id="VHq-QZ-Re4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="YNI-4c-N5x" kind="relationship" relationship="viewControllers" id="b0U-Hj-LcC"/>
+                        <segue destination="jiO-2J-u5J" kind="relationship" relationship="viewControllers" id="8tT-cV-qEL"/>
+                        <segue destination="cnd-Dc-8DF" kind="relationship" relationship="viewControllers" id="rs6-Ow-aFd"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rp2-fw-Qnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1123" y="1092"/>
         </scene>
         <!--Forget Password View Controller-->
         <scene sceneID="rJY-bh-HQh">
@@ -772,11 +851,42 @@
             </objects>
             <point key="canvasLocation" x="371" y="63"/>
         </scene>
+        <!--333-->
+        <scene sceneID="2s1-xv-aT8">
+            <objects>
+                <viewController id="cnd-Dc-8DF" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pbb-lS-nup"/>
+                        <viewControllerLayoutGuide type="bottom" id="OkJ-j2-lxE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dZX-GM-J0j">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="333" image="passIcon" id="6HH-vy-0hj" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="animation" destination="CWY-q6-hO0" id="rQW-r7-4SZ"/>
+                        </connections>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ux8-cn-PBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="CWY-q6-hO0" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="-207" y="2153"/>
+        </scene>
     </scenes>
     <resources>
         <image name="back" width="13" height="22"/>
         <image name="logo" width="111" height="104"/>
         <image name="loin_top_background" width="374" height="207"/>
+        <image name="mainTabIconSelected" width="19" height="19"/>
+        <image name="mainTabIconUnSelected" width="19" height="19"/>
         <image name="passIcon" width="14" height="20"/>
         <image name="phoneIcon" width="16" height="19"/>
     </resources>

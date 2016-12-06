@@ -9,14 +9,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DriverIos/LoginViewController.swift"
-            timestampString = "502285418.232098"
+            filePath = "DriverIos/RAMAnimatedTabBarController/RAMAnimatedTabBarController.swift"
+            timestampString = "502623526.626651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "LoginViewController"
-            landmarkType = "3">
+            startingLineNumber = "12"
+            endingLineNumber = "12">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -25,30 +23,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DriverIos/LoginViewController.swift"
-            timestampString = "502596502.595608"
+            filePath = "DriverIos/RAMAnimatedTabBarController/RAMAnimatedTabBarController.swift"
+            timestampString = "502623542.351793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DriverIos/LoginViewController.swift"
-            timestampString = "502599215.358014"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
+            startingLineNumber = "10"
+            endingLineNumber = "10">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

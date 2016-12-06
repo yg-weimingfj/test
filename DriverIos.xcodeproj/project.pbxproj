@@ -9,9 +9,19 @@
 /* Begin PBXBuildFile section */
 		AB0604041DF1573E005839DB /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0604031DF1573E005839DB /* RegisterViewController.swift */; };
 		AB0604091DF17C73005839DB /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0604081DF17C73005839DB /* ForgetPasswordViewController.swift */; };
+		AB1813C41DF659950002B84D /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1813C31DF659950002B84D /* CustomTabBarController.swift */; };
 		AB269B001DF5083500CFE95B /* DefaultHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269AFF1DF5083500CFE95B /* DefaultHttp.swift */; };
 		AB269B4D1DF50A4400CFE95B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB269B401DF50A3C00CFE95B /* Alamofire.framework */; };
 		AB269B4E1DF50A4400CFE95B /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB269B401DF50A3C00CFE95B /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AB269B7C1DF5597800CFE95B /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269B6F1DF5597800CFE95B /* RAMBounceAnimation.swift */; };
+		AB269B7D1DF5597800CFE95B /* RAMFrameItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269B711DF5597800CFE95B /* RAMFrameItemAnimation.swift */; };
+		AB269B7E1DF5597800CFE95B /* RAMFumeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269B731DF5597800CFE95B /* RAMFumeAnimation.swift */; };
+		AB269B7F1DF5597800CFE95B /* RAMRotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269B751DF5597800CFE95B /* RAMRotationAnimation.swift */; };
+		AB269B801DF5597800CFE95B /* RAMTransitionItemAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269B771DF5597800CFE95B /* RAMTransitionItemAnimations.swift */; };
+		AB269B811DF5597800CFE95B /* RAMAnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269B781DF5597800CFE95B /* RAMAnimatedTabBarController.swift */; };
+		AB269B821DF5597800CFE95B /* RAMBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269B7A1DF5597800CFE95B /* RAMBadge.swift */; };
+		AB269B831DF5597800CFE95B /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269B7B1DF5597800CFE95B /* RAMItemAnimationProtocol.swift */; };
+		AB2F6B481DF5642300AC94BD /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2F6B471DF5642300AC94BD /* TabViewController.swift */; };
 		ABEA386B1DEFB44A0074A234 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEA386A1DEFB44A0074A234 /* AppDelegate.swift */; };
 		ABEA38701DEFB44A0074A234 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABEA386E1DEFB44A0074A234 /* Main.storyboard */; };
 		ABEA38731DEFB44A0074A234 /* DriverIos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABEA38711DEFB44A0074A234 /* DriverIos.xcdatamodeld */; };
@@ -112,8 +122,18 @@
 /* Begin PBXFileReference section */
 		AB0604031DF1573E005839DB /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		AB0604081DF17C73005839DB /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
+		AB1813C31DF659950002B84D /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		AB269AFF1DF5083500CFE95B /* DefaultHttp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultHttp.swift; sourceTree = "<group>"; };
 		AB269B341DF50A3C00CFE95B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../../../Downloads/Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
+		AB269B6F1DF5597800CFE95B /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
+		AB269B711DF5597800CFE95B /* RAMFrameItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMFrameItemAnimation.swift; sourceTree = "<group>"; };
+		AB269B731DF5597800CFE95B /* RAMFumeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMFumeAnimation.swift; sourceTree = "<group>"; };
+		AB269B751DF5597800CFE95B /* RAMRotationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMRotationAnimation.swift; sourceTree = "<group>"; };
+		AB269B771DF5597800CFE95B /* RAMTransitionItemAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMTransitionItemAnimations.swift; sourceTree = "<group>"; };
+		AB269B781DF5597800CFE95B /* RAMAnimatedTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMAnimatedTabBarController.swift; sourceTree = "<group>"; };
+		AB269B7A1DF5597800CFE95B /* RAMBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBadge.swift; sourceTree = "<group>"; };
+		AB269B7B1DF5597800CFE95B /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
+		AB2F6B471DF5642300AC94BD /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		ABEA38671DEFB44A0074A234 /* DriverIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriverIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABEA386A1DEFB44A0074A234 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABEA386F1DEFB44A0074A234 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -170,6 +190,77 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AB269B6C1DF5597800CFE95B /* RAMAnimatedTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				AB269B6D1DF5597800CFE95B /* Animations */,
+				AB269B781DF5597800CFE95B /* RAMAnimatedTabBarController.swift */,
+				AB269B791DF5597800CFE95B /* RAMBadge */,
+				AB269B7B1DF5597800CFE95B /* RAMItemAnimationProtocol.swift */,
+			);
+			path = RAMAnimatedTabBarController;
+			sourceTree = "<group>";
+		};
+		AB269B6D1DF5597800CFE95B /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				AB269B6E1DF5597800CFE95B /* BounceAnimation */,
+				AB269B701DF5597800CFE95B /* FrameAnimation */,
+				AB269B721DF5597800CFE95B /* FumeAnimation */,
+				AB269B741DF5597800CFE95B /* RotationAnimation */,
+				AB269B761DF5597800CFE95B /* TransitionAniamtions */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		AB269B6E1DF5597800CFE95B /* BounceAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				AB269B6F1DF5597800CFE95B /* RAMBounceAnimation.swift */,
+			);
+			path = BounceAnimation;
+			sourceTree = "<group>";
+		};
+		AB269B701DF5597800CFE95B /* FrameAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				AB269B711DF5597800CFE95B /* RAMFrameItemAnimation.swift */,
+			);
+			path = FrameAnimation;
+			sourceTree = "<group>";
+		};
+		AB269B721DF5597800CFE95B /* FumeAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				AB269B731DF5597800CFE95B /* RAMFumeAnimation.swift */,
+			);
+			path = FumeAnimation;
+			sourceTree = "<group>";
+		};
+		AB269B741DF5597800CFE95B /* RotationAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				AB269B751DF5597800CFE95B /* RAMRotationAnimation.swift */,
+			);
+			path = RotationAnimation;
+			sourceTree = "<group>";
+		};
+		AB269B761DF5597800CFE95B /* TransitionAniamtions */ = {
+			isa = PBXGroup;
+			children = (
+				AB269B771DF5597800CFE95B /* RAMTransitionItemAnimations.swift */,
+			);
+			path = TransitionAniamtions;
+			sourceTree = "<group>";
+		};
+		AB269B791DF5597800CFE95B /* RAMBadge */ = {
+			isa = PBXGroup;
+			children = (
+				AB269B7A1DF5597800CFE95B /* RAMBadge.swift */,
+			);
+			path = RAMBadge;
+			sourceTree = "<group>";
+		};
 		ABEA385E1DEFB44A0074A234 = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +285,7 @@
 		ABEA38691DEFB44A0074A234 /* DriverIos */ = {
 			isa = PBXGroup;
 			children = (
+				AB269B6C1DF5597800CFE95B /* RAMAnimatedTabBarController */,
 				ABEA389C1DEFB47D0074A234 /* Supporting Files */,
 				ABEA386E1DEFB44A0074A234 /* Main.storyboard */,
 				AB0604081DF17C73005839DB /* ForgetPasswordViewController.swift */,
@@ -201,6 +293,8 @@
 				ABEA389D1DEFB4D50074A234 /* LoginViewController.swift */,
 				AB0604031DF1573E005839DB /* RegisterViewController.swift */,
 				AB269AFF1DF5083500CFE95B /* DefaultHttp.swift */,
+				AB2F6B471DF5642300AC94BD /* TabViewController.swift */,
+				AB1813C31DF659950002B84D /* CustomTabBarController.swift */,
 			);
 			path = DriverIos;
 			sourceTree = "<group>";
@@ -431,12 +525,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB269B7D1DF5597800CFE95B /* RAMFrameItemAnimation.swift in Sources */,
+				AB269B811DF5597800CFE95B /* RAMAnimatedTabBarController.swift in Sources */,
+				AB1813C41DF659950002B84D /* CustomTabBarController.swift in Sources */,
 				ABEA389E1DEFB4D50074A234 /* LoginViewController.swift in Sources */,
+				AB2F6B481DF5642300AC94BD /* TabViewController.swift in Sources */,
+				AB269B7C1DF5597800CFE95B /* RAMBounceAnimation.swift in Sources */,
 				AB269B001DF5083500CFE95B /* DefaultHttp.swift in Sources */,
+				AB269B7E1DF5597800CFE95B /* RAMFumeAnimation.swift in Sources */,
 				ABEA38731DEFB44A0074A234 /* DriverIos.xcdatamodeld in Sources */,
 				AB0604091DF17C73005839DB /* ForgetPasswordViewController.swift in Sources */,
+				AB269B831DF5597800CFE95B /* RAMItemAnimationProtocol.swift in Sources */,
 				ABEA386B1DEFB44A0074A234 /* AppDelegate.swift in Sources */,
+				AB269B821DF5597800CFE95B /* RAMBadge.swift in Sources */,
 				AB0604041DF1573E005839DB /* RegisterViewController.swift in Sources */,
+				AB269B7F1DF5597800CFE95B /* RAMRotationAnimation.swift in Sources */,
+				AB269B801DF5597800CFE95B /* RAMTransitionItemAnimations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
