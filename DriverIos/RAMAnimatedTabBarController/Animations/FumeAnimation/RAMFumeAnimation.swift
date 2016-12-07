@@ -32,7 +32,7 @@ open class RAMFumeAnimation : RAMItemAnimation {
    - parameter icon:      animating UITabBarItem icon
    - parameter textLabel: animating UITabBarItem textLabel
    */
-  override open func playAnimation(_ icon : UIImageView, textLabel : UILabel) {
+    override open func playAnimation(_ icon : UIImageView, textLabel : UILabel,selecedIcon :UIImageView) {
     playMoveIconAnimation(icon, values:[icon.center.y as AnyObject, (icon.center.y + 4.0) as AnyObject])
     playLabelAnimation(textLabel)
     textLabel.textColor = textSelectedColor
@@ -51,7 +51,7 @@ open class RAMFumeAnimation : RAMItemAnimation {
    - parameter defaultTextColor: default UITabBarItem text color
    - parameter defaultIconColor: default UITabBarItem icon color
    */
-  override open func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor : UIColor) {
+    override open func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor : UIColor,deselectedIcon : UIImageView) {
     
     playMoveIconAnimation(icon, values:[(icon.center.y + 4.0) as AnyObject, icon.center.y as AnyObject])
     playDeselectLabelAnimation(textLabel)
@@ -72,7 +72,7 @@ open class RAMFumeAnimation : RAMItemAnimation {
    - parameter icon:      animating UITabBarItem icon
    - parameter textLabel: animating UITabBarItem textLabel
    */
-  override open func selectedState(_ icon : UIImageView, textLabel : UILabel) {
+    override open func selectedState(_ icon : UIImageView, textLabel : UILabel,deselectedIcon:UIImageView,selectedIcon:UIImageView) {
     
     playMoveIconAnimation(icon, values:[(icon.center.y + 12.0) as AnyObject])
     textLabel.alpha = 0

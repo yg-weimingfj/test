@@ -45,7 +45,7 @@ open class RAMRotationAnimation : RAMItemAnimation {
    - parameter icon:      animating UITabBarItem icon
    - parameter textLabel: animating UITabBarItem textLabel
    */
-  override open func playAnimation(_ icon : UIImageView, textLabel : UILabel) {
+    override open func playAnimation(_ icon : UIImageView, textLabel : UILabel,selecedIcon : UIImageView) {
     playRoatationAnimation(icon)
     textLabel.textColor = textSelectedColor
   }
@@ -58,10 +58,10 @@ open class RAMRotationAnimation : RAMItemAnimation {
    - parameter defaultTextColor: default UITabBarItem text color
    - parameter defaultIconColor: default UITabBarItem icon color
    */
-  override open func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor : UIColor) {
+    override open func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor : UIColor,deselectedIcon : UIImageView) {
     textLabel.textColor = defaultTextColor
     
-    if let iconImage = icon.image {
+    if let iconImage = deselectedIcon.image {
       let renderMode = defaultIconColor.cgColor.alpha == 0 ? UIImageRenderingMode.alwaysOriginal :
         UIImageRenderingMode.alwaysTemplate
       let renderImage = iconImage.withRenderingMode(renderMode)
@@ -76,7 +76,7 @@ open class RAMRotationAnimation : RAMItemAnimation {
    - parameter icon:      animating UITabBarItem icon
    - parameter textLabel: animating UITabBarItem textLabel
    */
-  override open func selectedState(_ icon : UIImageView, textLabel : UILabel) {
+    override open func selectedState(_ icon : UIImageView, textLabel : UILabel,deselectedIcon:UIImageView,selectedIcon:UIImageView) {
     textLabel.textColor = textSelectedColor
     
     if let iconImage = icon.image {

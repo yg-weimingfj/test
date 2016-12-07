@@ -83,7 +83,7 @@ open class RAMAnimatedTabBarItem: UITabBarItem {
   open var badge: RAMBadge? // use badgeValue to show badge
   
   // Container for icon and text in UITableItem. 
-  open var iconView: (icon: UIImageView, textLabel: UILabel)?
+    open var iconView: (icon: UIImageView, textLabel: UILabel,deselectedIcon:UIImageView,selectedIcon: UIImageView)?
   
   /**
    Start selected animation
@@ -94,7 +94,7 @@ open class RAMAnimatedTabBarItem: UITabBarItem {
     guard animation != nil && iconView != nil else  {
       return
     }
-    animation.playAnimation(iconView!.icon, textLabel: iconView!.textLabel)
+    animation.playAnimation(iconView!.icon, textLabel: iconView!.textLabel,selecedIcon:iconView!.selectedIcon)
   }
   
   /**
@@ -110,7 +110,7 @@ open class RAMAnimatedTabBarItem: UITabBarItem {
       iconView!.icon,
       textLabel: iconView!.textLabel,
       defaultTextColor: textColor,
-      defaultIconColor: iconColor)
+      defaultIconColor: iconColor,deselectedIcon: iconView!.deselectedIcon)
   }
   
   /**
@@ -121,7 +121,7 @@ open class RAMAnimatedTabBarItem: UITabBarItem {
       return
     }
     
-    animation.selectedState(iconView!.icon, textLabel: iconView!.textLabel)
+    animation.selectedState(iconView!.icon, textLabel: iconView!.textLabel,deselectedIcon:iconView!.deselectedIcon,selectedIcon:iconView!.selectedIcon)
   }
 }
 
@@ -292,6 +292,15 @@ open class RAMAnimatedTabBarController: UITabBarController {
       icon.translatesAutoresizingMaskIntoConstraints = false
       icon.tintColor = item.iconColor
       
+        let deselectedIcon = UIImageView(image: item.image?.withRenderingMode(renderMode))
+        deselectedIcon.translatesAutoresizingMaskIntoConstraints = false
+        deselectedIcon.tintColor = item.iconColor
+        
+        
+        let selectedIcon = UIImageView(image: item.selectedImage?.withRenderingMode(renderMode))
+        selectedIcon.translatesAutoresizingMaskIntoConstraints = false
+        selectedIcon.tintColor = item.iconColor
+        
       // text
       let textLabel = UILabel()
       textLabel.text = item.title
@@ -317,7 +326,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
         icon.alpha      = 0.5
         textLabel.alpha = 0.5
       }
-      item.iconView = (icon:icon, textLabel:textLabel)
+      item.iconView = (icon:icon, textLabel:textLabel,deselectedIcon:deselectedIcon,selectedIcon:selectedIcon)
       
       if 0 == index { // selected first elemet
         item.selectedState()

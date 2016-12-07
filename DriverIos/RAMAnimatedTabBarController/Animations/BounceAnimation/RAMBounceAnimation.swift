@@ -32,8 +32,8 @@ open class RAMBounceAnimation : RAMItemAnimation {
    - parameter icon:      animating UITabBarItem icon
    - parameter textLabel: animating UITabBarItem textLabel
    */
-  override open func playAnimation(_ icon : UIImageView, textLabel : UILabel) {
-    playBounceAnimation(icon)
+  override open func playAnimation(_ icon : UIImageView, textLabel : UILabel,selecedIcon:UIImageView) {
+    playBounceAnimation(icon,selectedIcon: selecedIcon)
     textLabel.textColor = textSelectedColor
   }
   
@@ -45,10 +45,10 @@ open class RAMBounceAnimation : RAMItemAnimation {
    - parameter defaultTextColor: default UITabBarItem text color
    - parameter defaultIconColor: default UITabBarItem icon color
    */
-  override open func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor: UIColor) {
+    override open func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor: UIColor,deselectedIcon : UIImageView) {
     textLabel.textColor = defaultTextColor
     
-    if let iconImage = icon.image {
+    if let iconImage = deselectedIcon.image {
       let renderMode = defaultIconColor.cgColor.alpha == 0 ? UIImageRenderingMode.alwaysOriginal :
         UIImageRenderingMode.alwaysTemplate
       let renderImage = iconImage.withRenderingMode(renderMode)
@@ -63,17 +63,17 @@ open class RAMBounceAnimation : RAMItemAnimation {
    - parameter icon:      animating UITabBarItem icon
    - parameter textLabel: animating UITabBarItem textLabel
    */
-  override open func selectedState(_ icon : UIImageView, textLabel : UILabel) {
+    override open func selectedState(_ icon : UIImageView, textLabel : UILabel,deselectedIcon:UIImageView,selectedIcon:UIImageView) {
     textLabel.textColor = textSelectedColor
     
-    if let iconImage = icon.image {
+    if let iconImage = selectedIcon.image {
       let renderImage = iconImage.withRenderingMode(.alwaysTemplate)
       icon.image = renderImage
       icon.tintColor = iconSelectedColor
     }
   }
   
-  func playBounceAnimation(_ icon : UIImageView) {
+func playBounceAnimation(_ icon : UIImageView,selectedIcon:UIImageView) {
     
     let bounceAnimation = CAKeyframeAnimation(keyPath: Constants.AnimationKeys.Scale)
     bounceAnimation.values = [1.0 ,1.4, 0.9, 1.15, 0.95, 1.02, 1.0]
@@ -82,7 +82,7 @@ open class RAMBounceAnimation : RAMItemAnimation {
     
     icon.layer.add(bounceAnimation, forKey: nil)
     
-    if let iconImage = icon.image {
+    if let iconImage = selectedIcon.image {
       let renderImage = iconImage.withRenderingMode(.alwaysTemplate)
       icon.image = renderImage
       icon.tintColor = iconSelectedColor

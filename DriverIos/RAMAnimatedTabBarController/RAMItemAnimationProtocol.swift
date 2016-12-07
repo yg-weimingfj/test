@@ -26,9 +26,9 @@ import UIKit
 
 public protocol RAMItemAnimationProtocol {
   
-  func playAnimation(_ icon : UIImageView, textLabel : UILabel)
-  func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor : UIColor)
-  func selectedState(_ icon : UIImageView, textLabel : UILabel)
+  func playAnimation(_ icon : UIImageView, textLabel : UILabel,selecedIcon:UIImageView)
+  func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor : UIColor,deselectedIcon : UIImageView)
+    func selectedState(_ icon : UIImageView, textLabel : UILabel,deselectedIcon:UIImageView,selectedIcon:UIImageView)
 }
 
 /// Base class for UITabBarItems animation
@@ -65,7 +65,7 @@ open class RAMItemAnimation: NSObject, RAMItemAnimationProtocol {
    - parameter icon:      animating UITabBarItem icon
    - parameter textLabel: animating UITabBarItem textLabel
    */
-  open func playAnimation(_ icon : UIImageView, textLabel : UILabel) {
+    open func playAnimation(_ icon : UIImageView, textLabel : UILabel,selecedIcon:UIImageView) {
     fatalError("override method in subclass")
   }
   
@@ -77,7 +77,7 @@ open class RAMItemAnimation: NSObject, RAMItemAnimationProtocol {
    - parameter defaultTextColor: default UITabBarItem text color
    - parameter defaultIconColor: default UITabBarItem icon color
    */
-  open func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor : UIColor) {
+    open func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor : UIColor,deselectedIcon : UIImageView) {
     fatalError("override method in subclass")
   }
   
@@ -87,7 +87,7 @@ open class RAMItemAnimation: NSObject, RAMItemAnimationProtocol {
   - parameter icon:      animating UITabBarItem icon
    - parameter textLabel: animating UITabBarItem textLabel 
    */
-  open func selectedState(_ icon: UIImageView, textLabel : UILabel) {
+  open func selectedState(_ icon: UIImageView, textLabel : UILabel,deselectedIcon:UIImageView,selectedIcon:UIImageView) {
     fatalError("override method in subclass")
   }
 }

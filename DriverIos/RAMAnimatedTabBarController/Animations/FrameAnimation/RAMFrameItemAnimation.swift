@@ -86,7 +86,7 @@ open class RAMFrameItemAnimation: RAMItemAnimation {
    - parameter icon:      animating UITabBarItem icon
    - parameter textLabel: animating UITabBarItem textLabel
    */
-  override open func playAnimation(_ icon : UIImageView, textLabel : UILabel) {
+    override open func playAnimation(_ icon : UIImageView, textLabel : UILabel,selecedIcon : UIImageView) {
     
     playFrameAnimation(icon, images:animationImages)
     textLabel.textColor = textSelectedColor
@@ -100,7 +100,7 @@ open class RAMFrameItemAnimation: RAMItemAnimation {
    - parameter defaultTextColor: default UITabBarItem text color
    - parameter defaultIconColor: default UITabBarItem icon color
    */
-  override open func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor : UIColor) {
+    override open func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor, defaultIconColor : UIColor,deselectedIcon : UIImageView) {
     if isDeselectAnimation {
       playFrameAnimation(icon, images:animationImages.reversed())
     }
@@ -114,7 +114,7 @@ open class RAMFrameItemAnimation: RAMItemAnimation {
    - parameter icon:      animating UITabBarItem icon
    - parameter textLabel: animating UITabBarItem textLabel
    */
-  override open func selectedState(_ icon : UIImageView, textLabel : UILabel) {
+    override open func selectedState(_ icon : UIImageView, textLabel : UILabel,deselectedIcon:UIImageView,selectedIcon:UIImageView) {
     icon.image = selectedImage
     textLabel.textColor = textSelectedColor
   }
