@@ -351,13 +351,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="找货" image="findCargo" selectedImage="findCargo" id="XYm-5T-ndj" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="找货" image="CombinedShape" id="XYm-5T-ndj" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                 <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="yImageOffSet">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
@@ -373,7 +376,7 @@
         <!--我的-->
         <scene sceneID="ZfJ-0a-kgM">
             <objects>
-                <viewController id="FAg-wO-DiX" customClass="ViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FAg-wO-DiX" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tcN-R3-o04"/>
                         <viewControllerLayoutGuide type="bottom" id="lB6-WG-jM2"/>
@@ -397,7 +400,7 @@
         <!--运单-->
         <scene sceneID="lgV-Dz-tYH">
             <objects>
-                <viewController id="1cl-x6-Z6G" customClass="ViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1cl-x6-Z6G" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A1Y-RD-GeC"/>
                         <viewControllerLayoutGuide type="bottom" id="qmY-g2-axA"/>
@@ -421,7 +424,7 @@
         <!--空车上报-->
         <scene sceneID="6XN-1m-6r3">
             <objects>
-                <viewController id="EVy-RN-cIu" customClass="ViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="EVy-RN-cIu" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BNm-Yj-XNQ"/>
                         <viewControllerLayoutGuide type="bottom" id="vs5-qO-fOe"/>
@@ -445,7 +448,7 @@
         <!--Home Page Controller-->
         <scene sceneID="VjF-ls-AL6">
             <objects>
-                <tabBarController id="JLv-wq-dfP" customClass="HomePageController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="homePageController" id="JLv-wq-dfP" customClass="HomePageController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="FG9-qi-5c3" colorLabel="IBBuiltInLabel-Blue">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -464,13 +467,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="CombinedShape" width="38" height="38"/>
         <image name="HomePage01" width="19" height="19"/>
         <image name="HomePage02" width="19" height="19"/>
         <image name="auditIcon" width="39" height="48"/>
         <image name="emptyCarIcon" width="42" height="47"/>
         <image name="emptyCarUp01" width="18" height="20"/>
         <image name="emptyCarUp02" width="18" height="20"/>
-        <image name="findCargo" width="38" height="38"/>
         <image name="helpIcon" width="40" height="47"/>
         <image name="messageIcon" width="45" height="54"/>
         <image name="myInfo" width="18" height="20"/>

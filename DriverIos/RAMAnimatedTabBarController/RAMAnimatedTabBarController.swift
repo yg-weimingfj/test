@@ -54,6 +54,7 @@ extension RAMAnimatedTabBarItem {
 open class RAMAnimatedTabBarItem: UITabBarItem {
   
   @IBInspectable open var yOffSet: CGFloat = 0
+  @IBInspectable open var yImageOffSet: CGFloat = 0
   
   open override var isEnabled: Bool {
     didSet {
@@ -304,6 +305,9 @@ open class RAMAnimatedTabBarController: UITabBarController {
       
       container.addSubview(icon)
       createConstraints(icon, container: container, size: itemImage.size, yOffset: -5 - item.yOffSet)
+        if item.yImageOffSet != 0{
+            createConstraints(icon, container: container, size: itemImage.size, yOffset: -5 - item.yImageOffSet)
+        }
       
       container.addSubview(textLabel)
       let textLabelWidth = tabBar.frame.size.width / CGFloat(items.count) - 5.0

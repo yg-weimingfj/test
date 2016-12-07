@@ -7,12 +7,13 @@
 //
 
 import UIKit
-/// tabbar圆弧高度
-let layerHeight: CGFloat = 10
+
 /// 屏幕宽度
 let SCREEN_WIDTH = UIScreen.main.bounds.size.width
 /// 屏幕高度
 let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
+/// tabbar圆弧高度
+let layerHeight: CGFloat = SCREEN_WIDTH/10
 class HomePageController: RAMAnimatedTabBarController {
 
     override func viewDidLoad() {
@@ -46,6 +47,18 @@ extension HomePageController: UITabBarControllerDelegate {
     }
 }
 
+var skullCenter:CGPoint{
+            return CGPoint(x:SCREEN_WIDTH/2,y:0)////获取中心点
+    
+        }
+var skullRadius:CGFloat{
+            return layerHeight
+        }
+    private struct Ratios{
+        static let  skullRadiusToMouthWidth:CGFloat = 1
+        static let  skullRadiusToMouthHeigh:CGFloat = 3
+        static let  skullRadiusToMouthOffset:CGFloat = 3
+    }
 //MARK: -CustomMethod-
 private extension HomePageController {
     /**
@@ -58,11 +71,22 @@ private extension HomePageController {
         let layerLineWidth: CGFloat = 0.3
         let layer = CAShapeLayer()
         let beizer = UIBezierPath()
-        let startPoint = CGPoint(x: SCREEN_WIDTH / 2 - layerHeight * 3,  y: downHeight)
-        let endPoint = CGPoint(x:SCREEN_WIDTH / 2 + layerHeight * 3, y:downHeight)
+        let startPoint = CGPoint(x: SCREEN_WIDTH / 2 - layerHeight,  y: downHeight)
+        let endPoint = CGPoint(x:SCREEN_WIDTH / 2 + layerHeight, y:downHeight)
+        let  mouthWidth = skullRadius*4
+        let  mouthHeigh = skullRadius*4
+        let  mouthOffset = skullRadius
+        let mouthRect = CGRect(x: skullCenter.x - mouthWidth/2, y: skullCenter.y - mouthOffset, width: mouthWidth, height: mouthHeigh)
+//        let startPoint = CGPoint(x: mouthRect.minX, y: mouthRect.minY)
+//        let endPoint = CGPoint(x: mouthRect.maxX, y: mouthRect.minY)
+        let  mouthCurvature = 0.0
+
+        let smileOffset = CGFloat(max(-1, min(mouthCurvature, 1)))*mouthRect.height
+        let cp1 = CGPoint(x: mouthRect.minX + mouthRect.width/3, y: mouthRect.minY+smileOffset)
+        let cp2 = CGPoint(x: mouthRect.maxX - mouthRect.width/3, y: mouthRect.minY+smileOffset)
         beizer.move(to: CGPoint(x:0, y:downHeight))
         beizer.addLine(to: startPoint)
-        beizer.addQuadCurve(to: endPoint, controlPoint: CGPoint(x:SCREEN_WIDTH / 2, y:-layerHeight * 2))
+        beizer.addCurve(to: endPoint, controlPoint1: cp1, controlPoint2: cp2)
         beizer.addLine(to: CGPoint(x:SCREEN_WIDTH, y:downHeight))
         layer.path = beizer.cgPath
         layer.lineWidth = layerLineWidth
@@ -75,8 +99,50 @@ private extension HomePageController {
         self.tabBar.shadowImage = UIImage()
         self.tabBar.backgroundImage = UIImage()
     }
-    
-    
+//    @IBInspectable
+//    var scale:CGFloat = 0.90
+//    @IBInspectable
+//    var lineWidth:CGFloat = 1.0
+//    @IBInspectable
+//    var color:UIColor = UIColor.blue
+//    
+//    var skullRadius:CGFloat{
+//        return min(bounds.size.width,bounds.size.height)/2*scale//获取原的半径为父View的一半
+//    }
+//    var skullCenter:CGPoint{
+//        return CGPoint(x:bounds.midX,y:bounds.midY)////获取中心点
+//        
+//    }
+//    private struct Ratios{
+//        static let  skullRadiusToMouthWidth:CGFloat = 1
+//        static let  skullRadiusToMouthHeigh:CGFloat = 3
+//        static let  skullRadiusToMouthOffset:CGFloat = 3
+//    }
+//    func pathForMouth() -> UIBezierPath {
+//        let  mouthWidth = skullRadius/Ratios.skullRadiusToMouthWidth
+//        let  mouthHeigh = skullRadius/Ratios.skullRadiusToMouthHeigh
+//        let  mouthOffset = skullRadius/Ratios.skullRadiusToMouthOffset
+//        
+//        let mouthRect = CGRect(x: skullCenter.x - mouthWidth/2, y: skullCenter.y + mouthOffset, width: mouthWidth, height: mouthHeigh)
+//        
+//        let  mouthCurvature = 0.0
+//        
+//        let smileOffset = CGFloat(max(-1, min(mouthCurvature, 1)))*mouthRect.height
+//        let start = CGPoint(x: mouthRect.minX, y: mouthRect.minY)
+//        let end = CGPoint(x: mouthRect.maxX, y: mouthRect.minY)
+//        let cp1 = CGPoint(x: mouthRect.minX + mouthRect.width/3, y: mouthRect.minY+smileOffset)
+//        let cp2 = CGPoint(x: mouthRect.maxX - mouthRect.width/3, y: mouthRect.minY+smileOffset)
+//        
+//        let path = UIBezierPath()
+//        path.move(to: start)
+//        path.lineWidth = lineWidth
+//        path.addCurve(to: end, controlPoint1: cp1, controlPoint2: cp2)
+//        
+//        return path
+//        //
+//        //        return UIBezierPath(rect: mouthRect)
+//        
+//    }
     
     func setControllers() {
         
@@ -89,11 +155,8 @@ private extension HomePageController {
         //        na1.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
         //        na1.tabBarItem.image = UIImage(named: "tab_bar_look_nor")
         //
-        //        let editVC = SecondViewController()
-        //        editVC.initTabBarItem()
-        //        editVC.view.backgroundColor = UIColor.orangeColor()
-        //        editVC.tabBarItem.imageInsets = UIEdgeInsetsMake(-6, 0, 6, 0)
-        //        editVC.tabBarItem.image = UIImage(named: "tab_bar_live_hig")
+//                let editVC = ViewController()
+//                editVC.tabBarItem.imageInsets = UIEdgeInsetsMake(-6, 0, 6, 0)
         //
         //
         //        let meVC = ThirdViewController()
