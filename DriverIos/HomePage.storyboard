@@ -12,7 +12,7 @@
         <!--首页-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeController" customModule="carriers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -307,7 +307,7 @@
                             <constraint firstItem="ItU-7j-fBZ" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="eAi-qM-TzD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="首页" image="HomePage02" selectedImage="HomePage01" id="cb3-qu-2Db" customClass="RAMAnimatedTabBarItem" customModule="carriers" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="首页" image="HomePage02" selectedImage="HomePage01" id="cb3-qu-2Db" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
                         <connections>
                             <outlet property="animation" destination="0tf-9c-9FJ" id="y7b-EX-h5Y"/>
                         </connections>
@@ -333,14 +333,14 @@
                     </constraints>
                 </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <customObject id="0tf-9c-9FJ" customClass="RAMBounceAnimation" customModule="carriers" customModuleProvider="target"/>
+                <customObject id="0tf-9c-9FJ" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-1028" y="-575.26236881559225"/>
         </scene>
-        <!--找货2-->
+        <!--找货-->
         <scene sceneID="c3g-kE-Hbo">
             <objects>
-                <viewController id="Bnr-IY-a81" customClass="HomeController" customModule="carriers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Bnr-IY-a81" customClass="ViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0RI-Ps-XbU"/>
                         <viewControllerLayoutGuide type="bottom" id="C4N-yR-iec"/>
@@ -351,17 +351,29 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="找货2" image="findCargo" selectedImage="findCargo" id="XYm-5T-ndj"/>
+                    <tabBarItem key="tabBarItem" title="找货" image="findCargo" selectedImage="findCargo" id="XYm-5T-ndj" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="animation" destination="QWp-86-5Vk" id="e8e-S8-Gfu"/>
+                        </connections>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="un1-Xi-mKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="QWp-86-5Vk"/>
+                <customObject id="QWp-86-5Vk" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="329" y="90"/>
         </scene>
         <!--我的-->
         <scene sceneID="ZfJ-0a-kgM">
             <objects>
-                <viewController id="FAg-wO-DiX" customClass="HomeController" customModule="carriers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FAg-wO-DiX" customClass="ViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tcN-R3-o04"/>
                         <viewControllerLayoutGuide type="bottom" id="lB6-WG-jM2"/>
@@ -371,17 +383,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="我的" image="myInfo02" selectedImage="myInfo" id="UJe-zM-8mr"/>
+                    <tabBarItem key="tabBarItem" title="我的" image="myInfo02" selectedImage="myInfo" id="UJe-zM-8mr" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
+                        <connections>
+                            <outlet property="animation" destination="Y8r-FS-h2l" id="HXP-nW-OZO"/>
+                        </connections>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKl-Uh-kya" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="Y8r-FS-h2l"/>
+                <customObject id="Y8r-FS-h2l" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1705" y="90"/>
         </scene>
         <!--运单-->
         <scene sceneID="lgV-Dz-tYH">
             <objects>
-                <viewController id="1cl-x6-Z6G" customClass="HomeController" customModule="carriers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1cl-x6-Z6G" customClass="ViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A1Y-RD-GeC"/>
                         <viewControllerLayoutGuide type="bottom" id="qmY-g2-axA"/>
@@ -391,17 +407,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="运单" image="transportOrder02" selectedImage="transportOrder01" id="PIa-d8-why"/>
+                    <tabBarItem key="tabBarItem" title="运单" image="transportOrder02" selectedImage="transportOrder01" id="PIa-d8-why" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
+                        <connections>
+                            <outlet property="animation" destination="eXC-86-kmU" id="ccI-V9-KXT"/>
+                        </connections>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZG-Ay-o5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="eXC-86-kmU"/>
+                <customObject id="eXC-86-kmU" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-1026" y="792"/>
         </scene>
         <!--空车上报-->
         <scene sceneID="6XN-1m-6r3">
             <objects>
-                <viewController id="EVy-RN-cIu" customClass="HomeController" customModule="carriers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="EVy-RN-cIu" customClass="ViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BNm-Yj-XNQ"/>
                         <viewControllerLayoutGuide type="bottom" id="vs5-qO-fOe"/>
@@ -411,17 +431,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="空车上报" image="emptyCarUp02" selectedImage="emptyCarUp01" id="pkU-YA-lWm"/>
+                    <tabBarItem key="tabBarItem" title="空车上报" image="emptyCarUp02" selectedImage="emptyCarUp01" id="pkU-YA-lWm" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
+                        <connections>
+                            <outlet property="animation" destination="B7i-9K-fEv" id="5ge-Ho-5WM"/>
+                        </connections>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EPO-Mh-uv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="B7i-9K-fEv"/>
+                <customObject id="B7i-9K-fEv" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="986" y="90"/>
         </scene>
         <!--Home Page Controller-->
         <scene sceneID="VjF-ls-AL6">
             <objects>
-                <tabBarController id="JLv-wq-dfP" customClass="HomePageController" customModule="carriers" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="JLv-wq-dfP" customClass="HomePageController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="FG9-qi-5c3" colorLabel="IBBuiltInLabel-Blue">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
