@@ -13,11 +13,11 @@
 		0FA638251DF6B53000D23293 /* SliderGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA638221DF6B53000D23293 /* SliderGalleryController.swift */; };
 		0FA638261DF6B53000D23293 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA638231DF6B53000D23293 /* HomePageController.swift */; };
 		0FA638271DF6B53000D23293 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA638241DF6B53000D23293 /* HomeController.swift */; };
+		0FA638291DF6B9BF00D23293 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA638281DF6B9BF00D23293 /* ViewController.swift */; };
 		0FE0D4701DF66658000FE7E1 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE0D4631DF6664D000FE7E1 /* Alamofire.framework */; };
 		0FE0D4711DF66658000FE7E1 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE0D4631DF6664D000FE7E1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB0604041DF1573E005839DB /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0604031DF1573E005839DB /* RegisterViewController.swift */; };
 		AB0604091DF17C73005839DB /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0604081DF17C73005839DB /* ForgetPasswordViewController.swift */; };
-		AB1813C41DF659950002B84D /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1813C31DF659950002B84D /* CustomTabBarController.swift */; };
 		AB269B001DF5083500CFE95B /* DefaultHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269AFF1DF5083500CFE95B /* DefaultHttp.swift */; };
 		AB269B7C1DF5597800CFE95B /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269B6F1DF5597800CFE95B /* RAMBounceAnimation.swift */; };
 		AB269B7D1DF5597800CFE95B /* RAMFrameItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB269B711DF5597800CFE95B /* RAMFrameItemAnimation.swift */; };
@@ -132,10 +132,10 @@
 		0FA638221DF6B53000D23293 /* SliderGalleryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderGalleryController.swift; sourceTree = "<group>"; };
 		0FA638231DF6B53000D23293 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		0FA638241DF6B53000D23293 /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		0FA638281DF6B9BF00D23293 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0FE0D4571DF6664D000FE7E1 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		AB0604031DF1573E005839DB /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		AB0604081DF17C73005839DB /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
-		AB1813C31DF659950002B84D /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		AB269AFF1DF5083500CFE95B /* DefaultHttp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultHttp.swift; sourceTree = "<group>"; };
 		AB269B6F1DF5597800CFE95B /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
 		AB269B711DF5597800CFE95B /* RAMFrameItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMFrameItemAnimation.swift; sourceTree = "<group>"; };
@@ -191,11 +191,12 @@
 		0FA6381A1DF6B48A00D23293 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
+				0FA6381D1DF6B4F800D23293 /* imageHelper */,
 				0FA638221DF6B53000D23293 /* SliderGalleryController.swift */,
 				0FA638231DF6B53000D23293 /* HomePageController.swift */,
 				0FA638241DF6B53000D23293 /* HomeController.swift */,
-				0FA6381D1DF6B4F800D23293 /* imageHelper */,
 				0FA6381B1DF6B4B600D23293 /* HomePage.storyboard */,
+				0FA638281DF6B9BF00D23293 /* ViewController.swift */,
 			);
 			name = HomePage;
 			sourceTree = "<group>";
@@ -328,7 +329,6 @@
 				AB0604031DF1573E005839DB /* RegisterViewController.swift */,
 				AB269AFF1DF5083500CFE95B /* DefaultHttp.swift */,
 				AB2F6B471DF5642300AC94BD /* TabViewController.swift */,
-				AB1813C31DF659950002B84D /* CustomTabBarController.swift */,
 			);
 			path = DriverIos;
 			sourceTree = "<group>";
@@ -564,7 +564,7 @@
 				0FA638261DF6B53000D23293 /* HomePageController.swift in Sources */,
 				0FA638271DF6B53000D23293 /* HomeController.swift in Sources */,
 				AB269B811DF5597800CFE95B /* RAMAnimatedTabBarController.swift in Sources */,
-				AB1813C41DF659950002B84D /* CustomTabBarController.swift in Sources */,
+				0FA638291DF6B9BF00D23293 /* ViewController.swift in Sources */,
 				ABEA389E1DEFB4D50074A234 /* LoginViewController.swift in Sources */,
 				AB2F6B481DF5642300AC94BD /* TabViewController.swift in Sources */,
 				AB269B7C1DF5597800CFE95B /* RAMBounceAnimation.swift in Sources */,
