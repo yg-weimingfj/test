@@ -143,8 +143,8 @@ class LoginViewController: UIViewController {
         defaulthttp.httopost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
-                    let sb = UIStoryboard(name: "Main", bundle:nil)
-                    let vc = sb.instantiateViewController(withIdentifier: "forgetPasswordViewController") as! ForgetPasswordViewController
+                    let sb = UIStoryboard(name: "HomePage", bundle:nil)
+                    let vc = sb.instantiateViewController(withIdentifier: "homePageController") as! HomePageController
                     self.present(vc, animated: true, completion: nil)
                 }else{
                     let info:String = results["resultInfo"] as! String!
