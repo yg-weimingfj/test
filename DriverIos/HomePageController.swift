@@ -13,7 +13,7 @@ let SCREEN_WIDTH = UIScreen.main.bounds.size.width
 /// 屏幕高度
 let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
 /// tabbar圆弧高度
-let layerHeight: CGFloat = SCREEN_WIDTH/10
+let layerHeight: CGFloat = SCREEN_WIDTH/10-15
 class HomePageController: RAMAnimatedTabBarController {
 
     override func viewDidLoad() {
