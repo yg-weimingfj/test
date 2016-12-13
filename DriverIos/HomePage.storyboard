@@ -397,30 +397,6 @@
             </objects>
             <point key="canvasLocation" x="1705" y="90"/>
         </scene>
-        <!--运单-->
-        <scene sceneID="lgV-Dz-tYH">
-            <objects>
-                <viewController id="1cl-x6-Z6G" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="A1Y-RD-GeC"/>
-                        <viewControllerLayoutGuide type="bottom" id="qmY-g2-axA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Zvf-00-xeX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="运单" image="transportOrder02" selectedImage="transportOrder01" id="PIa-d8-why" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
-                        <connections>
-                            <outlet property="animation" destination="eXC-86-kmU" id="ccI-V9-KXT"/>
-                        </connections>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EZG-Ay-o5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="eXC-86-kmU" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
-            </objects>
-            <point key="canvasLocation" x="-1026" y="792"/>
-        </scene>
         <!--空车上报-->
         <scene sceneID="6XN-1m-6r3">
             <objects>
@@ -455,7 +431,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="96l-kO-du3"/>
-                        <segue destination="1cl-x6-Z6G" kind="relationship" relationship="viewControllers" id="YhW-WP-aT5"/>
+                        <segue destination="klY-dZ-XAx" kind="relationship" relationship="viewControllers" id="qbh-i1-bxd"/>
                         <segue destination="Bnr-IY-a81" kind="relationship" relationship="viewControllers" id="Bib-C7-YOl"/>
                         <segue destination="EVy-RN-cIu" kind="relationship" relationship="viewControllers" id="HCa-tM-hcz"/>
                         <segue destination="FAg-wO-DiX" kind="relationship" relationship="viewControllers" id="lkf-Sb-0hR"/>
@@ -464,6 +440,109 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wbM-eh-HQ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1025" y="90"/>
+        </scene>
+        <!--Waybill View Controller-->
+        <scene sceneID="x40-7m-5av">
+            <objects>
+                <viewController id="kDR-ft-8Qf" customClass="WaybillViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cvd-l1-0Ay"/>
+                        <viewControllerLayoutGuide type="bottom" id="SgK-xJ-LG0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5cA-zo-hkx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Hc-pH-v5h">
+                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ntH-cW-pJs">
+                                        <rect key="frame" x="16" y="10" width="343" height="29"/>
+                                        <segments>
+                                            <segment title="进行中"/>
+                                            <segment title="已完成"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="waybillTab:" destination="kDR-ft-8Qf" eventType="valueChanged" id="8Nm-6b-QXW"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4I-sl-Hdq">
+                                        <rect key="frame" x="0.0" y="49" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.81510416669999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="nBd-6E-Sen"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ntH-cW-pJs" secondAttribute="bottom" constant="12" id="BAI-gK-j4O"/>
+                                    <constraint firstItem="ntH-cW-pJs" firstAttribute="leading" secondItem="2Hc-pH-v5h" secondAttribute="leading" constant="16" id="M54-bz-uv1"/>
+                                    <constraint firstAttribute="trailing" secondItem="ntH-cW-pJs" secondAttribute="trailing" constant="16" id="RbM-fP-MwS"/>
+                                    <constraint firstItem="f4I-sl-Hdq" firstAttribute="leading" secondItem="2Hc-pH-v5h" secondAttribute="leading" id="SHk-vc-2WW"/>
+                                    <constraint firstItem="ntH-cW-pJs" firstAttribute="top" secondItem="2Hc-pH-v5h" secondAttribute="top" constant="10" id="bm1-41-13d"/>
+                                    <constraint firstAttribute="trailing" secondItem="f4I-sl-Hdq" secondAttribute="trailing" id="dvz-JP-WfN"/>
+                                    <constraint firstAttribute="bottom" secondItem="f4I-sl-Hdq" secondAttribute="bottom" id="gOl-7H-Zra"/>
+                                </constraints>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oMe-yN-gaZ">
+                                <rect key="frame" x="0.0" y="114" width="375" height="504"/>
+                                <connections>
+                                    <segue destination="GTE-g8-XsX" kind="embed" id="c8v-xQ-YYK"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oMe-yN-gaZ" firstAttribute="top" secondItem="2Hc-pH-v5h" secondAttribute="bottom" id="3zN-Op-q8f"/>
+                            <constraint firstAttribute="trailing" secondItem="2Hc-pH-v5h" secondAttribute="trailing" id="Ene-aM-cYp"/>
+                            <constraint firstItem="2Hc-pH-v5h" firstAttribute="leading" secondItem="5cA-zo-hkx" secondAttribute="leading" id="dnS-pj-v5W"/>
+                            <constraint firstItem="2Hc-pH-v5h" firstAttribute="top" secondItem="cvd-l1-0Ay" secondAttribute="bottom" id="dqz-bz-6Wx"/>
+                            <constraint firstAttribute="trailing" secondItem="oMe-yN-gaZ" secondAttribute="trailing" id="qck-bx-oEM"/>
+                            <constraint firstItem="SgK-xJ-LG0" firstAttribute="top" secondItem="oMe-yN-gaZ" secondAttribute="bottom" id="vBT-mY-rga"/>
+                            <constraint firstItem="oMe-yN-gaZ" firstAttribute="leading" secondItem="5cA-zo-hkx" secondAttribute="leading" id="xKa-fS-AlM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="p32-ju-I0j"/>
+                    <connections>
+                        <outlet property="waybillTab" destination="ntH-cW-pJs" id="1xo-HZ-hLY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rZ9-2p-bVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-88.799999999999997" y="871.21439280359823"/>
+        </scene>
+        <!--运单-->
+        <scene sceneID="MOk-hB-MLR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="klY-dZ-XAx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="运单" image="transportOrder02" selectedImage="transportOrder01" id="zS9-oP-d7Q" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
+                        <connections>
+                            <outlet property="animation" destination="UNA-Xq-HEr" id="1Rt-Pi-BO6"/>
+                        </connections>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eNX-nb-Xg4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kDR-ft-8Qf" kind="relationship" relationship="rootViewController" id="42W-YF-yee"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="17I-il-zdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="UNA-Xq-HEr" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="-1028" y="871.21439280359823"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="EMZ-YI-K9t">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="GTE-g8-XsX" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hOX-Ya-NOe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="759" y="871"/>
         </scene>
     </scenes>
     <resources>
