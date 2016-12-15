@@ -18,7 +18,7 @@ class WaybillViewController: UIViewController {
         //获取到嵌入的UIPageViewController
         pageViewController = self.childViewControllers.first as! UIPageViewController
         
-        let sb = UIStoryboard(name: "Main", bundle:nil)
+        let sb = UIStoryboard(name: "Waybill", bundle:nil)
         
         UnderController = sb.instantiateViewController(withIdentifier: "underWayTableViewController") as! UnderWayTableViewController
         CompleteController = sb.instantiateViewController(withIdentifier: "completeTableViewController") as! CompleteTableViewController

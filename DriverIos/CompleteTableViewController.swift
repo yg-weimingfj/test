@@ -16,7 +16,7 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         self.UITable.tableFooterView = UIView(frame: CGRect.zero)
-        let taobaoHeader = QQVideoRefreshHeader(frame: CGRect(x: 0,y: 0,width: self.view.bounds.width,height: 50))
+              let taobaoHeader = QQVideoRefreshHeader(frame: CGRect(x: 0,y: 0,width: self.view.bounds.width,height: 50))
         _ = self.UITable.setUpHeaderRefresh(taobaoHeader) { [weak self] in
             delay(1.5, closure: {
                 self?.models = (self?.models.map({_ in Int(arc4random()%100)}))!
