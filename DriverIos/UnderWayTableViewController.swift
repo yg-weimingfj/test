@@ -11,8 +11,13 @@ import UIKit
 class UnderWayTableViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var UITable: UITableView!
     var models = [1,2,3,4,5,6,7,8,9,10]
+    let cellId = "waybillCell"
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let nib = UINib(nibName: "WaybillCell", bundle: nil) //nibName指的是我们创建的Cell文件名
+        self.UITable.register(nib, forCellReuseIdentifier: cellId)
+        
         self.UITable.tableFooterView = UIView(frame: CGRect.zero)
         let curveHeader = CurveRefreshHeader(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
         _ = self.UITable.setUpHeaderRefresh(curveHeader) { [weak self] in
@@ -44,15 +49,19 @@ class UnderWayTableViewController: UIViewController,UITableViewDelegate,UITableV
         return models.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
+        return 168.0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        /*
+ 
         var cell = tableView.dequeueReusableCell(withIdentifier: "uncell")
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: "uncell")
         }
         cell?.textLabel?.text = "\(models[(indexPath as NSIndexPath).row])"
-        return cell!
+ */
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! WaybillCell
+        return cell
     }
 
 
