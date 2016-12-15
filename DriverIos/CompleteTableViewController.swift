@@ -10,11 +10,16 @@ import UIKit
 
 class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var models = [1,2,3,4,5,6,7,8,9,10]
-    
+    let cellId = "waybillCell"
     @IBOutlet var UITable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let xib = UINib(nibName: "WaybillCell", bundle: nil) //nibName指的是我们创建的Cell文件名
+        self.UITable.register(xib, forCellReuseIdentifier: cellId)
+        
+        self.UITable.separatorInset = UIEdgeInsets.zero
+        
         self.UITable.tableFooterView = UIView(frame: CGRect.zero)
               let taobaoHeader = QQVideoRefreshHeader(frame: CGRect(x: 0,y: 0,width: self.view.bounds.width,height: 50))
         _ = self.UITable.setUpHeaderRefresh(taobaoHeader) { [weak self] in
@@ -47,16 +52,17 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
         return models.count
     }
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
+        return 148.0
     }
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "comcell")
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "comcell")
-        }
-        cell?.textLabel?.text = "\(models[(indexPath as NSIndexPath).row])"
-        return cell!
+         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! WaybillCell
+        
+        return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
 
 
 }
