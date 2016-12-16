@@ -9,8 +9,7 @@
 import UIKit
 
 class MyController: UIViewController{
-
-    @IBOutlet weak var myInfo: UIView!//个人信息
+    
     @IBOutlet weak var viewScan: UIView!//扫一扫
     @IBOutlet weak var viewQRCode: UIView!//二维码
     @IBOutlet weak var viewEditWiFi: UIView!//修改WiFi设置
@@ -30,6 +29,7 @@ class MyController: UIViewController{
     @IBOutlet weak var rbStar: RatingBar!//评分星级
     @IBOutlet weak var flowProgress: UIProgressView!//流量
     @IBOutlet weak var myScrollView: UIScrollView!//滚动布局
+    
 
     let  defaulthttp = DefaultHttp()
     
@@ -45,8 +45,10 @@ class MyController: UIViewController{
       */
     func register() {
         
-        myScrollView.contentSize = CGSize(width: self.view.frame.width, height: UIScreen.main.bounds.size.height)
-        myScrollView.alwaysBounceVertical = true
+//        myScrollView.contentSize = CGSize(width: self.view.frame.width, height: UIScreen.main.bounds.size.height*2)
+//        myScrollView.alwaysBounceVertical = true
+//        myScrollView.autoresizesSubviews = true
+//        self.automaticallyAdjustsScrollViewInsets = true
         
         
         let myAccountUI = UITapGestureRecognizer(target: self, action: #selector(myAccountLinener))
