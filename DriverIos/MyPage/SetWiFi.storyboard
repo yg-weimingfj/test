@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Set Wi Fi Controller-->
+        <scene sceneID="5EN-ly-deG">
+            <objects>
+                <viewController storyboardIdentifier="setWiFiController" id="Gvw-OE-Qbt" customClass="SetWiFiController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zFR-U2-F9C"/>
+                        <viewControllerLayoutGuide type="bottom" id="hY4-Nd-cAb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vEd-xn-15a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g1K-Yh-SEJ">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="JqK-Xq-92Y"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="修改WiFi设置" id="Ygg-nE-j0r">
+                                        <barButtonItem key="leftBarButtonItem" image="back" id="dYO-CZ-uFg">
+                                            <connections>
+                                                <action selector="back:" destination="Gvw-OE-Qbt" id="iQJ-8f-5z5"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bS6-2Y-55v">
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="26v-7b-cUL">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="热点名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHq-bt-6GA">
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="iwO-GU-NIA"/>
+                                                    <constraint firstAttribute="height" constant="24" id="ti1-EL-CRD"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入热点名称" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iBH-SZ-zKZ">
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="u3n-jq-aQF"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="oHq-bt-6GA" firstAttribute="leading" secondItem="26v-7b-cUL" secondAttribute="leading" constant="15" id="1fl-76-U3n"/>
+                                            <constraint firstAttribute="height" constant="44" id="KKq-Bj-IOq"/>
+                                            <constraint firstItem="oHq-bt-6GA" firstAttribute="top" secondItem="26v-7b-cUL" secondAttribute="top" constant="10" id="XYN-Uu-fjb"/>
+                                            <constraint firstAttribute="trailing" secondItem="iBH-SZ-zKZ" secondAttribute="trailing" id="b4q-Kv-OQ9"/>
+                                            <constraint firstItem="iBH-SZ-zKZ" firstAttribute="top" secondItem="26v-7b-cUL" secondAttribute="top" id="pVk-CQ-S4Y"/>
+                                            <constraint firstItem="iBH-SZ-zKZ" firstAttribute="leading" secondItem="oHq-bt-6GA" secondAttribute="trailing" constant="25" id="xBq-UN-A5G"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1XU-5r-N9y">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WiFi密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryv-gr-jot">
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="5od-7v-brm"/>
+                                                    <constraint firstAttribute="width" constant="70" id="lzB-l7-ofx"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" allowsEditingTextAttributes="YES" placeholder="请输入密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wen-xe-0Xo">
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="kdt-zj-Rfj"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="wen-xe-0Xo" secondAttribute="trailing" id="Ax8-RQ-Woo"/>
+                                            <constraint firstItem="wen-xe-0Xo" firstAttribute="leading" secondItem="ryv-gr-jot" secondAttribute="trailing" constant="25" id="Gjg-42-nYE"/>
+                                            <constraint firstItem="ryv-gr-jot" firstAttribute="leading" secondItem="1XU-5r-N9y" secondAttribute="leading" constant="15" id="NMc-qN-RxH"/>
+                                            <constraint firstAttribute="height" constant="44" id="UnS-yP-xZP"/>
+                                            <constraint firstItem="wen-xe-0Xo" firstAttribute="top" secondItem="1XU-5r-N9y" secondAttribute="top" id="Y6U-y3-ZkB"/>
+                                            <constraint firstItem="ryv-gr-jot" firstAttribute="top" secondItem="1XU-5r-N9y" secondAttribute="top" constant="10" id="jP2-ja-0HH"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="1XU-5r-N9y" firstAttribute="leading" secondItem="bS6-2Y-55v" secondAttribute="leading" id="E9d-FB-yMv"/>
+                                    <constraint firstAttribute="height" constant="91" id="QM6-Om-32E"/>
+                                    <constraint firstItem="1XU-5r-N9y" firstAttribute="top" secondItem="26v-7b-cUL" secondAttribute="bottom" constant="1" id="TYB-WL-8k9"/>
+                                    <constraint firstItem="26v-7b-cUL" firstAttribute="leading" secondItem="bS6-2Y-55v" secondAttribute="leading" id="UbG-AI-a3I"/>
+                                    <constraint firstItem="26v-7b-cUL" firstAttribute="top" secondItem="bS6-2Y-55v" secondAttribute="top" constant="1" id="Vq4-xb-OhD"/>
+                                    <constraint firstAttribute="trailing" secondItem="1XU-5r-N9y" secondAttribute="trailing" id="aor-uZ-uSL"/>
+                                    <constraint firstAttribute="trailing" secondItem="26v-7b-cUL" secondAttribute="trailing" id="sYY-AD-H3Q"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3K3-A2-9hy">
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.56862745098039214" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="MHx-9L-a12"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="确定">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnSureLisener:" destination="Gvw-OE-Qbt" eventType="touchUpInside" id="z1b-aH-cHo"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="3K3-A2-9hy" firstAttribute="leading" secondItem="vEd-xn-15a" secondAttribute="leadingMargin" id="24Y-mi-eu7"/>
+                            <constraint firstItem="g1K-Yh-SEJ" firstAttribute="leading" secondItem="vEd-xn-15a" secondAttribute="leading" id="3e4-Ab-Oah"/>
+                            <constraint firstItem="g1K-Yh-SEJ" firstAttribute="top" secondItem="zFR-U2-F9C" secondAttribute="bottom" id="8vi-An-Ghe"/>
+                            <constraint firstItem="bS6-2Y-55v" firstAttribute="leading" secondItem="vEd-xn-15a" secondAttribute="leading" id="Fb5-Jo-YsR"/>
+                            <constraint firstItem="3K3-A2-9hy" firstAttribute="trailing" secondItem="vEd-xn-15a" secondAttribute="trailingMargin" id="UJn-Rk-kb4"/>
+                            <constraint firstAttribute="trailing" secondItem="bS6-2Y-55v" secondAttribute="trailing" id="WlF-y7-OK2"/>
+                            <constraint firstItem="bS6-2Y-55v" firstAttribute="top" secondItem="vEd-xn-15a" secondAttribute="top" constant="64" id="aKQ-fi-QuH"/>
+                            <constraint firstAttribute="trailing" secondItem="g1K-Yh-SEJ" secondAttribute="trailing" id="eou-fR-83T"/>
+                            <constraint firstItem="3K3-A2-9hy" firstAttribute="top" secondItem="bS6-2Y-55v" secondAttribute="bottom" constant="49" id="q6R-d0-Tdb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnSure" destination="3K3-A2-9hy" id="3wW-VO-7Rc"/>
+                        <outlet property="textWiFiName" destination="iBH-SZ-zKZ" id="w8R-Dh-AIh"/>
+                        <outlet property="textWiFiPwd" destination="wen-xe-0Xo" id="aGG-JS-SKk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J5K-Kp-ExW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="271" y="-169"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="13" height="22"/>
+    </resources>
+</document>

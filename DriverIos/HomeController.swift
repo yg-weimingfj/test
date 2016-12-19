@@ -84,7 +84,7 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     
     //图片轮播组件协议方法：获取内部scrollView尺寸
     func galleryScrollerViewSize() -> CGSize {
-        return CGSize(width: screenWidth, height: (screenWidth)/6*3)
+        return CGSize(width: screenWidth, height: 160)
     }
     
     //图片轮播组件协议方法：获取数据集合
