@@ -45,7 +45,6 @@ class MyController: UIViewController{
       */
     func register() {
         
-//        myScrollView.contentSize = CGSize(width: self.view.frame.width, height: UIScreen.main.bounds.size.height*2)
 //        myScrollView.alwaysBounceVertical = true
 //        myScrollView.autoresizesSubviews = true
 //        self.automaticallyAdjustsScrollViewInsets = true

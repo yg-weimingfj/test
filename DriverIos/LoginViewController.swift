@@ -9,7 +9,7 @@
 import UIKit
 import AdSupport
 @IBDesignable
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController ,UITextFieldDelegate{
     @IBOutlet var loginTabButton: UISegmentedControl!
     @IBOutlet var VerificationCodePhoneView: UIView!
     @IBOutlet var VerificationCodePhoneTextField: UITextField!
@@ -159,6 +159,11 @@ class LoginViewController: UIViewController {
 //        errorLabel.isHidden = false
 //        voiceView.isHidden = true
         
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
     }
     func openVoice(){
         print("打开语音")
