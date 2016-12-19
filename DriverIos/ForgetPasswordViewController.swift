@@ -12,7 +12,9 @@ class ForgetPasswordViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        let myView = Bundle.main.loadNibNamed("WaybillCell", owner: nil, options: nil)?.first as? WaybillCellVIew
+//        myView?.frame = CGRect(x: 0, y: 0, width: add.frame.width-50, height: add.frame.height-140)
+//        add.addSubview(myView!)
         // Do any additional setup after loading the view.
     }
 
