@@ -42,7 +42,7 @@ class SetWiFiController: UIViewController {
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
         
-        let des : Dictionary<String,Any> = ["token":"","method":"yunba.carrier.v1.line.magicbox.wifi.config","time":strNowTime,"wifi_name":textWiFiName.text,"wifi_pass":textWiFiPwd.text]
+        let des : Dictionary<String,Any> = ["token":"","method":"yunba.carrier.v1.line.magicbox.wifi.config","time":strNowTime,"wifi_name":textWiFiName.text!,"wifi_pass":textWiFiPwd.text!]
         
         defaulthttp.httopost(parame: des){results in
             if let result:String = results["result"] as! String?{
