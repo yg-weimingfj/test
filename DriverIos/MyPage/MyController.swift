@@ -44,12 +44,10 @@ class MyController: UIViewController{
        * 加载数据
       */
     func register() {
-        
-//        myScrollView.contentSize = CGSize(width: self.view.frame.width, height: UIScreen.main.bounds.size.height*2)
-//        myScrollView.alwaysBounceVertical = true
-//        myScrollView.autoresizesSubviews = true
-//        self.automaticallyAdjustsScrollViewInsets = true
-        
+                
+        let viewEditWiFiUI = UITapGestureRecognizer(target: self, action: #selector(setWiFi))
+        viewEditWiFi.addGestureRecognizer(viewEditWiFiUI)
+        viewEditWiFi.isUserInteractionEnabled = true
         
         let myAccountUI = UITapGestureRecognizer(target: self, action: #selector(myAccountLinener))
         myAccount.addGestureRecognizer(myAccountUI)
@@ -106,7 +104,7 @@ class MyController: UIViewController{
         }
     }
     /**
-     * 错误提示
+     * 提示
      */
     func hint(hintCon: String){
         let alertController = UIAlertController(title: hintCon,message: nil, preferredStyle: .alert)
@@ -152,6 +150,14 @@ class MyController: UIViewController{
      */
     func helpLinener() {
         print("55555")
+    }
+    /**
+     * 设置WiFi
+     */
+    func setWiFi() {
+        let sb = UIStoryboard(name: "SetWiFi", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "setWiFiController") as! SetWiFiController
+        self.present(vc, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
