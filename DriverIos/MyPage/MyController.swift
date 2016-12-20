@@ -75,19 +75,25 @@ class MyController: UIViewController{
 
         flowProgress.progress = 0.2
         flowProgress.transform = CGAffineTransform(scaleX: 1.0, y: 3.0)//改变进度条高度
-        
-        driverInfo()
+        var token = ""
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                token = obj.token!
+                self.driverInfo(token: token)
+            }
+        }
     }
     /**
      * 获取司机个人信息
      */
-    func driverInfo() {
+    func driverInfo(token:String) {
         let date = Date()
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
         
-        let des : Dictionary<String,Any> = ["token":"","method":"yunba.carrier.v1.user.get","time":strNowTime]
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.get","time":strNowTime]
         
         defaulthttp.httopost(parame: des){results in
             if let result:String = results["result"] as! String?{
