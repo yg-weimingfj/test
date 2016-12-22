@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="386" height="148"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TGu-sD-YAt" id="eMf-sN-fQc">
-                <rect key="frame" x="0.0" y="0.0" width="386" height="147"/>
+                <rect key="frame" x="0.0" y="0.0" width="386" height="148"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QQh-cA-7wY">
@@ -228,6 +228,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="RatingBarLable" destination="VNe-Io-ecv" id="OGK-fM-r93"/>
                 <outlet property="WayBillDistance" destination="xFH-6k-kkJ" id="iNX-tu-25k"/>
                 <outlet property="WayBillPlaceOfDeparture" destination="8vx-VZ-YAm" id="X8F-hM-0Jt"/>
                 <outlet property="WaybillBottomView" destination="RlG-2A-bWV" id="EoU-DV-6Ey"/>
