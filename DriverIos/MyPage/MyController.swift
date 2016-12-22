@@ -45,10 +45,9 @@ class MyController: UIViewController{
       */
     func register() {
         
-//        myScrollView.alwaysBounceVertical = true
-//        myScrollView.autoresizesSubviews = true
-//        self.automaticallyAdjustsScrollViewInsets = true
-        
+        let viewEditWiFiUI = UITapGestureRecognizer(target: self, action: #selector(setWiFi))
+        viewEditWiFi.addGestureRecognizer(viewEditWiFiUI)
+        viewEditWiFi.isUserInteractionEnabled = true
         
         let myAccountUI = UITapGestureRecognizer(target: self, action: #selector(myAccountLinener))
         myAccount.addGestureRecognizer(myAccountUI)
@@ -123,10 +122,21 @@ class MyController: UIViewController{
         }
     }
     /**
+     * 设置WiFi
+     */
+    func setWiFi() {
+        let sb = UIStoryboard(name: "SetWiFi", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "setWiFiController") as! SetWiFiController
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    /**
      * 我的记账
      */
     func myAccountLinener() {
-        
+        let sb = UIStoryboard(name: "OrderAccount", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "orderAccountController") as! OrderAccountController
+        self.present(vc, animated: true, completion: nil)
     }
     /**
      * 消息列表点击
