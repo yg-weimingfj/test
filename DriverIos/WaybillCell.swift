@@ -17,6 +17,7 @@ class WaybillCell:UITableViewCell {
     @IBOutlet weak var WaybillGoodsType: UILabel!
     @IBOutlet weak var WaybillCarType: UILabel!
     @IBOutlet weak var WaybillBottomView: UIView!
+    @IBOutlet weak var RatingBarLable: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

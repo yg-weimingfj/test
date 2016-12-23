@@ -21,7 +21,7 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
         self.UITable.separatorInset = UIEdgeInsets.zero
         
         self.UITable.tableFooterView = UIView(frame: CGRect.zero)
-              let taobaoHeader = QQVideoRefreshHeader(frame: CGRect(x: 0,y: 0,width: self.view.bounds.width,height: 50))
+        let taobaoHeader = QQVideoRefreshHeader(frame: CGRect(x: 0,y: 0,width: self.view.bounds.width,height: 50))
         _ = self.UITable.setUpHeaderRefresh(taobaoHeader) { [weak self] in
             delay(1.5, closure: {
                 self?.models = (self?.models.map({_ in Int(arc4random()%100)}))!
@@ -29,7 +29,7 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
                 self?.UITable.endHeaderRefreshing()
             })
         }
-        self.UITable.beginHeaderRefreshing()
+//        self.UITable.beginHeaderRefreshing()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
