@@ -20,6 +20,20 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        initData()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "currentPageChanged"), object: 0)
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    /**
+     * 初始化
+     */
+    func initData() {
         let xib = UINib(nibName: "OrderAccountItemCell", bundle: nil) //nibName指的是我们创建的Cell文件名
         tableView.register(xib, forCellReuseIdentifier: cellId)
         tableView.separatorInset = UIEdgeInsets.zero
@@ -32,18 +46,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
                 self?.tableView.endHeaderRefreshing(delay: 0.5)
             })
         }
-
-        // Do any additional setup after loading the view.
     }
-    override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "currentPageChanged"), object: 0)
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models.count
@@ -59,6 +62,11 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         let takeAccountUI = UITapGestureRecognizer(target: self, action: #selector(takeAccountLinener))
         cell.viewAccount.addGestureRecognizer(takeAccountUI)
         cell.viewAccount.isUserInteractionEnabled = true
+        
+        let accountInfoUI = UITapGestureRecognizer(target: self, action: #selector(accountInfoLinener))
+        cell.viewItem.addGestureRecognizer(accountInfoUI)
+        cell.viewItem.isUserInteractionEnabled = true
+        
         if(indexPath.row%2 == 0){
             cell.viewMoney.isHidden = true
             cell.viewAccount.isHidden = false
@@ -77,6 +85,14 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     func takeAccountLinener() {
         let sb = UIStoryboard(name: "OrderAccount", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "takeAccountController") as! TakeAccountController
+        self.present(vc, animated: true, completion: nil)
+    }
+    /**
+     * 记账详情
+     */
+    func accountInfoLinener() {
+        let sb = UIStoryboard(name: "OrderAccount", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "accountInfoController") as! AccountInfoController
         self.present(vc, animated: true, completion: nil)
     }
 

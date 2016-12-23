@@ -36,14 +36,14 @@ class MyController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        register()
+        registerData()
         // Do any additional setup after loading the view.
     }
 
     /**
        * 加载数据
       */
-    func register() {
+    func registerData() {
         
         let viewEditWiFiUI = UITapGestureRecognizer(target: self, action: #selector(setWiFi))
         viewEditWiFi.addGestureRecognizer(viewEditWiFiUI)
@@ -142,7 +142,9 @@ class MyController: UIViewController{
      * 消息列表点击
      */
     func messageListLinener() {
-        print("11111")
+        let sb = UIStoryboard(name: "Message", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "messageListController") as! MessageListController
+        self.present(vc, animated: true, completion: nil)
     }
     /**
      * 邀请好友点击
@@ -160,7 +162,9 @@ class MyController: UIViewController{
      * 设置点击
      */
     func settingLinener() {
-        print("44444")
+        let sb = UIStoryboard(name: "Authenticate", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "authenticateController") as! AuthenticateController
+        self.present(vc, animated: true, completion: nil)
     }
     /**
      * 帮助点击
