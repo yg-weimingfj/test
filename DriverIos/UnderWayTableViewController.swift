@@ -99,11 +99,11 @@ class UnderWayTableViewController: UIViewController,UITableViewDelegate,UITableV
                             self.UITable.endFooterRefreshingWithNoMoreData()
                         }
                     }else{
-                        if list.count > 0 {
+                        if list.count < 10 {
+                            self.UITable.endFooterRefreshingWithNoMoreData()
+                        }else{
                             self.models = self.models+list
                             self.UITable.endFooterRefreshing()
-                        }else{
-                            self.UITable.endFooterRefreshingWithNoMoreData()
                         }
                        
                     }
@@ -156,16 +156,20 @@ class UnderWayTableViewController: UIViewController,UITableViewDelegate,UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! WaybillCell
         
         let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
-        let placeMap = areamap[cellMap["s_code"] as! String!] as! [String:AnyObject]
-        let DestinationMap = areamap[cellMap["t_code"] as! String!] as! [String:AnyObject]
+        let placeMap = areamap[cellMap["s_code"] as! String!] as! [String:AnyObject]?
+        let DestinationMap = areamap[cellMap["t_code"] as! String!] as! [String:AnyObject]?
         
         
-        
-        cell.WayBillPlaceOfDeparture.text = placeMap["TEXT"] as! String?
-        cell.WaybillDestination.text = DestinationMap["TEXT"] as! String?
+        if placeMap != nil{
+            cell.WayBillPlaceOfDeparture.text = placeMap!["TEXT"] as! String?
+        }
+        if placeMap != nil{
+            cell.WaybillDestination.text = DestinationMap!["TEXT"] as! String?
+        }
         cell.WayBillDistance.text = cellMap["estimated_distance"] as! String!+"公里"
-        cell.WaybillGoodsType.text = cellMap["cargo_name"] as! String?
+        cell.WaybillGoodsType.text = cellMap["cargo_size"] as! String!+(cellMap["cargo_unit"] as! String!)
         cell.WaybillCarType.text = cellMap["vehicle_type"] as! String?
+        cell.WaybillTime.text = cellMap["carrier_order_taking_time"] as! String?
         
         cell.WaybillBottomView.isHidden = true
         cell.RatingBarLable.isHidden = true

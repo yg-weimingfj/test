@@ -26,6 +26,7 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     @IBOutlet weak var helpView: UIView!
     
     @IBOutlet weak var menuScrollView: UIScrollView!
+    var codeResult:LBXScanResult?
     
   
     @IBAction func homeScanner(_ sender: Any) {
@@ -79,6 +80,7 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
         let tap = UITapGestureRecognizer(target: self,
                                          action: #selector(HomeController.handleTapAction(_:)))
         sliderGallery.view.addGestureRecognizer(tap)
+//        print("\("码的类型:" + (codeResult?.strBarCodeType)!+"==="+"码的内容:" + (codeResult?.strScanned)!)")
 
     }
     
@@ -100,6 +102,33 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     func handleTapAction(_ tap:UITapGestureRecognizer)->Void{
 //       SliderGalleryControllerDelegate.resetImageViewSource()
         sliderGallery.resetImageViewSource()
+    }
+    @IBAction func QRcode(_ sender: UIBarButtonItem) {
+        weixinStyle()
+    }
+    //MARK: ---无边框，内嵌4个角------
+    func weixinStyle()
+    {
+        //设置扫码区域参数
+        var style = LBXScanViewStyle()
+        style.centerUpOffset = 44;
+        style.photoframeAngleStyle = LBXScanViewPhotoframeAngleStyle.Inner;
+        style.photoframeLineW = 2;
+        style.photoframeAngleW = 18;
+        style.photoframeAngleH = 18;
+        style.isNeedShowRetangle = false;
+        
+        style.anmiationStyle = LBXScanViewAnimationStyle.LineMove;
+        
+        style.colorAngle = UIColor(red: 0.0/255, green: 200.0/255.0, blue: 20.0/255.0, alpha: 1.0)
+        
+        
+        style.animationImage = UIImage(named: "CodeScan.bundle/qrcode_Scan_weixin_Line")
+        
+        
+        let vc = LBXScanViewController();
+        vc.scanStyle = style
+        self.present(vc, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
