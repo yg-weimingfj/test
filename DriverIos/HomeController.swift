@@ -109,26 +109,11 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     //MARK: ---无边框，内嵌4个角------
     func weixinStyle()
     {
-        //设置扫码区域参数
-        var style = LBXScanViewStyle()
-        style.centerUpOffset = 44;
-        style.photoframeAngleStyle = LBXScanViewPhotoframeAngleStyle.Inner;
-        style.photoframeLineW = 2;
-        style.photoframeAngleW = 18;
-        style.photoframeAngleH = 18;
-        style.isNeedShowRetangle = false;
-        
-        style.anmiationStyle = LBXScanViewAnimationStyle.LineMove;
-        
-        style.colorAngle = UIColor(red: 0.0/255, green: 200.0/255.0, blue: 20.0/255.0, alpha: 1.0)
         
         
-        style.animationImage = UIImage(named: "CodeScan.bundle/qrcode_Scan_weixin_Line")
-        
-        
-        let vc = LBXScanViewController();
-        vc.scanStyle = style
-        self.present(vc, animated: true, completion: nil)
+        let sb = UIStoryboard(name: "MyQRCode", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "myQRCodeNavigationController") as! MyQRCodeNavigationController
+                self.present(vc, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
