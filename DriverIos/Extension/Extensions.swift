@@ -14,13 +14,3 @@ extension UIColor{
     }
 }
 
-extension UIView{
-    func addconstraintsWithVisualFormat(_ format: String,views: UIView...) {
-        var viewsDict = [String: UIView]()
-        for (index,view) in views.enumerated() {
-            viewsDict["v\(index)"] = view
-            view.translatesAutoresizingMaskIntoConstraints = false
-        }
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDict))
-    }
-}

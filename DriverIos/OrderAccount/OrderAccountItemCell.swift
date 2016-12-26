@@ -17,6 +17,7 @@ class OrderAccountItemCell: UITableViewCell {
     @IBOutlet weak var labelMile: UILabel!//公里数
     @IBOutlet weak var viewMoney: UIView!//收入支出
     @IBOutlet weak var viewAccount: UIView!//记一记
+    @IBOutlet weak var viewItem: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
