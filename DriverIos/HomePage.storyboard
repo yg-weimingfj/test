@@ -39,7 +39,7 @@
                                     <navigationItem title="运吧 • 司机" id="P13-Yf-7eE">
                                         <barButtonItem key="rightBarButtonItem" image="scanner" id="08t-ke-cuT">
                                             <connections>
-                                                <action selector="homeScanner:" destination="BYZ-38-t0r" id="vl5-TS-w9V"/>
+                                                <action selector="QRcode:" destination="BYZ-38-t0r" id="b4o-TM-ga3"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -786,7 +786,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUs-FH-bac">
-                                                        <rect key="frame" x="186.5" y="96" width="2" height="30"/>
+                                                        <rect key="frame" x="187" y="96" width="2" height="30"/>
                                                         <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="2" id="1ds-h4-yoi"/>

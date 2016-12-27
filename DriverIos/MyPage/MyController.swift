@@ -36,19 +36,18 @@ class MyController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        register()
+        registerData()
         // Do any additional setup after loading the view.
     }
 
     /**
        * 加载数据
       */
-    func register() {
+    func registerData() {
         
-//        myScrollView.alwaysBounceVertical = true
-//        myScrollView.autoresizesSubviews = true
-//        self.automaticallyAdjustsScrollViewInsets = true
-        
+        let viewEditWiFiUI = UITapGestureRecognizer(target: self, action: #selector(setWiFi))
+        viewEditWiFi.addGestureRecognizer(viewEditWiFiUI)
+        viewEditWiFi.isUserInteractionEnabled = true
         
         let myAccountUI = UITapGestureRecognizer(target: self, action: #selector(myAccountLinener))
         myAccount.addGestureRecognizer(myAccountUI)
@@ -76,19 +75,25 @@ class MyController: UIViewController{
 
         flowProgress.progress = 0.2
         flowProgress.transform = CGAffineTransform(scaleX: 1.0, y: 3.0)//改变进度条高度
-        
-        driverInfo()
+        var token = ""
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                token = obj.token!
+                self.driverInfo(token: token)
+            }
+        }
     }
     /**
      * 获取司机个人信息
      */
-    func driverInfo() {
+    func driverInfo(token:String) {
         let date = Date()
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
         
-        let des : Dictionary<String,Any> = ["token":"","method":"yunba.carrier.v1.user.get","time":strNowTime]
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.get","time":strNowTime]
         
         defaulthttp.httopost(parame: des){results in
             if let result:String = results["result"] as! String?{
@@ -117,16 +122,29 @@ class MyController: UIViewController{
         }
     }
     /**
+     * 设置WiFi
+     */
+    func setWiFi() {
+        let sb = UIStoryboard(name: "SetWiFi", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "setWiFiController") as! SetWiFiController
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    /**
      * 我的记账
      */
     func myAccountLinener() {
-        
+        let sb = UIStoryboard(name: "OrderAccount", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "orderAccountController") as! OrderAccountController
+        self.present(vc, animated: true, completion: nil)
     }
     /**
      * 消息列表点击
      */
     func messageListLinener() {
-        print("11111")
+        let sb = UIStoryboard(name: "Message", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "messageListController") as! MessageListController
+        self.present(vc, animated: true, completion: nil)
     }
     /**
      * 邀请好友点击
@@ -144,7 +162,9 @@ class MyController: UIViewController{
      * 设置点击
      */
     func settingLinener() {
-        print("44444")
+        let sb = UIStoryboard(name: "Authenticate", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "authenticateController") as! AuthenticateController
+        self.present(vc, animated: true, completion: nil)
     }
     /**
      * 帮助点击

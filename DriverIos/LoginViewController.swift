@@ -143,6 +143,24 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         defaulthttp.httopost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
+                    
+                    let homePath = results["resultObj"] as! Dictionary<String,Any>
+                    
+                    
+                    let stu = Student()
+                    stu.name = homePath["carrier_name"] as! String?
+                    stu.userId = homePath["user_id"] as! String?
+                    stu.token = homePath["token"] as! String?
+                    stu.carrierAvatar = homePath["carrier_avatar"] as! String?
+                    stu.carrierPhone = homePath["carrier_phone"] as! String?
+                    stu.carrierStatus = homePath["carrier_status"] as! String?
+                    stu.deviceMark = homePath["device_mark"] as! String?
+                    stu.isPrivate = homePath["is_private"] as! String?
+                    stu.userCode = homePath["user_code"] as! String?
+                    $.saveObj("driverUserInfo", value: stu)
+
+                    
+                    
                     let sb = UIStoryboard(name: "HomePage", bundle:nil)
                     let vc = sb.instantiateViewController(withIdentifier: "homePageController") as! HomePageController
                     self.present(vc, animated: true, completion: nil)
