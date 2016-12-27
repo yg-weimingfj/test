@@ -275,12 +275,13 @@ class EmptyCarController: UIViewController,UICollectionViewDataSource, UICollect
         if areaView != nil {
             areaView.removeFromSuperview()
         }
+        let arrowCount = Int(ceil(Double(areaArr.count)/4))
         areaView = UIView(frame: CGRect(x: 0, y: 40, width: screenSize.width, height: screenSize.height/3*2-40))
         
         //定义collectionView的布局类型，流布局
         let layout = UICollectionViewFlowLayout()
         //设置cell的大小
-        layout.itemSize = CGSize(width: (screenSize.width-20)/4-10, height: 20)
+        layout.itemSize = CGSize(width: Int(screenSize.width-20)/4-10, height: Int(screenSize.height/3*2-40)/arrowCount-10)
         //滑动方向 默认方向是垂直
         layout.scrollDirection = .vertical
         //每个Item之间最小的间距
