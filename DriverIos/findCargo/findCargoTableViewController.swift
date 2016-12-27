@@ -238,14 +238,24 @@ class findCargoTableViewController: UIViewController,UITableViewDelegate,UITable
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "findCargoCell", for: indexPath) as! FindCargoCell
+        let userLogoAction = UITapGestureRecognizer(target:self,action:#selector(userMsgDetail))
+        cell.userLogoImage.addGestureRecognizer(userLogoAction)
+        cell.userLogoImage.isUserInteractionEnabled = true
+//        let messageListUI = UITapGestureRecognizer(target: self, action: #selector(messageListLinener))
+//        messageList.addGestureRecognizer(messageListUI)
+//        messageList.isUserInteractionEnabled = true
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+//        let sb = UIStoryboard(name: "findCargoTable", bundle:nil)
+//        let vc = sb.instantiateViewController(withIdentifier: "findCargoUserDetailView") as! FindCargoUserDetailViewController
+//        self.present(vc, animated: true, completion: nil)
+    }
+    func userMsgDetail(){
         let sb = UIStoryboard(name: "findCargoTable", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "findCargoUserDetailView") as! FindCargoUserDetailViewController
         self.present(vc, animated: true, completion: nil)
     }
-
 }
 
