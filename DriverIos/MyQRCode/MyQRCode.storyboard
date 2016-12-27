@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--扫一扫-->
+        <scene sceneID="S2g-eG-gDa">
+            <objects>
+                <viewController storyboardIdentifier="myQRCodeViewController" id="UQI-kh-Ajd" customClass="MyQRCodeViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uld-OJ-6u9"/>
+                        <viewControllerLayoutGuide type="bottom" id="eTo-TV-7If"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y2y-gZ-HqB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="扫一扫" id="xkg-Nw-aKM">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="jCb-5F-tnD">
+                            <connections>
+                                <action selector="outMyQRCode:" destination="UQI-kh-Ajd" id="uTG-EL-Zgy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NIX-YX-fbo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1588" y="-472.71364317841085"/>
+        </scene>
+        <!--MyQR Code Navigation Controller-->
+        <scene sceneID="H4H-a2-g6z">
+            <objects>
+                <navigationController storyboardIdentifier="myQRCodeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="8Qu-o4-rvR" customClass="MyQRCodeNavigationController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="imy-mp-ymU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UQI-kh-Ajd" kind="relationship" relationship="rootViewController" id="lhl-gD-UWy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="urI-Qn-iGz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="648.79999999999995" y="-472.71364317841085"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="13" height="22"/>
+    </resources>
+</document>

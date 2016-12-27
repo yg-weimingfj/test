@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JLv-wq-dfP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JLv-wq-dfP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pageControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="hVI-NO-MTT">
-                                <rect key="frame" x="157.5" y="571" width="60" height="37"/>
+                                <rect key="frame" x="158" y="571" width="60" height="37"/>
                                 <color key="backgroundColor" red="1" green="0.24107342100000001" blue="0.24326765610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="4K2-44-CKH"/>
@@ -39,7 +39,7 @@
                                     <navigationItem title="运吧 • 司机" id="P13-Yf-7eE">
                                         <barButtonItem key="rightBarButtonItem" image="scanner" id="08t-ke-cuT">
                                             <connections>
-                                                <action selector="homeScanner:" destination="BYZ-38-t0r" id="vl5-TS-w9V"/>
+                                                <action selector="QRcode:" destination="BYZ-38-t0r" id="b4o-TM-ga3"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -324,7 +324,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <customObject id="0tf-9c-9FJ" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="-1028" y="-575.26236881559225"/>
+            <point key="canvasLocation" x="881" y="-575"/>
         </scene>
         <!--找货-->
         <scene sceneID="c3g-kE-Hbo">
@@ -338,58 +338,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9gd-c3-nwL">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3mP-qx-aUh">
                                 <rect key="frame" x="0.0" y="20" width="375" height="74"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTP-eG-Fl5">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4uX-uy-5Sp">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                         <subviews>
-                                            <segmentedControl contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tx8-F2-uAd">
-                                                <rect key="frame" x="38" y="40" width="300" height="29"/>
-                                                <segments>
-                                                    <segment title="收入"/>
-                                                    <segment title="支出"/>
-                                                </segments>
-                                                <color key="tintColor" red="0.20000000000000001" green="0.56862745098039214" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <connections>
-                                                    <action selector="findCargoChange:" destination="Bnr-IY-a81" eventType="valueChanged" id="6l2-J1-0Zr"/>
-                                                </connections>
-                                            </segmentedControl>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="找货" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pS7-9Z-SNx">
-                                                <rect key="frame" x="0.0" y="8" width="375" height="24"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="找货" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5Q-ST-Nyx">
+                                                <rect key="frame" x="0.0" y="8" width="375" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JKa-qx-fHu">
+                                                <rect key="frame" x="16" y="36" width="343" height="34"/>
+                                                <segments>
+                                                    <segment title="全部货源"/>
+                                                    <segment title="长跑路线"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="findCargoChange:" destination="Bnr-IY-a81" eventType="valueChanged" id="ECe-Zs-vdu"/>
+                                                </connections>
+                                            </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="tx8-F2-uAd" firstAttribute="leading" secondItem="aTP-eG-Fl5" secondAttribute="leading" constant="38" id="2j7-H8-1lq"/>
-                                            <constraint firstItem="pS7-9Z-SNx" firstAttribute="top" secondItem="aTP-eG-Fl5" secondAttribute="top" constant="8" id="7H0-dA-hj9"/>
-                                            <constraint firstItem="tx8-F2-uAd" firstAttribute="centerX" secondItem="pS7-9Z-SNx" secondAttribute="centerX" id="FSQ-Ga-3ka"/>
-                                            <constraint firstItem="tx8-F2-uAd" firstAttribute="top" secondItem="pS7-9Z-SNx" secondAttribute="bottom" constant="8" symbolic="YES" id="Fer-yQ-Wnu"/>
-                                            <constraint firstItem="pS7-9Z-SNx" firstAttribute="leading" secondItem="aTP-eG-Fl5" secondAttribute="leading" id="LbB-QL-g1s"/>
-                                            <constraint firstAttribute="trailing" secondItem="tx8-F2-uAd" secondAttribute="trailing" constant="37" id="Wao-TU-Dye"/>
-                                            <constraint firstAttribute="trailing" secondItem="pS7-9Z-SNx" secondAttribute="trailing" id="Y11-FI-8i5"/>
+                                            <constraint firstItem="JKa-qx-fHu" firstAttribute="top" secondItem="j5Q-ST-Nyx" secondAttribute="bottom" constant="12" id="7mG-Cr-FF8"/>
+                                            <constraint firstAttribute="trailing" secondItem="j5Q-ST-Nyx" secondAttribute="trailing" id="81P-Pw-Pxd"/>
+                                            <constraint firstAttribute="bottom" secondItem="JKa-qx-fHu" secondAttribute="bottom" constant="4" id="Ivs-9x-EeA"/>
+                                            <constraint firstAttribute="trailing" secondItem="JKa-qx-fHu" secondAttribute="trailing" constant="16" id="NF9-im-Ngs"/>
+                                            <constraint firstItem="j5Q-ST-Nyx" firstAttribute="top" secondItem="4uX-uy-5Sp" secondAttribute="top" constant="8" id="eAT-AX-rhe"/>
+                                            <constraint firstItem="j5Q-ST-Nyx" firstAttribute="leading" secondItem="4uX-uy-5Sp" secondAttribute="leading" id="hj3-gy-azG"/>
+                                            <constraint firstItem="JKa-qx-fHu" firstAttribute="leading" secondItem="4uX-uy-5Sp" secondAttribute="leading" constant="16" id="vUk-ch-kA2"/>
+                                            <constraint firstAttribute="bottom" secondItem="j5Q-ST-Nyx" secondAttribute="bottom" constant="49" id="vX4-C1-QKI"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.20000000000000001" green="0.5568627451" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="aTP-eG-Fl5" firstAttribute="top" secondItem="9gd-c3-nwL" secondAttribute="top" id="9AO-Sh-gqK"/>
-                                    <constraint firstAttribute="trailing" secondItem="aTP-eG-Fl5" secondAttribute="trailing" id="YHx-be-F1M"/>
-                                    <constraint firstItem="aTP-eG-Fl5" firstAttribute="leading" secondItem="9gd-c3-nwL" secondAttribute="leading" id="aIZ-at-Nc2"/>
-                                    <constraint firstAttribute="bottom" secondItem="aTP-eG-Fl5" secondAttribute="bottom" constant="1" id="t9V-vz-3xh"/>
+                                    <constraint firstAttribute="trailing" secondItem="4uX-uy-5Sp" secondAttribute="trailing" id="EPt-62-N9Y"/>
+                                    <constraint firstAttribute="height" constant="74" id="Pdj-Rb-yPe"/>
+                                    <constraint firstAttribute="bottom" secondItem="4uX-uy-5Sp" secondAttribute="bottom" constant="1" id="X0l-72-dIS"/>
+                                    <constraint firstItem="4uX-uy-5Sp" firstAttribute="leading" secondItem="3mP-qx-aUh" secondAttribute="leading" id="wnk-CH-Kg6"/>
+                                    <constraint firstItem="4uX-uy-5Sp" firstAttribute="top" secondItem="3mP-qx-aUh" secondAttribute="top" id="zKZ-qe-IKE"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDM-7G-fXj">
+                                <rect key="frame" x="0.0" y="94" width="375" height="524"/>
+                                <connections>
+                                    <segue destination="9QC-JL-9cL" kind="embed" id="t6h-HV-TAO"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9gd-c3-nwL" firstAttribute="top" secondItem="0RI-Ps-XbU" secondAttribute="bottom" id="0wn-6w-kIC"/>
-                            <constraint firstItem="9gd-c3-nwL" firstAttribute="leading" secondItem="j4W-Ti-yxQ" secondAttribute="leading" id="8oU-ge-Og7"/>
-                            <constraint firstItem="C4N-yR-iec" firstAttribute="top" secondItem="9gd-c3-nwL" secondAttribute="bottom" constant="524" id="qqY-Vp-8K5"/>
-                            <constraint firstAttribute="trailing" secondItem="9gd-c3-nwL" secondAttribute="trailing" id="w6V-39-mrI"/>
+                            <constraint firstItem="fDM-7G-fXj" firstAttribute="top" secondItem="3mP-qx-aUh" secondAttribute="bottom" id="2q3-mF-M0R"/>
+                            <constraint firstItem="C4N-yR-iec" firstAttribute="top" secondItem="fDM-7G-fXj" secondAttribute="bottom" id="3UR-uQ-Xd7"/>
+                            <constraint firstItem="3mP-qx-aUh" firstAttribute="top" secondItem="0RI-Ps-XbU" secondAttribute="bottom" id="J52-JF-R5O"/>
+                            <constraint firstAttribute="trailing" secondItem="3mP-qx-aUh" secondAttribute="trailing" id="fdf-dP-M8H"/>
+                            <constraint firstItem="fDM-7G-fXj" firstAttribute="trailing" secondItem="3mP-qx-aUh" secondAttribute="trailing" id="qpI-yK-NIo"/>
+                            <constraint firstItem="fDM-7G-fXj" firstAttribute="leading" secondItem="3mP-qx-aUh" secondAttribute="leading" id="qwu-qP-54L"/>
+                            <constraint firstItem="3mP-qx-aUh" firstAttribute="leading" secondItem="j4W-Ti-yxQ" secondAttribute="leading" id="tb7-Wq-iju"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="找货" image="CombinedShape" id="XYm-5T-ndj" customClass="RAMAnimatedTabBarItem" customModule="DriverIos" customModuleProvider="target">
@@ -409,13 +420,21 @@
                         </connections>
                     </tabBarItem>
                     <connections>
-                        <outlet property="changeFindCargoPage" destination="tx8-F2-uAd" id="BJB-Jb-ody"/>
+                        <outlet property="findCargoSegmented" destination="JKa-qx-fHu" id="m1W-ru-G2o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="un1-Xi-mKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="QWp-86-5Vk" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="-361" y="90"/>
+            <point key="canvasLocation" x="-1247.2" y="-685.00749625187416"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="pO4-S3-7UZ">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="9QC-JL-9cL" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uTe-Fw-VRp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="161" y="-1143"/>
         </scene>
         <!--我的-->
         <scene sceneID="ZfJ-0a-kgM">
@@ -767,7 +786,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUs-FH-bac">
-                                                        <rect key="frame" x="186.5" y="96" width="2" height="30"/>
+                                                        <rect key="frame" x="187" y="96" width="2" height="30"/>
                                                         <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="2" id="1ds-h4-yoi"/>
@@ -1071,7 +1090,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKl-Uh-kya" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="Y8r-FS-h2l" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="1704.8" y="89.505247376311857"/>
+            <point key="canvasLocation" x="278" y="1002"/>
         </scene>
         <!--空车上报-->
         <scene sceneID="6XN-1m-6r3">
@@ -1113,7 +1132,7 @@
                                         <rect key="frame" x="0.0" y="1" width="375" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出发地" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ub-62-AhV">
-                                                <rect key="frame" x="15" y="13" width="50" height="19.5"/>
+                                                <rect key="frame" x="15" y="13" width="50" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="mNC-4Z-s8b"/>
                                                 </constraints>
@@ -1286,7 +1305,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EPO-Mh-uv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="B7i-9K-fEv" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="277.60000000000002" y="89.505247376311857"/>
+            <point key="canvasLocation" x="1487" y="582"/>
         </scene>
         <!--Home Page Controller-->
         <scene sceneID="VjF-ls-AL6">
@@ -1306,7 +1325,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wbM-eh-HQ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1025" y="90"/>
+            <point key="canvasLocation" x="-3343" y="172"/>
         </scene>
         <!--Waybill View Controller-->
         <scene sceneID="x40-7m-5av">
@@ -1377,7 +1396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rZ9-2p-bVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-88.799999999999997" y="871.21439280359823"/>
+            <point key="canvasLocation" x="-1114" y="1449"/>
         </scene>
         <!--运单-->
         <scene sceneID="MOk-hB-MLR">
@@ -1401,7 +1420,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17I-il-zdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="UNA-Xq-HEr" customClass="RAMBounceAnimation" customModule="DriverIos" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="-1028" y="871.21439280359823"/>
+            <point key="canvasLocation" x="-2119" y="1002"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="EMZ-YI-K9t">
@@ -1409,7 +1428,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="GTE-g8-XsX" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hOX-Ya-NOe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="759" y="871"/>
+            <point key="canvasLocation" x="54" y="1721"/>
         </scene>
     </scenes>
     <resources>

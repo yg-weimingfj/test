@@ -26,6 +26,7 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     @IBOutlet weak var helpView: UIView!
     
     @IBOutlet weak var menuScrollView: UIScrollView!
+    var codeResult:LBXScanResult?
     
   
     @IBAction func homeScanner(_ sender: Any) {
@@ -79,6 +80,7 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
         let tap = UITapGestureRecognizer(target: self,
                                          action: #selector(HomeController.handleTapAction(_:)))
         sliderGallery.view.addGestureRecognizer(tap)
+//        print("\("码的类型:" + (codeResult?.strBarCodeType)!+"==="+"码的内容:" + (codeResult?.strScanned)!)")
 
     }
     
@@ -100,6 +102,18 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     func handleTapAction(_ tap:UITapGestureRecognizer)->Void{
 //       SliderGalleryControllerDelegate.resetImageViewSource()
         sliderGallery.resetImageViewSource()
+    }
+    @IBAction func QRcode(_ sender: UIBarButtonItem) {
+        weixinStyle()
+    }
+    //MARK: ---无边框，内嵌4个角------
+    func weixinStyle()
+    {
+        
+        
+        let sb = UIStoryboard(name: "MyQRCode", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "myQRCodeNavigationController") as! MyQRCodeNavigationController
+                self.present(vc, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
