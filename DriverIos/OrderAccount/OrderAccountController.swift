@@ -10,6 +10,9 @@ import UIKit
 
 class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet weak var labelInCome: UILabel!//收入
+    @IBOutlet weak var labelCost: UILabel!//支出
+    @IBOutlet weak var labelBalance: UILabel!//结余
     @IBOutlet weak var tableView: UITableView!
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
@@ -17,6 +20,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     
     var models = [1,2,3,4,5,6,7,8,9,10]
     let cellId = "orderAccountCell"
+    let defaulthttp = DefaultHttp()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +49,66 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
                 self?.tableView.reloadData()
                 self?.tableView.endHeaderRefreshing(delay: 0.5)
             })
+        }
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                self.accountInfo(token: obj.token!)
+            }
+        }
+    }
+    /**
+     * 获取记账信息
+     */
+    func accountInfo(token:String) {
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String
+        
+        let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.accounting.get","time":strNowTime]
+        
+        defaulthttp.httopost(parame: params){results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    let resultObj = results["resultObj"] as! Dictionary<String,Any>
+                    var totalIncome = resultObj["total_income"] as! String!
+                    var totalExpense = resultObj["total_expense"] as! String!
+                    if(totalIncome?.isEmpty)!{
+                        totalIncome = "0"
+                    }
+                    if(totalExpense?.isEmpty)!{
+                        totalExpense = "0"
+                    }
+                    self.labelInCome.text = "+"+totalIncome!
+                    self.labelCost.text = "-"+totalExpense!
+                    let balance = Double(totalIncome!)! + Double(totalExpense!)!
+                    if(balance > 0){
+                        self.labelBalance.text = "+"+String(balance)
+                    }else if(balance < 0){
+                        self.labelBalance.text = "-"+String(balance)
+                    }else{
+                        self.labelBalance.text = "0"
+                    }
+                    
+                }else{
+                    let info:String = results["resultInfo"] as! String!
+                    self.hint(hintCon: info)
+                }
+            }
+            print("JSON: \(results)")
+            
+        }
+    }
+    /**
+     * 错误提示
+     */
+    func hint(hintCon: String){
+        let alertController = UIAlertController(title: hintCon,message: nil, preferredStyle: .alert)
+        //显示提示框
+        self.present(alertController, animated: true, completion: nil)
+        //1秒钟后自动消失
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.presentedViewController?.dismiss(animated: false, completion: nil)
         }
     }
     // MARK: - Table view data source
