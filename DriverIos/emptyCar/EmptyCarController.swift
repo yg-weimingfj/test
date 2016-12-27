@@ -21,15 +21,7 @@ class EmptyCarController: UIViewController,UICollectionViewDataSource, UICollect
     var provinceLabel : UILabel!
     var cityLabel : UILabel!
     var townLabel : UILabel!
-    let courses = [
-        ["name":"Swift","pic":"swift.png"],
-        ["name":"OC","pic":"oc.jpg"],
-        ["name":"Java","pic":"java.png"],
-        ["name":"PHP","pic":"php.jpeg"],
-        ["name":"JS","pic":"js.jpeg"],
-        ["name":"HTML","pic":"html.jpeg"],
-        ["name":"Ruby","pic":"ruby.png"]
-    ]
+    
     @IBOutlet weak var sourceAreaView: UIView!
     @IBOutlet weak var emptyCarButton: UIButton!
 

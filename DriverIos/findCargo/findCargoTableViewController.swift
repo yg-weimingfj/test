@@ -240,6 +240,12 @@ class findCargoTableViewController: UIViewController,UITableViewDelegate,UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "findCargoCell", for: indexPath) as! FindCargoCell
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let sb = UIStoryboard(name: "findCargoTable", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "findCargoUserDetailView") as! FindCargoUserDetailViewController
+        self.present(vc, animated: true, completion: nil)
+    }
 
 }
 
