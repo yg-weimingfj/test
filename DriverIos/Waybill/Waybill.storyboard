@@ -40,11 +40,30 @@
                     </view>
                     <connections>
                         <outlet property="UITable" destination="7fq-f5-Pcu" id="mie-V0-T7V"/>
+                        <segue destination="a3e-Pm-Lgs" kind="modal" identifier="WaybillToDetails" id="iQA-w7-Omt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izq-TC-BNG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1717.5999999999999" y="851.42428785607206"/>
+            <point key="canvasLocation" x="1548" y="742"/>
+        </scene>
+        <!--Under Details View Controller-->
+        <scene sceneID="dss-Sh-vSI">
+            <objects>
+                <viewController id="a3e-Pm-Lgs" customClass="UnderDetailsViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HKa-aQ-hDO"/>
+                        <viewControllerLayoutGuide type="bottom" id="hgB-lG-7kD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TUr-hr-GG0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F61-Ew-jYM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2471" y="742"/>
         </scene>
         <!--Complete Table View Controller-->
         <scene sceneID="th8-k9-UUP">
@@ -81,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgj-N9-VIv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2413.04347826087" y="851.9021739130435"/>
+            <point key="canvasLocation" x="1548" y="1406"/>
         </scene>
     </scenes>
 </document>
