@@ -152,8 +152,23 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
         
         return cell
     }
+    var orderid = ""
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row%2 == 1{
+            orderid = "111"
+        }else{
+            orderid = "222"
+        }
+        self.performSegue(withIdentifier: "CompleteToDetails",sender:self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dev=segue.destination as! CompleteDetailsViewController
+        
+        //segue 在sb 中的传值
+        
+        dev.orderId = orderid
     }
 
 
