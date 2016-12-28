@@ -178,15 +178,14 @@ class UnderWayTableViewController: UIViewController,UITableViewDelegate,UITableV
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.performSegue(withIdentifier: "WaybillToDetails",sender:self);
+        self.performSegue(withIdentifier: "WaybillToDetails",sender:self)
     }
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let dev=segue.destination as! UnderDetailsViewController
         
         //segue 在sb 中的传值
         
         dev.orderId = "11111111"
-        
     }
+
 }
