@@ -28,7 +28,7 @@ class TakeAccountController: UIViewController {
     }
     //收入
     @IBAction func btnSaveLisener(_ sender: UIButton) {
-        print("in********")
+        accountInto()
     }
     @IBOutlet weak var viewInCome: UIView!//收入
     @IBOutlet weak var textCash: UITextField!//收入现金
@@ -45,9 +45,12 @@ class TakeAccountController: UIViewController {
     @IBOutlet weak var labelOther: UILabel!//支出类型--其他
     @IBOutlet weak var btnSaveOut: UIButton!//支出
     @IBAction func btnSaveOutlisener(_ sender: AnyObject) {
-        print("out********")
+        accountCost()
     }
     private var labels :[UILabel] = [UILabel]()
+    var token = ""
+    var costType = ""
+    let defaulthttp = DefaultHttp()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -86,6 +89,12 @@ class TakeAccountController: UIViewController {
         let viewLabelOther = UITapGestureRecognizer(target: self, action: #selector(labelOtherLisener))
         labelOther.addGestureRecognizer(viewLabelOther)
         labelOther.isUserInteractionEnabled = true
+        
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                self.token = obj.token!
+            }
+        }
     }
     func labelOilFeeLisener()  {
         selectItem(selectPosition: 0)
@@ -118,6 +127,77 @@ class TakeAccountController: UIViewController {
                 label.layer.borderColor = UIColor.rgb(red: 102 , green: 102, blue: 102).cgColor
             }
         }
+    }
+    /**
+     * 记一记--收入
+     */
+    func accountInto() {
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String
+        let orderId = "54511"
+        let cash = textCash.text! as String
+        let oilCard = textOilCard.text! as String
+        let remark = textRemark.text! as String
+        let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.accounting.income.update","time":strNowTime,"order_id":orderId,"income_cash":cash,"income_petrol":oilCard,"income_comment":remark]
+        
+        defaulthttp.httopost(parame: params){results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    self.hint(hintCon: "记账成功")
+                }else{
+                    let info:String = results["resultInfo"] as! String!
+                    self.hint(hintCon: info)
+                }
+            }
+            print("JSON: \(results)")
+        }
+    }
+    /**
+     * 记一记--支出
+     */
+    func accountCost() {
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String
+        let orderId = "54511"
+        let cash = textOutCash.text! as String
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.accounting.expense.update","time":strNowTime,"order_id":orderId,"expense_cash":cash,"expense_type":costType]
+        
+        defaulthttp.httopost(parame: des){results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    self.hint(hintCon: "记账成功")
+                }else{
+                    let info:String = results["resultInfo"] as! String!
+                    self.hint(hintCon: info)
+                }
+            }
+            print("JSON: \(results)")
+        }
+    }
+    /**
+     * 错误提示
+     */
+    func hint(hintCon: String){
+        let alertController = UIAlertController(title: hintCon,message: nil, preferredStyle: .alert)
+        //显示提示框
+        self.present(alertController, animated: true, completion: nil)
+        //1秒钟后自动消失
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.presentedViewController?.dismiss(animated: false, completion: nil)
+        }
+    }
+    /**
+     * 监听键盘
+     */
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.textCash.resignFirstResponder()
+        self.textOilCard.resignFirstResponder()
+        self.textRemark.resignFirstResponder()
+        self.textOutCash.resignFirstResponder()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

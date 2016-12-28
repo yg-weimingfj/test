@@ -59,6 +59,13 @@ class SQLManager: NSObject {
             createStudentTableSQL += "`LAT` varchar(100) DEFAULT NULL,"
             createStudentTableSQL += "PRIMARY KEY (`CODE`)"
             createStudentTableSQL += ");"
+            createStudentTableSQL += "DROP TABLE IF EXISTS `sys_dict_tab`;"
+            createStudentTableSQL += "CREATE TABLE `sys_dict_tab` ("
+            createStudentTableSQL += "`id` bigint(20) NOT NULL,`type` varchar(20) DEFAULT NULL,"
+            createStudentTableSQL += "`type_name` varchar(50) DEFAULT NULL,`parent_code` varchar(20) DEFAULT NULL,"
+            createStudentTableSQL += "`code` varchar(20) DEFAULT NULL,`text` varchar(500) DEFAULT NULL,"
+            createStudentTableSQL += "`seq` int(11) DEFAULT NULL,`remark` varchar(100) DEFAULT NULL,"
+            createStudentTableSQL += "`is_del` varchar(1) DEFAULT 'N',PRIMARY KEY (`id`));"
             createStudentTableSQL = createStudentTableSQL.replacingOccurrences(of: "`", with: "'")
             if execSQL(SQL: createStudentTableSQL) == false {
                 // 失败
@@ -73,11 +80,18 @@ class SQLManager: NSObject {
                     
                 }
                 if SQLManager.shareInstance().execSQL(SQL: areaTxt.replacingOccurrences(of: "`", with: "'")) == true {
-                    print("插入数据成功")
+                    print("地区表数据插入成功")
                 }
-                //                print()
-                //                self.listItems = NSArray(contentsOfFile:plist!)
-                
+                let dictFile = Bundle.main.path(forResource: "insert_dict", ofType: "sql")
+                var dictTxt : NSString!
+                do {
+                   dictTxt = try NSString(contentsOfFile: dictFile!, encoding: String.Encoding.utf8.rawValue)
+                } catch  {
+                    
+                }
+                if SQLManager.shareInstance().execSQL(SQL: dictTxt.replacingOccurrences(of: "`", with: "'")) == true {
+                    print("字典表数据插入成功")
+                }
             }
         }
     }

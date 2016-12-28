@@ -28,11 +28,13 @@ class MyController: UIViewController{
     @IBOutlet weak var labelOrderCount: UILabel!//完成运单数
     @IBOutlet weak var rbStar: RatingBar!//评分星级
     @IBOutlet weak var flowProgress: UIProgressView!//流量
+    @IBOutlet weak var labelTotalFlow: UILabel!//总流量
+    @IBOutlet weak var labelSurplusFlow: UILabel!//剩余流量
     @IBOutlet weak var myScrollView: UIScrollView!//滚动布局
     
 
     let  defaulthttp = DefaultHttp()
-    
+    var token = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,6 +50,10 @@ class MyController: UIViewController{
         let viewEditWiFiUI = UITapGestureRecognizer(target: self, action: #selector(setWiFi))
         viewEditWiFi.addGestureRecognizer(viewEditWiFiUI)
         viewEditWiFi.isUserInteractionEnabled = true
+        
+        let viewEditFlowUI = UITapGestureRecognizer(target: self, action: #selector(rechargeFlow))
+        viewEditFlow.addGestureRecognizer(viewEditFlowUI)
+        viewEditFlow.isUserInteractionEnabled = true
         
         let myAccountUI = UITapGestureRecognizer(target: self, action: #selector(myAccountLinener))
         myAccount.addGestureRecognizer(myAccountUI)
@@ -75,31 +81,36 @@ class MyController: UIViewController{
 
         flowProgress.progress = 0.2
         flowProgress.transform = CGAffineTransform(scaleX: 1.0, y: 3.0)//改变进度条高度
-        var token = ""
+        
         $.getObj("driverUserInfo") { (obj) -> () in
             if let obj = obj as? Student{
-                print("\(obj.userId) , \(obj.name)")
-                token = obj.token!
-                self.driverInfo(token: token)
+                self.token = obj.token!
+                self.driverInfo()
+                self.checkFlow()
             }
         }
+        
     }
     /**
      * 获取司机个人信息
      */
-    func driverInfo(token:String) {
+    func driverInfo() {
         let date = Date()
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
         
-        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.get","time":strNowTime]
+        let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.get","time":strNowTime]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httopost(parame: params){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
-                    
-                    
+                    let resultObj = results["resultObj"] as! Dictionary<String,Any>
+                    let publishCount = resultObj["vehicle_num"] as! String!
+                    let orderCount = resultObj["carrier_order_done_count"] as! String!
+                    self.labelUserName.text = resultObj["carrier_name"] as! String!
+                    self.labelIssusd.text = "累计发布"+publishCount!+"次"
+                    self.labelOrderCount.text = "完成"+orderCount!+"个运单"
                 }else{
                     let info:String = results["resultInfo"] as! String!
                     self.hint(hintCon: info)
@@ -109,6 +120,35 @@ class MyController: UIViewController{
             
         }
     }
+    /**
+     * 魔盒流量查询
+     */
+    func checkFlow() {
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String
+        
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.line.magicbox.flow.query","time":strNowTime]
+        
+        defaulthttp.httopost(parame: des){results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    let resultObj = results["resultObj"] as! Dictionary<String,Any>
+                    let totalFlow = resultObj["setTotalFlow"] as! String!
+                    let leftFlow = resultObj["leftFlow"] as! String!
+                    self.labelTotalFlow.text = "魔盒流量("+totalFlow!+"M)"
+                    self.labelSurplusFlow.text = "剩余"+leftFlow!+"M"
+                }else{
+                    let info:String = results["resultInfo"] as! String!
+                    self.hint(hintCon: info)
+                }
+            }
+            print("JSON: \(results)")
+            
+        }
+    }
+
     /**
      * 错误提示
      */
@@ -129,7 +169,14 @@ class MyController: UIViewController{
         let vc = sb.instantiateViewController(withIdentifier: "setWiFiController") as! SetWiFiController
         self.present(vc, animated: true, completion: nil)
     }
-
+    /**
+     * 流量充值
+     */
+    func rechargeFlow() {
+        let sb = UIStoryboard(name: "SetWiFi", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "rechargeFlowController") as! RechargeFlowController
+        self.present(vc, animated: true, completion: nil)
+    }
     /**
      * 我的记账
      */

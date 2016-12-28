@@ -15,10 +15,15 @@ class SetWiFiController: UIViewController {
     @IBOutlet weak var textWiFiPwd: UITextField!
     @IBOutlet weak var btnSure: UIButton!
     @IBAction func btnSureLisener(_ sender: UIButton) {
-        setWiFi()
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                self.token = obj.token!
+                self.setWiFi()
+            }
+        }
     }
     
-    
+    var token = ""
     let  defaulthttp = DefaultHttp()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,25 +42,23 @@ class SetWiFiController: UIViewController {
      * 设置WiFi
      */
     func setWiFi() {
-        let date = Date()
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
-        let strNowTime = timeFormatter.string(from: date) as String
-        
-        let des : Dictionary<String,Any> = ["token":"","method":"yunba.carrier.v1.line.magicbox.wifi.config","time":strNowTime,"wifi_name":textWiFiName.text!,"wifi_pass":textWiFiPwd.text!]
-        
-        defaulthttp.httopost(parame: des){results in
-            if let result:String = results["result"] as! String?{
-                if result == "1"{
-                    
-                    
-                }else{
-                    let info:String = results["resultInfo"] as! String!
-                    self.hint(hintCon: info)
-                }
-            }
-            print("JSON: \(results)")
+        if(textWiFiName.text?.isEmpty)!{
+            self.hint(hintCon: "请输入热点名称")
+        }else if(textWiFiPwd.text?.isEmpty)!{
+            self.hint(hintCon: "请输入WiFi密码")
+        }else{
+            let date = Date()
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+            let strNowTime = timeFormatter.string(from: date) as String
             
+            let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.line.magicbox.wifi.config","time":strNowTime,"wifi_name":textWiFiName.text!,"wifi_pass":textWiFiPwd.text!]
+            
+            defaulthttp.httopost(parame: params){results in
+                let info:String = results["resultInfo"] as! String!
+                self.hint(hintCon: info)
+            }
+
         }
     }
     /**
