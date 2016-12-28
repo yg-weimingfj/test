@@ -14,7 +14,6 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     
     @IBOutlet weak var emptyCarView: UIView!
     
-    
     @IBOutlet weak var offenRunView: UIView!
     
     @IBOutlet weak var myWalletView: UIView!
@@ -81,6 +80,8 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
                                          action: #selector(HomeController.handleTapAction(_:)))
         sliderGallery.view.addGestureRecognizer(tap)
 //        print("\("码的类型:" + (codeResult?.strBarCodeType)!+"==="+"码的内容:" + (codeResult?.strScanned)!)")
+        
+        registerData()
 
     }
     
@@ -115,7 +116,47 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
         let vc = sb.instantiateViewController(withIdentifier: "myQRCodeNavigationController") as! MyQRCodeNavigationController
                 self.present(vc, animated: true, completion: nil)
     }
-    
+    /**
+     * 加载数据
+     */
+    func registerData() {
+        
+        let myAccountUI = UITapGestureRecognizer(target: self, action: #selector(gotoMyAccount))
+        myWalletPageView.addGestureRecognizer(myAccountUI)
+        myWalletPageView.isUserInteractionEnabled = true
+        
+        let messageListUI = UITapGestureRecognizer(target: self, action: #selector(gotoMessageList))
+        messageView.addGestureRecognizer(messageListUI)
+        messageView.isUserInteractionEnabled = true
+        
+        let auditViewUI = UITapGestureRecognizer(target: self, action: #selector(gotoAuth))
+        auditView.addGestureRecognizer(auditViewUI)
+        auditView.isUserInteractionEnabled = true
+    }
+    /**
+     * 跳转到我的记账页面
+     */
+    func gotoMyAccount() {
+        let sb = UIStoryboard(name: "OrderAccount", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "orderAccountController") as! OrderAccountController
+        self.present(vc, animated: true, completion: nil)
+    }
+    /**
+     * 跳转到消息列表页面
+     */
+    func gotoMessageList() {
+        let sb = UIStoryboard(name: "Message", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "messageListController") as! MessageListController
+        self.present(vc, animated: true, completion: nil)
+    }
+    /**
+     * 跳转到认证页面
+     */
+    func gotoAuth() {
+        let sb = UIStoryboard(name: "Authenticate", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "authenticateController") as! AuthenticateController
+        self.present(vc, animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

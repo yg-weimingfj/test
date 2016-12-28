@@ -15,7 +15,7 @@ class AccountInfoController: UIViewController,UITableViewDelegate,UITableViewDat
         self.dismiss(animated: true, completion: nil)
     }
     @IBOutlet weak var tableView: UITableView!
-    let cellId = "accountInfoCell"
+    private let cellId = "accountInfoCell"
     override func viewDidLoad() {
         super.viewDidLoad()
 

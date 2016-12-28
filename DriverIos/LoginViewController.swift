@@ -30,10 +30,11 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     
     @IBOutlet var loginCell: UILabel!
     @IBOutlet var loginButton: UIButton!
-    let  defaulthttp = DefaultHttp()
-    let appsecret = "weimingfj_ios_app_secret"
+    private let  defaulthttp = DefaultHttp()
+    private let appsecret = "weimingfj_ios_app_secret"
+    private var loginType = "verfy"//登录模式，默认验证码登录
     
-    var isCounting = false {
+    private var isCounting = false {
         willSet {
             if newValue {
                 countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector:#selector(updateTime(timer:)), userInfo: nil, repeats: true)
@@ -109,17 +110,26 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     }
 
     @IBAction func VerificationCodePhoneButton(_ sender: UIButton) {
-        isCounting = true
-        buttonNum+=1
+        let phone = VerificationCodePhoneTextField.text!
+        if(phone.isEmpty){
+            self.tishi(st: "请输入手机号")
+        }else{
+            isCounting = true
+            buttonNum+=1
+            sendVerfy()
+        }
+        
     }
     @IBAction func loginTabButton(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
+            loginType = "verfy"
             VerificationCodePhoneView.isHidden = false
             passwordPhoneView.isHidden = true
             passwordTexField.placeholder = "请输入验证码"
             passwordTexField.text = ""
         case 1:
+            loginType = "password"
             VerificationCodePhoneView.isHidden = true
             passwordPhoneView.isHidden = false
             passwordTexField.placeholder = "请输入密码"
@@ -130,52 +140,115 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         }
     }
     @IBAction func loginButton(_ sender: UIButton) {
-        
-        let passd5 = passEncryption(passtext: passwordTexField.text!, appEncryotion: appsecret)
-        let uuid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-        let date = Date()
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
-        let strNowTime = timeFormatter.string(from: date) as String
-        
-        let des : Dictionary<String,Any> = ["token":"","mobile_no":passwordPhoneTextField.text!,"user_pwd":passd5,"method":"yunba.carrier.v1.user.login","device_mark":uuid,"time":strNowTime]
-        
-        defaulthttp.httopost(parame: des){results in
-            if let result:String = results["result"] as! String?{
-                if result == "1"{
-                    
-                    let homePath = results["resultObj"] as! Dictionary<String,Any>
-                    
-                    
-                    let stu = Student()
-                    stu.name = homePath["carrier_name"] as! String?
-                    stu.userId = homePath["user_id"] as! String?
-                    stu.token = homePath["token"] as! String?
-                    stu.carrierAvatar = homePath["carrier_avatar"] as! String?
-                    stu.carrierPhone = homePath["carrier_phone"] as! String?
-                    stu.carrierStatus = homePath["carrier_status"] as! String?
-                    stu.deviceMark = homePath["device_mark"] as! String?
-                    stu.isPrivate = homePath["is_private"] as! String?
-                    stu.userCode = homePath["user_code"] as! String?
-                    $.saveObj("driverUserInfo", value: stu)
-
-                    
-                    
-                    let sb = UIStoryboard(name: "HomePage", bundle:nil)
-                    let vc = sb.instantiateViewController(withIdentifier: "homePageController") as! HomePageController
-                    self.present(vc, animated: true, completion: nil)
-                }else{
-                    let info:String = results["resultInfo"] as! String!
-                    self.tishi(st: info)
-                }
-            }
-            print("JSON: \(results)")
+        if(loginType == "password"){
+            let passd5 = passEncryption(passtext: passwordTexField.text!, appEncryotion: appsecret)
+            let uuid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+            let date = Date()
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+            let strNowTime = timeFormatter.string(from: date) as String
             
+            let des : Dictionary<String,Any> = ["token":"","mobile_no":passwordPhoneTextField.text!,"user_pwd":passd5,"method":"yunba.carrier.v1.user.login","device_mark":uuid,"time":strNowTime]
+            
+            defaulthttp.httopost(parame: des){results in
+                if let result:String = results["result"] as! String?{
+                    if result == "1"{
+                        
+                        let homePath = results["resultObj"] as! Dictionary<String,Any>
+                        
+                        
+                        let stu = Student()
+                        stu.name = homePath["carrier_name"] as! String?
+                        stu.userId = homePath["user_id"] as! String?
+                        stu.token = homePath["token"] as! String?
+                        stu.carrierAvatar = homePath["carrier_avatar"] as! String?
+                        stu.carrierPhone = homePath["carrier_phone"] as! String?
+                        stu.carrierStatus = homePath["carrier_status"] as! String?
+                        stu.deviceMark = homePath["device_mark"] as! String?
+                        stu.isPrivate = homePath["is_private"] as! String?
+                        stu.userCode = homePath["user_code"] as! String?
+                        $.saveObj("driverUserInfo", value: stu)
+
+                        let sb = UIStoryboard(name: "HomePage", bundle:nil)
+                        let vc = sb.instantiateViewController(withIdentifier: "homePageController") as! HomePageController
+                        self.present(vc, animated: true, completion: nil)
+                    }else{
+                        let info:String = results["resultInfo"] as! String!
+                        self.tishi(st: info)
+                    }
+                }
+                print("JSON: \(results)")
+                
+            }
+        }else{
+            let verfy = passwordTexField.text!
+            let uuid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+            let date = Date()
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+            let strNowTime = timeFormatter.string(from: date) as String
+            
+            let des : Dictionary<String,Any> = ["token":"","tel":VerificationCodePhoneTextField.text!,"code":verfy,"method":"yunba.carrier.v1.user.codelogin","device_mark":uuid,"time":strNowTime]
+            
+            defaulthttp.httopost(parame: des){results in
+                if let result:String = results["result"] as! String?{
+                    if result == "1"{
+                        
+                        let homePath = results["resultObj"] as! Dictionary<String,Any>
+                        let stu = Student()
+                        stu.name = homePath["carrier_name"] as! String?
+                        stu.userId = homePath["user_id"] as! String?
+                        stu.token = homePath["token"] as! String?
+                        stu.carrierAvatar = homePath["carrier_avatar"] as! String?
+                        stu.carrierPhone = homePath["carrier_phone"] as! String?
+                        stu.carrierStatus = homePath["carrier_status"] as! String?
+                        stu.deviceMark = homePath["device_mark"] as! String?
+                        stu.isPrivate = homePath["is_private"] as! String?
+                        stu.userCode = homePath["user_code"] as! String?
+                        $.saveObj("driverUserInfo", value: stu)
+                        
+                        let sb = UIStoryboard(name: "HomePage", bundle:nil)
+                        let vc = sb.instantiateViewController(withIdentifier: "homePageController") as! HomePageController
+                        self.present(vc, animated: true, completion: nil)
+                    }else{
+                        let info:String = results["resultInfo"] as! String!
+                        self.tishi(st: info)
+                    }
+                }
+                print("JSON: \(results)")
+                
+            }
         }
 
 //        errorLabel.text = "验证码错误，请重新输入"
 //        errorLabel.isHidden = false
 //        voiceView.isHidden = true
+        
+    }
+    /**
+     * 发送短信验证码
+     */
+    func sendVerfy() {
+        
+            let date = Date()
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+            let strNowTime = timeFormatter.string(from: date) as String
+            
+            let params : Dictionary<String,Any> = ["token":"","method":"yunba.carrier.v1.smscode.send","time":strNowTime,"mobile_no":VerificationCodePhoneTextField.text!,"voice":""]
+            
+            defaulthttp.httopost(parame: params){results in
+                if let result:String = results["result"] as! String?{
+                    if result == "1"{
+                        self.tishi(st: "验证码发送成功")
+                    }else{
+                        let info:String = results["resultInfo"] as! String!
+                        self.tishi(st: info)
+                    }
+                }
+                print("JSON: \(results)")
+                
+            }
         
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -206,12 +279,6 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         }else{
             UIApplication.shared.openURL(URL(string: "tel://4008856913")!)
         }
-        
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("id===\(segue.identifier)")
-        let des = segue.destination as! RegisterViewController
-        des.type = "13131313"
         
     }
     //密码加密

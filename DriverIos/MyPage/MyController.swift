@@ -33,8 +33,8 @@ class MyController: UIViewController{
     @IBOutlet weak var myScrollView: UIScrollView!//滚动布局
     
 
-    let  defaulthttp = DefaultHttp()
-    var token = ""
+    private let  defaulthttp = DefaultHttp()
+    private var token = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -209,9 +209,7 @@ class MyController: UIViewController{
      * 设置点击
      */
     func settingLinener() {
-        let sb = UIStoryboard(name: "Authenticate", bundle:nil)
-        let vc = sb.instantiateViewController(withIdentifier: "authenticateController") as! AuthenticateController
-        self.present(vc, animated: true, completion: nil)
+        
     }
     /**
      * 帮助点击

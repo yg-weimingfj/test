@@ -11,7 +11,7 @@ import UIKit
 class MessageListRightController: UITableViewController {
     
     
-    let cellId = "messageListItemCell"
+    private let cellId = "messageListItemCell"
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,7 +55,15 @@ class MessageListRightController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        gotoMessageInfo()
     }
-
+    /**
+     * 跳转到消息详情
+     */
+    func gotoMessageInfo() {
+        let sb = UIStoryboard(name: "Message", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "messageInfoController") as! MessageInfoController
+        self.present(vc, animated: true, completion: nil)
+    }
 
 }

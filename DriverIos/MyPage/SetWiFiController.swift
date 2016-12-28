@@ -23,8 +23,8 @@ class SetWiFiController: UIViewController {
         }
     }
     
-    var token = ""
-    let  defaulthttp = DefaultHttp()
+    private var token = ""
+    private let  defaulthttp = DefaultHttp()
     override func viewDidLoad() {
         super.viewDidLoad()
 

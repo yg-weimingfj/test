@@ -18,9 +18,9 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         self.dismiss(animated: true, completion: nil)
     }
     
-    var models = [1,2,3,4,5,6,7,8,9,10]
-    let cellId = "orderAccountCell"
-    let defaulthttp = DefaultHttp()
+    private var models = [1,2,3,4,5,6,7,8,9,10]
+    private let cellId = "orderAccountCell"
+    private let defaulthttp = DefaultHttp()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -126,11 +126,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         let takeAccountUI = UITapGestureRecognizer(target: self, action: #selector(takeAccountLinener))
         cell.viewAccount.addGestureRecognizer(takeAccountUI)
         cell.viewAccount.isUserInteractionEnabled = true
-        
-        let accountInfoUI = UITapGestureRecognizer(target: self, action: #selector(accountInfoLinener))
-        cell.viewItem.addGestureRecognizer(accountInfoUI)
-        cell.viewItem.isUserInteractionEnabled = true
-        
+                
         if(indexPath.row%2 == 0){
             cell.viewMoney.isHidden = true
             cell.viewAccount.isHidden = false
@@ -142,6 +138,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        accountInfoLinener()
     }
     /**
      * 记一记

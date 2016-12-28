@@ -30,12 +30,12 @@ class AuthenticateController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var imageHead: UIImageView!//头像照片
     @IBOutlet weak var btnSure: UIButton!//确认按钮
     
-    var imagePicker: UIImagePickerController!
-    var token = ""
-    var idCardImg = ""
-    var headImg = ""
-    var carImg = ""
-    let defaulthttp = DefaultHttp()
+    private var imagePicker: UIImagePickerController!
+    private var token = ""
+    private var idCardImg = ""
+    private var headImg = ""
+    private var carImg = ""
+    private let defaulthttp = DefaultHttp()
     override func viewDidLoad() {
         super.viewDidLoad()
 

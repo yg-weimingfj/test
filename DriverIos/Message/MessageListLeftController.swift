@@ -12,7 +12,7 @@ class MessageListLeftController: UITableViewController {
 
     
     
-    let cellId = "messageListItemCell"
+    private let cellId = "messageListItemCell"
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -66,13 +66,11 @@ class MessageListLeftController: UITableViewController {
             cell.viewNormalMsg.isHidden = false
             cell.viewSystemMsg.isHidden = true
         }
-        let takeAccountUI = UITapGestureRecognizer(target: self, action: #selector(gotoMessageInfo))
-        cell.viewNormalMsg.addGestureRecognizer(takeAccountUI)
-        cell.viewNormalMsg.isUserInteractionEnabled = true
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        gotoMessageInfo()
     }
 
 }

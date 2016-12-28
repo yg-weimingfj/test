@@ -48,9 +48,9 @@ class TakeAccountController: UIViewController {
         accountCost()
     }
     private var labels :[UILabel] = [UILabel]()
-    var token = ""
-    var costType = ""
-    let defaulthttp = DefaultHttp()
+    private var token = ""
+    private var costType = ""
+    private let defaulthttp = DefaultHttp()
     override func viewDidLoad() {
         super.viewDidLoad()
 

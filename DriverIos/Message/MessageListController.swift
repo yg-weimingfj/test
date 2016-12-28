@@ -28,7 +28,7 @@ class MessageListController: UIViewController {
     @IBOutlet weak var msgTypeTab: UISegmentedControl!
     @IBOutlet weak var viewCon: UIView!
     
-    var pageViewController: UIPageViewController!
+    private var pageViewController: UIPageViewController!
     var leftController: MessageListLeftController!
     var rightController: MessageListRightController!
     override func viewDidLoad() {

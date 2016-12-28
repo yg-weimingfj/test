@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -86,10 +87,12 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="161" id="FRO-4B-qgW"/>
                                                     <constraint firstAttribute="height" constant="104" id="PML-Zu-YMV"/>
+                                                    <constraint firstAttribute="width" secondItem="7im-1r-oxG" secondAttribute="height" multiplier="161:104" id="hGv-LW-xB6"/>
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="auth_add_idcard" translatesAutoresizingMaskIntoConstraints="NO" id="Gbu-1g-J6A">
                                                 <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Gbu-1g-J6A" secondAttribute="height" multiplier="161:104" id="8PM-fO-PFh"/>
                                                     <constraint firstAttribute="width" constant="161" id="kTL-60-bFh"/>
                                                     <constraint firstAttribute="height" constant="104" id="tqy-Zd-akt"/>
                                                 </constraints>
@@ -97,11 +100,13 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="auth_head" translatesAutoresizingMaskIntoConstraints="NO" id="Sah-JY-hYV">
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="120" id="Uoh-03-ACG"/>
+                                                    <constraint firstAttribute="width" secondItem="Sah-JY-hYV" secondAttribute="height" multiplier="1:1" id="aXe-LI-Gat"/>
                                                     <constraint firstAttribute="width" constant="120" id="ixj-rV-z8H"/>
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="auth_add_head" translatesAutoresizingMaskIntoConstraints="NO" id="TGh-I2-uhF">
                                                 <constraints>
+                                                    <constraint firstAttribute="width" secondItem="TGh-I2-uhF" secondAttribute="height" multiplier="1:1" id="Dgg-6q-lq2"/>
                                                     <constraint firstAttribute="width" constant="120" id="nVB-LH-k4R"/>
                                                     <constraint firstAttribute="height" constant="120" id="oNG-4X-yLY"/>
                                                 </constraints>
