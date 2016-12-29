@@ -32,7 +32,9 @@ class EmptyCarTableController: UIViewController,UITableViewDelegate,UITableViewD
         self.emptyCarTableView.beginHeaderRefreshing()
         // Do any additional setup after loading the view.
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "findCargoPageChanged"), object: 1)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

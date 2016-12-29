@@ -129,6 +129,10 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
         messageView.addGestureRecognizer(messageListUI)
         messageView.isUserInteractionEnabled = true
         
+        let usedLineUI = UITapGestureRecognizer(target: self, action: #selector(gotoUsedLine))
+        offenRunView.addGestureRecognizer(usedLineUI)
+        offenRunView.isUserInteractionEnabled = true
+        
         let auditViewUI = UITapGestureRecognizer(target: self, action: #selector(gotoAuth))
         auditView.addGestureRecognizer(auditViewUI)
         auditView.isUserInteractionEnabled = true
@@ -155,6 +159,14 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     func gotoAuth() {
         let sb = UIStoryboard(name: "Authenticate", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "authenticateController") as! AuthenticateController
+        self.present(vc, animated: true, completion: nil)
+    }
+    /**
+     * 跳转到常跑路线页面
+     */
+    func gotoUsedLine() {
+        let sb = UIStoryboard(name: "UsedLine", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "usedLineController") as! UsedLineController
         self.present(vc, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
