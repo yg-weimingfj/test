@@ -16,7 +16,6 @@ class findCargoViewController: UIViewController  {
     let viewMarginHeight = 127
     
     @IBOutlet weak var findCargoSegmented: UISegmentedControl!
-    @IBOutlet weak var findCargoSelectedView: UIView!
     var findCargoPageController : UIPageViewController!
     var findCargoController : findCargoTableViewController!
     var emptyCarTable : EmptyCarTableController!

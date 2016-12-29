@@ -25,6 +25,7 @@ class AreaDropDownView: UIView,UICollectionViewDataSource, UICollectionViewDeleg
     var alertController : UIAlertController!
     var viewWidth : CGFloat!
     var viewHeight : CGFloat!
+    var showLevel : String!//判断父级页面显示的地区地址（nil或者0则显示当前的所选的item，1为当前item加上一级item，2为详细地址
     override init(frame: CGRect){
         
         super.init(frame: frame)
@@ -283,7 +284,14 @@ class AreaDropDownView: UIView,UICollectionViewDataSource, UICollectionViewDeleg
             townValue = areaModel.text
         }
         bbchange?(areaCode,provinceValue,cityValue,townValue)
-        self.areaLabel.text = areaModel.text
+        if(showLevel == nil || showLevel == "0"){
+            self.areaLabel.text = areaModel.text
+        }else if(showLevel == "1"){
+            self.areaLabel.text = areaModel.cityText
+        }else if(showLevel == "2"){
+            self.areaLabel.text = areaModel.fullText
+        }
+        
     }
 
 }

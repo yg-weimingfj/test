@@ -66,7 +66,9 @@ class findCargoTableViewController: UIViewController,UITableViewDelegate,UITable
         self.tableView.beginHeaderRefreshing()
     }
 
-    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "findCargoPageChanged"), object: 0)
+    }
     func allCargoSelect(){
         for i in 0 ..< conditionNum {
             let conditionWidth = Int(mainScreen.width)/conditionNum
