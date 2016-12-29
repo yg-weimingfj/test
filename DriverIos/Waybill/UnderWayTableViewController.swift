@@ -17,6 +17,7 @@ class UnderWayTableViewController: UIViewController,UITableViewDelegate,UITableV
     private var pageStart = 1
     private var pageNum = 10
     private var areamap:Dictionary<String,Any> = [:]
+    private var orderid = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -178,6 +179,8 @@ class UnderWayTableViewController: UIViewController,UITableViewDelegate,UITableV
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let tableMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+        orderid = tableMap["order_id"] as! String
         self.performSegue(withIdentifier: "WaybillToDetails",sender:self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -185,7 +188,7 @@ class UnderWayTableViewController: UIViewController,UITableViewDelegate,UITableV
         
         //segue 在sb 中的传值
         
-        dev.orderId = "11111111"
+        dev.orderId = orderid
     }
 
 }

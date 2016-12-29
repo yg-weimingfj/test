@@ -17,7 +17,7 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
     private var pageStart = 1
     private var pageNum = 10
     private var areamap:Dictionary<String,Any> = [:]
-    
+    private var orderid = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         let xib = UINib(nibName: "WaybillCell", bundle: nil) //nibName指的是我们创建的Cell文件名
@@ -152,15 +152,11 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
         
         return cell
     }
-    var orderid = ""
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row%2 == 1{
-            orderid = "111"
-        }else{
-            orderid = "222"
-        }
+        let tableMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+        orderid = tableMap["order_id"] as! String
         self.performSegue(withIdentifier: "CompleteToDetails",sender:self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
