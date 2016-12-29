@@ -1064,7 +1064,7 @@
         <image name="CompleteYellowIcon" width="8" height="16"/>
         <image name="SelectedBig" width="36" height="36"/>
         <image name="SelectedEvaluate" width="16" height="16"/>
-        <image name="UnSelectedBig" width="16" height="16"/>
+        <image name="UnSelectedBig" width="36" height="36"/>
         <image name="UnSelectedEvaluate" width="16" height="16"/>
         <image name="WaybillUpload" width="240" height="156"/>
         <image name="auth_head" width="120" height="120"/>
