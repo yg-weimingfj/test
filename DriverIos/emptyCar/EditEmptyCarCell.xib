@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pFs-Rt-l3h">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_check" translatesAutoresizingMaskIntoConstraints="NO" id="pFs-Rt-l3h">
                         <rect key="frame" x="12" y="12" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="RA9-KI-x7K"/>
@@ -60,5 +60,6 @@
     </objects>
     <resources>
         <image name="CellArrow2" width="52" height="10"/>
+        <image name="no_check" width="24" height="24"/>
     </resources>
 </document>
