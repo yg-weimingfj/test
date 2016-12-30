@@ -47,6 +47,7 @@ class TakeAccountController: UIViewController {
     @IBAction func btnSaveOutlisener(_ sender: AnyObject) {
         accountCost()
     }
+    var orderId :String = ""
     private var labels :[UILabel] = [UILabel]()
     private var token = ""
     private var costType = ""
@@ -56,6 +57,7 @@ class TakeAccountController: UIViewController {
 
         initData()
     }
+    
     /**
      * 初始化
      */
@@ -136,7 +138,6 @@ class TakeAccountController: UIViewController {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
-        let orderId = "54511"
         let cash = textCash.text! as String
         let oilCard = textOilCard.text! as String
         let remark = textRemark.text! as String
@@ -162,7 +163,7 @@ class TakeAccountController: UIViewController {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
-        let orderId = "54511"
+        let orderId = "012f3d64-e79b-4637-80bf-3fcb0b963d09"
         let cash = textOutCash.text! as String
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.accounting.expense.update","time":strNowTime,"order_id":orderId,"expense_cash":cash,"expense_type":costType]
         

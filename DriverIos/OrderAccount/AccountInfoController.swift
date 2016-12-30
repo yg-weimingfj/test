@@ -16,6 +16,7 @@ class AccountInfoController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     @IBOutlet weak var tableView: UITableView!
     private let cellId = "accountInfoCell"
+    var orderId :String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 

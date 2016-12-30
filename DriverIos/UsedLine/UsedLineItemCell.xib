@@ -76,6 +76,13 @@
                     <constraint firstAttribute="trailing" secondItem="MTS-9W-70G" secondAttribute="trailing" id="RFg-Jf-7li"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="labelDepa" destination="4qw-BI-XpY" id="fsz-yU-kGT"/>
+                <outlet property="labelDepaDetail" destination="hK4-K6-Rst" id="Lp1-HJ-inS"/>
+                <outlet property="labelDest" destination="A4f-3J-3pQ" id="Gdf-qh-4EH"/>
+                <outlet property="labelDestDetail" destination="pyH-p6-JHi" id="NMG-NN-VHC"/>
+                <outlet property="labelMile" destination="5qe-F5-emV" id="BK1-mf-KMj"/>
+            </connections>
             <point key="canvasLocation" x="62.5" y="69.5"/>
         </tableViewCell>
     </objects>

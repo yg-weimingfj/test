@@ -26,6 +26,8 @@ class AreaDropDownView: UIView,UICollectionViewDataSource, UICollectionViewDeleg
     var viewWidth : CGFloat!
     var viewHeight : CGFloat!
     var showLevel : String!//判断父级页面显示的地区地址（nil或者0则显示当前的所选的item，1为当前item加上一级item，2为详细地址
+    var areaTitleLabel : UILabel!
+    var title : String! = nil
     override init(frame: CGRect){
         
         super.init(frame: frame)
@@ -34,10 +36,14 @@ class AreaDropDownView: UIView,UICollectionViewDataSource, UICollectionViewDeleg
         
     }
     func createAreaView(){
-        let areaTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: viewWidth, height: 58))
+        areaTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: viewWidth, height: 58))
         
         addSubview(areaTitleLabel)
-        areaTitleLabel.text = "请选择出发地"
+        if(title != nil){
+            areaTitleLabel.text = title
+        }else{
+           areaTitleLabel.text = "请选择出发地"
+        }
         areaTitleLabel.font = UIFont.boldSystemFont(ofSize: 17)
         areaTitleLabel.textAlignment = NSTextAlignment.center
         
@@ -87,7 +93,6 @@ class AreaDropDownView: UIView,UICollectionViewDataSource, UICollectionViewDeleg
         addSubview(areaBorderView)
         chooseShow()
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -200,10 +205,13 @@ class AreaDropDownView: UIView,UICollectionViewDataSource, UICollectionViewDeleg
         // 取出查询到的结果
         let resultDataArr = SQLManager.shareInstance().queryDataBase(querySQL: querySQL)
         areaArr = []
-        for dict in resultDataArr! {
-            let mymodel = AreaModel(code: dict["CODE"] as! String, parentCode: dict["PARENT_CODE"] as! String, text: dict["TEXT"] as! String, pinYin: dict["PIN_YIN"] as! String, remark: dict["REMARK"] as! String , simpleText: dict["SIMPLE_TEXT"] as! String, province: dict["PROVINCE"] as! String, simpleCity: dict["SIMPLE_CITY"] as! String, areaLevel: dict["LEVEL"] as! String, isDirectlyUnder: dict["IS_DIRECTLY_UNDER"] as! String, fullText: dict["FULL_TEXT"] as! String, cityText: dict["CITY_TEXT"] as! String , lon: dict["LON"] as! String, lat: dict["LAT"] as! String)
-            areaArr.append(mymodel)
+        if(resultDataArr != nil){
+            for dict in resultDataArr! {
+                let mymodel = AreaModel(code: dict["CODE"] as! String, parentCode: dict["PARENT_CODE"] as! String, text: dict["TEXT"] as! String, pinYin: dict["PIN_YIN"] as! String, remark: dict["REMARK"] as! String , simpleText: dict["SIMPLE_TEXT"] as! String, province: dict["PROVINCE"] as! String, simpleCity: dict["SIMPLE_CITY"] as! String, areaLevel: dict["LEVEL"] as! String, isDirectlyUnder: dict["IS_DIRECTLY_UNDER"] as! String, fullText: dict["FULL_TEXT"] as! String, cityText: dict["CITY_TEXT"] as! String , lon: dict["LON"] as! String, lat: dict["LAT"] as! String)
+                areaArr.append(mymodel)
+            }
         }
+        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return areaArr.count

@@ -174,7 +174,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y9X-y5-GfE">
-                                <frame key="frameInset" minY="168" width="375" height="44"/>
+                                <frame key="frameInset" minY="168" width="170" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle_default" translatesAutoresizingMaskIntoConstraints="NO" id="W1f-ad-UAh">

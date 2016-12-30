@@ -20,6 +20,8 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     private let cellId = "usedLineItemCell"
     private let defaulthttp = DefaultHttp()
+    private var models = [Any]()
+    private var areamap:Dictionary<String,Any> = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,11 +47,11 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 self?.tableView.endHeaderRefreshing(delay: 0.5)
             })
         }
-//        $.getObj("driverUserInfo") { (obj) -> () in
-//            if let obj = obj as? Student{
-//                self.getUsedLine(token: obj.token!)
-//            }
-//        }
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                self.getUsedLine(token: obj.token!)
+            }
+        }
     }
     /**
      * 获取常跑路线信息
@@ -60,21 +62,21 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
         
-        let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.accounting.get","time":strNowTime]
+        let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.routes.list.get","time":strNowTime]
         
-        defaulthttp.httopost(parame: params){results in
-            if let result:String = results["result"] as! String?{
-                if result == "1"{
-                    
-                    
-                }else{
-                    let info:String = results["resultInfo"] as! String!
-                    self.hint(hintCon: info)
-                }
-            }
-            print("JSON: \(results)")
-            
-        }
+//        defaulthttp.httopost(parame: params){results in
+//            print("JSON: \(results)")
+//            if let result:String = results["result"] as! String?{
+//                if result == "1"{
+//                    let obj:[Any] = results["resultObj"] as! [Any]
+//                    self.models = obj
+//                    self.tableView.reloadData()
+//                }else{
+//                    let info:String = results["resultInfo"] as! String!
+//                    self.hint(hintCon: info)
+//                }
+//            }
+//        }
     }
     /**
      * 错误提示
@@ -90,7 +92,7 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return models.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
@@ -98,11 +100,18 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! UsedLineItemCell
-//        cell.labelDepa.text = "福州仓山万达"
-//        cell.labelDest.text = "厦门鼓浪屿"
-//        let takeAccountUI = UITapGestureRecognizer(target: self, action: #selector(takeAccountLinener))
-//        cell.viewAccount.addGestureRecognizer(takeAccountUI)
-//        cell.viewAccount.isUserInteractionEnabled = true
+        let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+        let depaMap = areamap[cellMap["place_from_code"] as! String!] as! [String:AnyObject]?
+        let destMap = areamap[cellMap["place_to_code"] as! String!] as! [String:AnyObject]?
+        if depaMap != nil{
+            cell.labelDepa.text = depaMap!["TEXT"] as! String?
+        }
+        if destMap != nil{
+            cell.labelDest.text = destMap!["TEXT"] as! String?
+        }
+        cell.labelDepaDetail.text = cellMap["from_place"] as! String!
+        cell.labelDestDetail.text = cellMap["to_place"] as! String!
+        cell.labelMile.text = cellMap["to_place"] as! String!
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

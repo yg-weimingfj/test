@@ -10,6 +10,11 @@ import UIKit
 
 class UsedLineItemCell: UITableViewCell {
 
+    @IBOutlet weak var labelDepa: UILabel!
+    @IBOutlet weak var labelDest: UILabel!
+    @IBOutlet weak var labelMile: UILabel!
+    @IBOutlet weak var labelDepaDetail: UILabel!
+    @IBOutlet weak var labelDestDetail: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

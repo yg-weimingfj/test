@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AdSupport
 class RegisterViewController: UIViewController {
     @IBOutlet weak var textTel: UITextField!//电话
     @IBOutlet weak var textVerfy: UITextField!//验证码
@@ -47,12 +47,13 @@ class RegisterViewController: UIViewController {
         }else if(newPwd != newPwdSure){
             self.hint(hintCon: "两次密码输入不一致，请重新输入")
         }else{
+            let uuid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
             let password = passEncryption(passtext: newPwd, appEncryotion: appsecret)
             let date = Date()
             let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
             let strNowTime = timeFormatter.string(from: date) as String
-            let des : Dictionary<String,Any> = ["token":"","method":"yunba.carrier.v1.user.password.reset","time":strNowTime,"mobile_no":phone,"user_pwd":password,"sms_verify_code":verfy]
+            let des : Dictionary<String,Any> = ["token":"","method":"yunba.carrier.v1.user.register","time":strNowTime,"device_mark":uuid,"reg_app_channel":"weiming","mobile_no":phone,"user_pwd":password,"sms_verify_code":verfy]
             
             defaulthttp.httopost(parame: des){results in
                 if let result:String = results["result"] as! String?{
@@ -160,7 +161,7 @@ class RegisterViewController: UIViewController {
             if newValue {
                 countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector:#selector(updateTime(timer:)), userInfo: nil, repeats: true)
                 
-                remainingSeconds = 10
+                remainingSeconds = 60
                 btnGetVerfy.backgroundColor = UIColor.gray
             } else {
                 countdownTimer?.invalidate()
