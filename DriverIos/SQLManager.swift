@@ -92,6 +92,7 @@ class SQLManager: NSObject {
                 if SQLManager.shareInstance().execSQL(SQL: dictTxt.replacingOccurrences(of: "`", with: "'")) == true {
                     print("字典表数据插入成功")
                 }
+                UserDefaults.standard.set(1, forKey: "firstStart")
             }
         }
     }
