@@ -17,8 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        SQLManager.shareInstance().createDataBaseTableIfNeeded()
-        print("来自AppDelegate里面的创建数据库已执行")
+        
+        if UserDefaults.standard.integer(forKey: "firstStart")<1{
+            SQLManager.shareInstance().createDataBaseTableIfNeeded()
+            print("来自AppDelegate里面的创建数据库已执行")
+        }else{
+            
+        }
         return true
     }
 

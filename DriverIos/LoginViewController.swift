@@ -34,6 +34,9 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     private let appsecret = "weimingfj_ios_app_secret"
     private var loginType = "verfy"//登录模式，默认验证码登录
     
+    @IBOutlet var buttonToText: NSLayoutConstraint!
+    @IBOutlet var loginTopLogoHeight: NSLayoutConstraint!
+    @IBOutlet var passwordTextView: UIView!
     private var isCounting = false {
         willSet {
             if newValue {
@@ -99,11 +102,17 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         loginCell.addGestureRecognizer(loginCellUI)
         loginCell.isUserInteractionEnabled = true
         
-        
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         // Do any additional setup after loading the view.
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        let loginHeight = self.view.frame.size.height
+        if loginHeight<570 {
+            loginTopLogoHeight.constant = loginHeight/3
+            buttonToText.constant = buttonToText.constant/2
+        }
+    }
     func updateTime(timer: Timer) {
         // 计时开始时，逐秒减少remainingSeconds的值
         remainingSeconds -= 1
@@ -253,8 +262,42 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+
         
         return true
+    }
+    func keyBoardWillShow(_ notification: Notification){
+        let he = self.view.frame.size.height - passwordTextView.frame.origin.y - passwordTextView.frame.size.height-10
+        //获取userInfo
+        let kbInfo = notification.userInfo
+        //获取键盘的size
+        let kbRect = (kbInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        //键盘的y偏移量
+        let changeY = kbRect.origin.y - SCREEN_HEIGHT
+//        //键盘弹出的时间
+        let duration = kbInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        //界面偏移动画
+        if -changeY > he{
+            UIView.animate(withDuration: duration) {
+                
+                self.view.frame.origin.y = changeY + he
+            }
+        }else{
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    //键盘的隐藏
+    func keyBoardWillHide(_ notification: Notification){
+        
+        let kbInfo = notification.userInfo
+//        let kbRect = (kbInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+//        let changeY = kbRect.origin.y
+        let duration = kbInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        
+        UIView.animate(withDuration: duration) {
+             self.view.frame.origin.y = 0
+        }
     }
     func openVoice(){
         print("打开语音")
