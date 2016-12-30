@@ -64,19 +64,19 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.routes.list.get","time":strNowTime]
         
-//        defaulthttp.httopost(parame: params){results in
-//            print("JSON: \(results)")
-//            if let result:String = results["result"] as! String?{
-//                if result == "1"{
-//                    let obj:[Any] = results["resultObj"] as! [Any]
-//                    self.models = obj
-//                    self.tableView.reloadData()
-//                }else{
-//                    let info:String = results["resultInfo"] as! String!
-//                    self.hint(hintCon: info)
-//                }
-//            }
-//        }
+        defaulthttp.httopost(parame: params){results in
+            print("JSON: \(results)")
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    let obj:[Any] = results["resultObj"] as! [Any]
+                    self.models = obj
+                    self.tableView.reloadData()
+                }else{
+                    let info:String = results["resultInfo"] as! String!
+                    self.hint(hintCon: info)
+                }
+            }
+        }
     }
     /**
      * 错误提示
