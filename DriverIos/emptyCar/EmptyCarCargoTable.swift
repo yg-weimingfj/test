@@ -68,8 +68,8 @@ extension EmptyCarCargoTable :UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //        let sb = UIStoryboard(name: "findCargoTable", bundle:nil)
-        //        let vc = sb.instantiateViewController(withIdentifier: "findCargoUserDetailView") as! FindCargoUserDetailViewController
-        //        self.present(vc, animated: true, completion: nil)
+        let sb = UIStoryboard(name: "emptyCarUpload", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "emptyCarTransportDetail") as! EmptyCarTransportDetail
+        self.present(vc, animated: true, completion: nil)
     }
 }

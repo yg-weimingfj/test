@@ -173,7 +173,7 @@ class ForgetPasswordViewController: UIViewController {
             if newValue {
                 countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector:#selector(updateTime(timer:)), userInfo: nil, repeats: true)
                 
-                remainingSeconds = 10
+                remainingSeconds = 60
                 btnGetVerfy.backgroundColor = UIColor.gray
             } else {
                 countdownTimer?.invalidate()

@@ -10,9 +10,11 @@ import UIKit
 
 class EmptyCarUpload: UITableViewCell {
 
+    @IBOutlet weak var uploadButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        uploadButton.layer.cornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

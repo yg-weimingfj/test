@@ -18,9 +18,14 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         self.dismiss(animated: true, completion: nil)
     }
     
-    private var models = [1,2,3,4,5,6,7,8,9,10]
+    private var models = [Any]()
     private let cellId = "orderAccountCell"
+    private var areamap:Dictionary<String,Any> = [:]
+    private var orderId = ""
+    private var pageStart = 1
+    private var pageNum = 10
     private let defaulthttp = DefaultHttp()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,7 +50,6 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         let curveHeader = CurveRefreshHeader(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
         _ = tableView.setUpHeaderRefresh(curveHeader) { [weak self] in
             delay(1.5, closure: {
-                self?.models = (self?.models.map({_ in Int(arc4random()%100)}))!
                 self?.tableView.reloadData()
                 self?.tableView.endHeaderRefreshing(delay: 0.5)
             })
@@ -53,6 +57,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         $.getObj("driverUserInfo") { (obj) -> () in
             if let obj = obj as? Student{
                 self.accountInfo(token: obj.token!)
+                self.WaybillInfo(token: obj.token!)
             }
         }
     }
@@ -100,7 +105,49 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     /**
-     * 错误提示
+     * 获取运单信息
+     */
+    private func WaybillInfo(token:String) {
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String        
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.orders.list.get","time":strNowTime,"order_status":"6","page_start":String(pageStart),"page_num":String(pageNum)]
+        
+        defaulthttp.httopost(parame: des){results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    let obj = results["resultObj"]  as! [String:Any]
+                    let list = obj["list"] as! [Any]
+                    if self.pageStart == 1{
+                        self.models = list
+                        self.tableView.endHeaderRefreshing(delay: 0.5)
+                        if list.count >= 10{
+                            self.tableView.endFooterRefreshing()
+                        }else{
+                            self.tableView.endFooterRefreshingWithNoMoreData()
+                        }
+                    }else{
+                        if list.count < 10 {
+                            self.tableView.endFooterRefreshingWithNoMoreData()
+                        }else{
+                            self.models = self.models+list
+                            self.tableView.endFooterRefreshing()
+                        }
+                        
+                    }
+                    self.tableView.reloadData()
+                }else{
+                    let info:String = results["resultInfo"] as! String!
+                    self.hint(hintCon: info)
+                }
+            }
+            print("JSON: \(results)")
+            
+        }
+    }
+    /**
+     * 提示
      */
     func hint(hintCon: String){
         let alertController = UIAlertController(title: hintCon,message: nil, preferredStyle: .alert)
@@ -121,8 +168,21 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! OrderAccountItemCell
-        cell.labelDepa.text = "福州仓山万达"
-        cell.labelDest.text = "厦门鼓浪屿"
+        let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+        let placeMap = areamap[cellMap["s_code"] as! String!] as! [String:AnyObject]?
+        let DestinationMap = areamap[cellMap["t_code"] as! String!] as! [String:AnyObject]?
+        
+        
+        if placeMap != nil{
+            cell.labelDepa.text = placeMap!["TEXT"] as! String?
+        }
+        if placeMap != nil{
+            cell.labelDest.text = DestinationMap!["TEXT"] as! String?
+        }
+        cell.labelMile.text = cellMap["estimated_distance"] as! String!+"公里"
+        cell.labelOrderNo.text = cellMap["order_no"] as! String?
+        cell.labelFinishDate.text = cellMap["carrier_order_taking_time"] as! String?
+
         let takeAccountUI = UITapGestureRecognizer(target: self, action: #selector(takeAccountLinener))
         cell.viewAccount.addGestureRecognizer(takeAccountUI)
         cell.viewAccount.isUserInteractionEnabled = true
@@ -138,22 +198,28 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+        orderId = (cellMap["order_id"] as! String?)!
         accountInfoLinener()
     }
     /**
      * 记一记
      */
     func takeAccountLinener() {
+
         let sb = UIStoryboard(name: "OrderAccount", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "takeAccountController") as! TakeAccountController
+        vc.orderId = orderId
         self.present(vc, animated: true, completion: nil)
     }
     /**
      * 记账详情
      */
     func accountInfoLinener() {
+        
         let sb = UIStoryboard(name: "OrderAccount", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "accountInfoController") as! AccountInfoController
+        vc.orderId = orderId
         self.present(vc, animated: true, completion: nil)
     }
 

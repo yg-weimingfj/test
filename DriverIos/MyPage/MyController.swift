@@ -165,7 +165,7 @@ class MyController: UIViewController{
      * 设置WiFi
      */
     func setWiFi() {
-        let sb = UIStoryboard(name: "SetWiFi", bundle:nil)
+        let sb = UIStoryboard(name: "Set", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "setWiFiController") as! SetWiFiController
         self.present(vc, animated: true, completion: nil)
     }
@@ -173,7 +173,7 @@ class MyController: UIViewController{
      * 流量充值
      */
     func rechargeFlow() {
-        let sb = UIStoryboard(name: "SetWiFi", bundle:nil)
+        let sb = UIStoryboard(name: "Set", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "rechargeFlowController") as! RechargeFlowController
         self.present(vc, animated: true, completion: nil)
     }
@@ -209,7 +209,9 @@ class MyController: UIViewController{
      * 设置点击
      */
     func settingLinener() {
-        
+        let sb = UIStoryboard(name: "Set", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "settingController") as! SettingController
+        self.present(vc, animated: true, completion: nil)
     }
     /**
      * 帮助点击

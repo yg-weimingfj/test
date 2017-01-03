@@ -98,10 +98,10 @@
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9uW-0e-n5u">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="9uW-0e-n5u">
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="13" id="PyO-SH-hlU"/>
-                                                    <constraint firstAttribute="width" constant="8" id="nK8-hQ-xfz"/>
+                                                    <constraint firstAttribute="height" constant="15" id="PyO-SH-hlU"/>
+                                                    <constraint firstAttribute="width" constant="15" id="nK8-hQ-xfz"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URX-V6-b9v">
@@ -134,9 +134,10 @@
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V2A-JM-fan">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="V2A-JM-fan">
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="8" id="6GL-eV-fAf"/>
+                                                    <constraint firstAttribute="height" constant="15" id="PBS-aC-odF"/>
+                                                    <constraint firstAttribute="width" constant="15" id="hs3-ny-ref"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwe-lG-X1K">
@@ -154,11 +155,9 @@
                                             <constraint firstAttribute="bottom" secondItem="Uwe-lG-X1K" secondAttribute="bottom" constant="10" id="Adt-mH-bV5"/>
                                             <constraint firstItem="Nqg-NV-M9K" firstAttribute="top" secondItem="pYk-sU-0em" secondAttribute="top" constant="10" id="JqZ-py-XB5"/>
                                             <constraint firstItem="Uwe-lG-X1K" firstAttribute="top" secondItem="pYk-sU-0em" secondAttribute="top" constant="10" id="bbb-vf-Phb"/>
-                                            <constraint firstItem="V2A-JM-fan" firstAttribute="centerY" secondItem="Uwe-lG-X1K" secondAttribute="centerY" id="dkX-ET-v9N"/>
                                             <constraint firstItem="Uwe-lG-X1K" firstAttribute="leading" secondItem="Nqg-NV-M9K" secondAttribute="trailing" constant="52" id="ebi-QY-OM3"/>
-                                            <constraint firstAttribute="trailing" secondItem="V2A-JM-fan" secondAttribute="trailing" constant="15" id="f1N-zZ-Tbq"/>
-                                            <constraint firstItem="V2A-JM-fan" firstAttribute="top" secondItem="pYk-sU-0em" secondAttribute="top" constant="16" id="hhp-R7-3KV"/>
-                                            <constraint firstItem="V2A-JM-fan" firstAttribute="leading" secondItem="Uwe-lG-X1K" secondAttribute="trailing" constant="10" id="pFw-gu-Z2d"/>
+                                            <constraint firstAttribute="trailing" secondItem="V2A-JM-fan" secondAttribute="trailing" constant="15" id="jnr-Uc-OoA"/>
+                                            <constraint firstItem="V2A-JM-fan" firstAttribute="top" secondItem="pYk-sU-0em" secondAttribute="top" constant="16" id="oEa-J4-5Fm"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -174,7 +173,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y9X-y5-GfE">
-                                <frame key="frameInset" minY="168" width="375" height="44"/>
+                                <frame key="frameInset" minY="168" width="170" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle_default" translatesAutoresizingMaskIntoConstraints="NO" id="W1f-ad-UAh">
@@ -235,6 +234,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow_right" width="18" height="18"/>
         <image name="back" width="13" height="22"/>
         <image name="circle_default" width="24" height="24"/>
     </resources>
