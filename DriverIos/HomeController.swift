@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollViewDelegate {
+class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollViewDelegate{
 
     @IBOutlet weak var auditView: UIView!
     

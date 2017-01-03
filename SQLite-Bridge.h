@@ -12,3 +12,5 @@
 
 #endif /* SQLite_Bridge_h */
 #import "SQLite3.h"
+#import <AMapLocationKit/AMapLocationKit.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
