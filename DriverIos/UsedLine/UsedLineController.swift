@@ -79,6 +79,20 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 self.getUsedLine()
             }
         }
+        getAreaData()
+    }
+    /**
+     * 获取地区
+     */
+    func getAreaData(){
+        let querySQL = "SELECT CODE,PARENT_CODE,TEXT,PIN_YIN,REMARK,SIMPLE_TEXT,PROVINCE,SIMPLE_CITY,PROVINCE,SIMPLE_CITY,LEVEL,FULL_TEXT,CITY_TEXT,LON,LAT,IS_DIRECTLY_UNDER FROM 'base_area_tab'"
+        // 取出查询到的结果
+        if let resultDataArr = SQLManager.shareInstance().queryDataBase(querySQL: querySQL){
+            for dict in resultDataArr{
+                //            let mymodel = AreaModel(code: dict["CODE"] as! String, parentCode: dict["PARENT_CODE"] as! String, text: dict["TEXT"] as! String, pinYin: dict["PIN_YIN"] as! String, remark: dict["REMARK"] as! String , simpleText: dict["SIMPLE_TEXT"] as! String, province: dict["PROVINCE"] as! String, simpleCity: dict["SIMPLE_CITY"] as! String, areaLevel: dict["LEVEL"] as! String, isDirectlyUnder: dict["IS_DIRECTLY_UNDER"] as! String, fullText: dict["FULL_TEXT"] as! String, cityText: dict["CITY_TEXT"] as! String , lon: dict["LON"] as! String, lat: dict["LAT"] as! String)
+                areamap[dict["CODE"] as! String] = dict
+            }
+        }
     }
     /**
      * 获取常跑路线信息
@@ -146,7 +160,7 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return models.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
