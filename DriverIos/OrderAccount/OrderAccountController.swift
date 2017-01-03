@@ -50,7 +50,6 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         let curveHeader = CurveRefreshHeader(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
         _ = tableView.setUpHeaderRefresh(curveHeader) { [weak self] in
             delay(1.5, closure: {
-                self?.models = (self?.models.map({_ in Int(arc4random()%100)}))!
                 self?.tableView.reloadData()
                 self?.tableView.endHeaderRefreshing(delay: 0.5)
             })
@@ -105,6 +104,9 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
             
         }
     }
+    /**
+     * 获取运单信息
+     */
     private func WaybillInfo(token:String) {
         let date = Date()
         let timeFormatter = DateFormatter()
@@ -145,7 +147,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     /**
-     * 错误提示
+     * 提示
      */
     func hint(hintCon: String){
         let alertController = UIAlertController(title: hintCon,message: nil, preferredStyle: .alert)
