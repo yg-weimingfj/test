@@ -82,7 +82,7 @@ class HomePageController: RAMAnimatedTabBarController , AMapLocationManagerDeleg
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
         
-        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.location.update","time":strNowTime,"lat":location.coordinate.latitude,"lng":location.coordinate.longitude,"province":regeocode.province!,"city":regeocode.city!,"county":regeocode.district!,"addr":regeocode.formattedAddress!]
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.location.update","time":strNowTime,"lat":String(format: "%.8f", location.coordinate.latitude),"lng":String(format: "%.8f", location.coordinate.longitude),"province":regeocode.province!,"city":regeocode.city!,"county":regeocode.district!,"addr":regeocode.formattedAddress!]
         
         defaulthttp.httopost(parame: des){results in
             if let result:String = results["result"] as! String?{
