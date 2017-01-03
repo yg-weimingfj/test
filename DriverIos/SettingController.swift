@@ -86,7 +86,13 @@ class SettingController: UIViewController {
      * 退出点击
      */
     func exitLinener() {
-        exit(0)
+        //清空用户信息
+        let stu = Student()
+        $.saveObj("driverUserInfo", value: stu)
+        let sb = UIStoryboard(name: "Main", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "loginViewController") as! LoginViewController
+        vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        self.present(vc, animated: true, completion: nil)
     }
     /**
      * 提示

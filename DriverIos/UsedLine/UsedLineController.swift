@@ -11,14 +11,40 @@ import UIKit
 class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var btnDelete: UIButton!//删除按钮
+    @IBOutlet weak var viewDelete: UIView!//删除状态底部按钮
+    @IBOutlet weak var btnSure: UIButton!//确定
+    @IBOutlet weak var btnCancel: UIButton!//取消
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func addLineLisener(_ sender: UIBarButtonItem) {
         addUsedLine()
     }
+    @IBAction func deleteLineLisener(_ sender: UIButton) {
+        viewDelete.isHidden = false
+        btnDelete.isHidden = true
+        isDelete = true
+        self.tableView.reloadData()
+    }
+    @IBAction func btnSureLisener(_ sender: UIButton) {
+//        deleteUsedLine(oftenId: oftenId!,index: indexPath.row)
+        viewDelete.isHidden = true
+        btnDelete.isHidden = false
+        isDelete = false
+        self.tableView.reloadData()
+    }
+    @IBAction func btnCancelLisener(_ sender: UIButton) {
+        viewDelete.isHidden = true
+        btnDelete.isHidden = false
+        isDelete = false
+        self.tableView.reloadData()
+    }
+
     
     private let cellId = "usedLineItemCell"
+    private var token = ""
+    private var isDelete = false
     private let defaulthttp = DefaultHttp()
     private var models = [Any]()
     private var areamap:Dictionary<String,Any> = [:]
@@ -49,14 +75,15 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         $.getObj("driverUserInfo") { (obj) -> () in
             if let obj = obj as? Student{
-                self.getUsedLine(token: obj.token!)
+                self.token = obj.token!
+                self.getUsedLine()
             }
         }
     }
     /**
      * 获取常跑路线信息
      */
-    func getUsedLine(token:String) {
+    func getUsedLine() {
         let date = Date()
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
@@ -68,9 +95,36 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
             print("JSON: \(results)")
             if let result:String = results["result"] as! String?{
                 if result == "1"{
-                    let obj:[Any] = results["resultObj"] as! [Any]
+                    var obj:[Any] = results["resultObj"] as! [Any]
+                    let cellMap:Dictionary<String,String> = ["isDelete":"N"]
+                    obj.append(cellMap)
                     self.models = obj
                     self.tableView.reloadData()
+                }else{
+                    let info:String = results["resultInfo"] as! String!
+                    self.hint(hintCon: info)
+                }
+            }
+        }
+    }
+    /**
+     * 删除常跑路线
+     */
+    func deleteUsedLine(oftenId:String,index:Int) {
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String
+        
+        let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.route.delete","time":strNowTime,"often_id":strNowTime]
+        
+        defaulthttp.httopost(parame: params){results in
+            print("JSON: \(results)")
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    self.models.remove(at: index)
+                    self.tableView.reloadData()
+                    self.hint(hintCon: "删除成功")
                 }else{
                     let info:String = results["resultInfo"] as! String!
                     self.hint(hintCon: info)
@@ -92,7 +146,7 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return models.count
+        return 10
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
@@ -100,6 +154,11 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! UsedLineItemCell
+        if(isDelete){
+            cell.ivDelete.isHidden = false
+        }else{
+            cell.ivDelete.isHidden = true
+        }
         let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
         let depaMap = areamap[cellMap["place_from_code"] as! String!] as! [String:AnyObject]?
         let destMap = areamap[cellMap["place_to_code"] as! String!] as! [String:AnyObject]?
@@ -115,7 +174,24 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        if(isDelete){
+            let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! UsedLineItemCell
+            var cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+            let isDelete = cellMap["isDelete"] as! String!
+            if(isDelete == "Y"){
+                cell.ivDelete.image = UIImage(named: "circle_default")
+                cellMap["isDelete"] = "N"
+            }else{
+                cell.ivDelete.image = UIImage(named: "circle_selected")
+                cellMap["isDelete"] = "Y"
+            }
+            self.models.append(cellMap)
+            self.tableView.reloadData()
+        }
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+//        let oftenId = cellMap["often_id"] as! String!
+//        deleteUsedLine(oftenId: oftenId!,index: indexPath.row)
     }
     /**
      * 添加常跑路线

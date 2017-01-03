@@ -18,10 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5av-QG-b85">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="1YC-qW-2AC"/>
-                                </constraints>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5av-QG-b85">
+                                <frame key="frameInset" minY="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="常跑路线" id="bSt-2I-Sir">
                                         <barButtonItem key="leftBarButtonItem" image="back" id="gzv-eB-cS7">
@@ -29,7 +28,7 @@
                                                 <action selector="back:" destination="COO-YX-sLN" id="Faq-tn-NLW"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="QPz-G6-y2q">
+                                        <barButtonItem key="rightBarButtonItem" title="增加路线" id="QPz-G6-y2q">
                                             <connections>
                                                 <action selector="addLineLisener:" destination="COO-YX-sLN" id="Cnb-8v-WDE"/>
                                             </connections>
@@ -38,7 +37,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="129" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9kj-VF-Iif">
-                                <frame key="frameInset" minY="64" width="375" height="603"/>
+                                <frame key="frameInset" minY="64" width="375" height="549"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -46,16 +45,65 @@
                                     <outlet property="delegate" destination="COO-YX-sLN" id="hko-rC-7ec"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fwl-lM-z6s">
+                                <frame key="frameInset" minY="623" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4q-Ks-pyG">
+                                        <frame key="frameInset" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.20000000000000001" green="0.5568627451" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="删除路线">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteLineLisener:" destination="COO-YX-sLN" eventType="touchUpInside" id="Z0W-3v-eMJ"/>
+                                        </connections>
+                                    </button>
+                                    <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pdD-QS-qL3">
+                                        <frame key="frameInset" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oNQ-NR-oZq">
+                                                <frame key="frameInset" width="187.5" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.20000000000000001" green="0.5568627451" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="确定">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="btnSureLisener:" destination="COO-YX-sLN" eventType="touchUpInside" id="prX-Ky-1Y3"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbf-Lm-PsW">
+                                                <frame key="frameInset" minX="187" width="187.5" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="取消">
+                                                    <color key="titleColor" red="0.20000000000000001" green="0.56862745100000001" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="btnCancelLisener:" destination="COO-YX-sLN" eventType="touchUpInside" id="5Jo-K0-Y4F"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="5av-QG-b85" firstAttribute="leading" secondItem="FMb-EJ-Qac" secondAttribute="leading" id="CnL-vr-TDb"/>
-                            <constraint firstAttribute="trailing" secondItem="5av-QG-b85" secondAttribute="trailing" id="PLA-KM-i1G"/>
-                            <constraint firstItem="5av-QG-b85" firstAttribute="top" secondItem="jdN-fo-DJn" secondAttribute="bottom" id="XiG-vO-wKe"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="btnCancel" destination="Jbf-Lm-PsW" id="6ea-4E-jT9"/>
+                        <outlet property="btnDelete" destination="G4q-Ks-pyG" id="QyK-E0-VmO"/>
+                        <outlet property="btnSure" destination="oNQ-NR-oZq" id="JQh-q5-8JJ"/>
                         <outlet property="tableView" destination="9kj-VF-Iif" id="lHy-z4-sF7"/>
+                        <outlet property="viewDelete" destination="pdD-QS-qL3" id="XDB-8I-423"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sYH-2E-FAg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -193,6 +241,7 @@
                                 <frame key="frameInset" minX="16" minY="220" width="343" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.5568627451" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="添加常跑路线">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
