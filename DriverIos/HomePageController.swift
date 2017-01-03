@@ -14,7 +14,14 @@ let SCREEN_WIDTH = UIScreen.main.bounds.size.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
 /// tabbar圆弧高度
 let layerHeight: CGFloat = SCREEN_WIDTH/10-15
-class HomePageController: RAMAnimatedTabBarController {
+class HomePageController: RAMAnimatedTabBarController , AMapLocationManagerDelegate{
+    lazy var locationManager = AMapLocationManager()
+    var completionBlock: AMapLocatingCompletionBlock!
+    let defaultLocationTimeout = 6
+    let defaultReGeocodeTimeout = 3
+    private var token = ""
+    private let  defaulthttp = DefaultHttp()
+    private var time:Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +29,77 @@ class HomePageController: RAMAnimatedTabBarController {
         setUpTabBar()
         setControllers()
         self.delegate = self
+        
+        
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.locationTimeout = defaultLocationTimeout
+        locationManager.reGeocodeTimeout = defaultReGeocodeTimeout
+        locationManager.delegate = self
+        initCompleteBlock()
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                self.token = obj.token!
+                self.getLocation()
+                self.time = Timer(timeInterval: 60, target: self, selector: #selector(self.getLocation), userInfo: nil, repeats: true)
+                RunLoop.main.add(self.time!, forMode:RunLoopMode.commonModes)
+            }
+        }
+    }
+    func getLocation() {
+        locationManager.requestLocation(withReGeocode: true, completionBlock: completionBlock)
+    }
+    func initCompleteBlock() {
+        
+        completionBlock = { [weak self] (location: CLLocation?, regeocode: AMapLocationReGeocode?, error: Error?) in
+            if let error = error {
+                let error = error as NSError
+                NSLog("locError:{\(error.code) - \(error.localizedDescription)};")
+                
+                if error.code == AMapLocationErrorCode.locateFailed.rawValue {
+                    return;
+                }
+            }
+                          if let location = location {
+                
+                if let regeocode = regeocode {
+//                    print("\(regeocode.formattedAddress) \n \(regeocode.citycode!)-\(regeocode.adcode!)-\(location.horizontalAccuracy)m")
+                    print("cc====\(regeocode)")
+                    }
+                    self?.locationPost(location: location,regeocode: regeocode!)
+                    print("lat:\(location.coordinate.latitude); lon:\(location.coordinate.longitude); accuracy:\(location.horizontalAccuracy)m")
+                
+            }
+            
+        }
+    }
+    
+    private func locationPost(location:CLLocation,regeocode:AMapLocationReGeocode) {
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String
+        
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.location.update","time":strNowTime,"lat":location.coordinate.latitude,"lng":location.coordinate.longitude,"province":regeocode.province!,"city":regeocode.city!,"county":regeocode.district!,"addr":regeocode.formattedAddress!]
+        
+        defaulthttp.httopost(parame: des){results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                   
+                    
+                }else{
+                    //                    let info:String = results["resultInfo"] as! String!
+                }
+            }
+            print("JSON: \(results)")
+            
+        }
+    }
+    deinit {
+        self.time?.invalidate()
+        self.time = nil
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,7 +127,7 @@ extension HomePageController: UITabBarControllerDelegate {
 
 var skullCenter:CGPoint{
             return CGPoint(x:SCREEN_WIDTH/2,y:0)////获取中心点
-    
+
         }
 var skullRadius:CGFloat{
             return layerHeight
