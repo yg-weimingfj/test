@@ -102,7 +102,7 @@ class MyController: UIViewController{
         
         let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.get","time":strNowTime]
         
-        defaulthttp.httopost(parame: params){results in
+        defaulthttp.httpPost(parame: params){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let resultObj = results["resultObj"] as! Dictionary<String,Any>
@@ -131,7 +131,7 @@ class MyController: UIViewController{
         
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.line.magicbox.flow.query","time":strNowTime]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let resultObj = results["resultObj"] as! Dictionary<String,Any>
@@ -165,7 +165,7 @@ class MyController: UIViewController{
      * 设置WiFi
      */
     func setWiFi() {
-        let sb = UIStoryboard(name: "SetWiFi", bundle:nil)
+        let sb = UIStoryboard(name: "Set", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "setWiFiController") as! SetWiFiController
         self.present(vc, animated: true, completion: nil)
     }
@@ -173,7 +173,7 @@ class MyController: UIViewController{
      * 流量充值
      */
     func rechargeFlow() {
-        let sb = UIStoryboard(name: "SetWiFi", bundle:nil)
+        let sb = UIStoryboard(name: "Set", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "rechargeFlowController") as! RechargeFlowController
         self.present(vc, animated: true, completion: nil)
     }
@@ -209,7 +209,9 @@ class MyController: UIViewController{
      * 设置点击
      */
     func settingLinener() {
-        
+        let sb = UIStoryboard(name: "Set", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "settingController") as! SettingController
+        self.present(vc, animated: true, completion: nil)
     }
     /**
      * 帮助点击

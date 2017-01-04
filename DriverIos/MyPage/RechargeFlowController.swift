@@ -191,7 +191,7 @@ class RechargeFlowController: UIViewController {
         
         let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.line.magicbox.flow.recharge.preorder","time":strNowTime,"pay_method":rechargeType,"pay_amount":rechargeAmount]
         
-        defaulthttp.httopost(parame: params){results in
+        defaulthttp.httpPost(parame: params){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     self.hint(hintCon: "充值成功")

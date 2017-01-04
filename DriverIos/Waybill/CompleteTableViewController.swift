@@ -51,11 +51,12 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
     func getAreaData(){
         let querySQL = "SELECT CODE,PARENT_CODE,TEXT,PIN_YIN,REMARK,SIMPLE_TEXT,PROVINCE,SIMPLE_CITY,PROVINCE,SIMPLE_CITY,LEVEL,FULL_TEXT,CITY_TEXT,LON,LAT,IS_DIRECTLY_UNDER FROM 'base_area_tab'"
         // 取出查询到的结果
-        let resultDataArr = SQLManager.shareInstance().queryDataBase(querySQL: querySQL)
-        for dict in resultDataArr! {
+        if let resultDataArr = SQLManager.shareInstance().queryDataBase(querySQL: querySQL){
+        for dict in resultDataArr {
             //            let mymodel = AreaModel(code: dict["CODE"] as! String, parentCode: dict["PARENT_CODE"] as! String, text: dict["TEXT"] as! String, pinYin: dict["PIN_YIN"] as! String, remark: dict["REMARK"] as! String , simpleText: dict["SIMPLE_TEXT"] as! String, province: dict["PROVINCE"] as! String, simpleCity: dict["SIMPLE_CITY"] as! String, areaLevel: dict["LEVEL"] as! String, isDirectlyUnder: dict["IS_DIRECTLY_UNDER"] as! String, fullText: dict["FULL_TEXT"] as! String, cityText: dict["CITY_TEXT"] as! String , lon: dict["LON"] as! String, lat: dict["LAT"] as! String)
             areamap[dict["CODE"] as! String] = dict
         }
+     }
     }
     
     
@@ -67,7 +68,7 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
         
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.orders.list.get","time":strNowTime,"order_status":"6","page_start":String(pageStart),"page_num":String(pageNum)]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let obj = results["resultObj"]  as! [String:Any]

@@ -21,6 +21,10 @@
                                 <frame key="frameInset" minY="10" width="375" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle_default" translatesAutoresizingMaskIntoConstraints="NO" id="Msx-QE-feZ">
+                                        <frame key="frameInset" minX="11" minY="22" width="22" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="258公里" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qe-F5-emV">
                                         <frame key="frameInset" minX="151.5" minY="13" width="72" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -77,6 +81,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ivDelete" destination="Msx-QE-feZ" id="dWJ-LR-iHV"/>
                 <outlet property="labelDepa" destination="4qw-BI-XpY" id="fsz-yU-kGT"/>
                 <outlet property="labelDepaDetail" destination="hK4-K6-Rst" id="Lp1-HJ-inS"/>
                 <outlet property="labelDest" destination="A4f-3J-3pQ" id="Gdf-qh-4EH"/>
@@ -88,5 +93,6 @@
     </objects>
     <resources>
         <image name="CellArrow" width="72" height="10"/>
+        <image name="circle_default" width="24" height="24"/>
     </resources>
 </document>

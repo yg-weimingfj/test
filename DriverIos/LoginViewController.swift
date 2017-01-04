@@ -159,7 +159,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
             
             let des : Dictionary<String,Any> = ["token":"","mobile_no":passwordPhoneTextField.text!,"user_pwd":passd5,"method":"yunba.carrier.v1.user.login","device_mark":uuid,"time":strNowTime]
             
-            defaulthttp.httopost(parame: des){results in
+            defaulthttp.httpPost(parame: des){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
                         
@@ -199,7 +199,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
             
             let des : Dictionary<String,Any> = ["token":"","tel":VerificationCodePhoneTextField.text!,"code":verfy,"method":"yunba.carrier.v1.user.codelogin","device_mark":uuid,"time":strNowTime]
             
-            defaulthttp.httopost(parame: des){results in
+            defaulthttp.httpPost(parame: des){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
                         
@@ -246,7 +246,7 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
             
             let params : Dictionary<String,Any> = ["token":"","method":"yunba.carrier.v1.smscode.send","time":strNowTime,"mobile_no":VerificationCodePhoneTextField.text!,"voice":""]
             
-            defaulthttp.httopost(parame: params){results in
+            defaulthttp.httpPost(parame: params){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
                         self.tishi(st: "验证码发送成功")
