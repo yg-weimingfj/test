@@ -99,7 +99,7 @@ class UnderDetailsViewController: UIViewController {
         
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.order.get","time":strNowTime,"order_id":orderId]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true

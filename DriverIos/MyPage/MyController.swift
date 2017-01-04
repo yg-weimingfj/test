@@ -102,7 +102,7 @@ class MyController: UIViewController{
         
         let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.get","time":strNowTime]
         
-        defaulthttp.httopost(parame: params){results in
+        defaulthttp.httpPost(parame: params){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let resultObj = results["resultObj"] as! Dictionary<String,Any>
@@ -131,7 +131,7 @@ class MyController: UIViewController{
         
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.line.magicbox.flow.query","time":strNowTime]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let resultObj = results["resultObj"] as! Dictionary<String,Any>

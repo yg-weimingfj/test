@@ -84,7 +84,7 @@ class AuthenticateController: UIViewController, UINavigationControllerDelegate, 
         let idNo = textIDCard.text! as String
         let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.auth.update","time":strNowTime,"id_no":idNo,"verification_avatar":headImg,"id_photo":idCardImg,"driver_license_photo":carImg]
         
-        defaulthttp.httopost(parame: params){results in
+        defaulthttp.httpPost(parame: params){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     self.hint(hintCon: "申请成功")

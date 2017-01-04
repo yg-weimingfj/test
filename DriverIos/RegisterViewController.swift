@@ -55,7 +55,7 @@ class RegisterViewController: UIViewController {
             let strNowTime = timeFormatter.string(from: date) as String
             let des : Dictionary<String,Any> = ["token":"","method":"yunba.carrier.v1.user.register","time":strNowTime,"device_mark":uuid,"reg_app_channel":"weiming","mobile_no":phone,"user_pwd":password,"sms_verify_code":verfy]
             
-            defaulthttp.httopost(parame: des){results in
+            defaulthttp.httpPost(parame: des){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
                         self.dismiss(animated: true, completion: nil)
@@ -84,7 +84,7 @@ class RegisterViewController: UIViewController {
             
             let params : Dictionary<String,Any> = ["token":"","method":"yunba.carrier.v1.smscode.send","time":strNowTime,"mobile_no":phone,"voice":""]
             
-            defaulthttp.httopost(parame: params){results in
+            defaulthttp.httpPost(parame: params){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
                         self.hint(hintCon: "验证码发送成功")

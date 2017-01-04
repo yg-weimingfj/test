@@ -104,7 +104,7 @@ class AddUsedLineController: UIViewController {
             
             let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.route.add","time":strNowTime,"place_from_code":self.sourceAreaCode,"place_to_code":self.destAreaCode]
             
-            defaulthttp.httopost(parame: des){results in
+            defaulthttp.httpPost(parame: des){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
                         self.hint(hintCon: "添加成功")

@@ -23,7 +23,7 @@ class DefaultHttp{
         case trace   = "TRACE"
         case connect = "CONNECT"
     }
-    func httopost(parame:Dictionary<String,Any>,call:@escaping (_ results:([String:Any]))->Void){
+    func httpPost(parame:Dictionary<String,Any>,call:@escaping (_ results:([String:Any]))->Void){
         let parameters: Parameters = parame
         print("请求参数：\(parameters)")
         
@@ -44,4 +44,7 @@ class DefaultHttp{
             }
         }
     }
+//    func http(<#parameters#>) -> <#return type#> {
+//        <#function body#>
+//    }
 }

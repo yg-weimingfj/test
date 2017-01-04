@@ -81,16 +81,33 @@ class HomePageController: RAMAnimatedTabBarController , AMapLocationManagerDeleg
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
+        var province = ""
+        var city = ""
+        var county = ""
+        var addr = ""
+        if regeocode.province != nil {
+            province = regeocode.province!
+        }
+        if regeocode.city != nil {
+            city = regeocode.city!
+        }
+        if regeocode.district != nil {
+            county = regeocode.district!
+        }
+        if regeocode.formattedAddress != nil {
+            addr = regeocode.formattedAddress!
+        }
         
-        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.location.update","time":strNowTime,"lat":String(format: "%.8f", location.coordinate.latitude),"lng":String(format: "%.8f", location.coordinate.longitude),"province":regeocode.province!,"city":regeocode.city!,"county":regeocode.district!,"addr":regeocode.formattedAddress!]
         
-        defaulthttp.httopost(parame: des){results in
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.location.update","time":strNowTime,"lat":String(format: "%.8f", location.coordinate.latitude),"lng":String(format: "%.8f", location.coordinate.longitude),"province":province,"city":city,"county":county,"addr":addr]
+        
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                    
                     
                 }else{
-                    //                    let info:String = results["resultInfo"] as! String!
+                    
                 }
             }
             print("JSON: \(results)")
