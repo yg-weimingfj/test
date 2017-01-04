@@ -1,7 +1,7 @@
 //
 //  EmptyCarController.swift
 //  DriverIos
-//
+//  空车上报页面
 //  Created by my on 2016/12/7.
 //  Copyright © 2016年 weiming. All rights reserved.
 //
@@ -10,6 +10,12 @@ import UIKit
 
 
 class EmptyCarController: UIViewController {
+    
+    private let  defaulthttp = DefaultHttp()
+
+    private var token = "D681CD4B984048C6B8FE785F82FD9ADA"
+    
+    var parentController: EmptyCarListViewController!
     
     @IBOutlet weak var sourceAreaLabel: UILabel!
     @IBOutlet weak var destAreaLabel: UILabel!
@@ -28,6 +34,7 @@ class EmptyCarController: UIViewController {
     var destCityValue :String! = "城市"
     var destTownValue : String! = "区/镇"
 
+    var timeValue : String!
     
     var alertController : UIAlertController!
     var areaView : AreaDropDownView!
@@ -152,6 +159,9 @@ class EmptyCarController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
         timeLabel.text = dateFormatter.string(from: datePickView.date)
+        dateFormatter.dateFormat = "YYYY-MM-dd aa"
+        timeValue = dateFormatter.string(from:datePickView.date)
+        timeValue = timeValue.replacingOccurrences(of: "AM", with: "上午").replacingOccurrences(of: "PM", with: "下午")
         contentView.removeFromSuperview()
         cancel()
     }
@@ -238,10 +248,43 @@ class EmptyCarController: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
     @IBAction func emptyCarUpload(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        if(self.sourceAreaCode == nil || self.sourceAreaCode.isEmpty){
+            alertMsg(st: "出发地不能为空")
+        }else if(self.destAreaCode == nil || self.destAreaCode.isEmpty){
+            alertMsg(st: "目的地不能为空")
+        }else{
+            let date = Date()
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+            let strNowTime = timeFormatter.string(from: date) as String
+            
+            let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.idlevechile.add","time":strNowTime,"lng":"116.396574","lat":"39.992706","addr":"123","idle_time":self.timeValue,"from_place":self.sourceAreaLabel.text! as String,"place_from_code":self.sourceAreaCode,"tareas":self.destAreaLabel.text! as String,"tcodes":self.destAreaCode]
+            
+            defaulthttp.httopost(parame: des){results in
+                if let result:String = results["result"] as! String?{
+                    if result == "1"{
+                        self.dismiss(animated: true, completion: nil)
+                        self.parentController.emptyCargoInfo(ustoken: self.token)
+                    }else{
+                        let info:String = results["resultInfo"] as! String!
+                        self.alertMsg(st: info)
+                    }
+                }
+                print("JSON: \(results)")
+            }
+         
+        }
     }
-
+   private func alertMsg(st:String){
+        let alertController = UIAlertController(title: st,message: nil, preferredStyle: .alert)
+        
+        let timeAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+        alertController.addAction(timeAction)
+        //显示提示框
+        self.present(alertController, animated: true, completion: nil)
+    }
     @IBAction func emptyCarBack(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
 }

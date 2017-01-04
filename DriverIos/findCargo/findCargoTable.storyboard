@@ -176,13 +176,13 @@
                                                 <integer key="value" value="0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                                <real key="value" value="4"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="image" keyPath="imageTotal" value="UnSelectedEvaluate"/>
                                             <userDefinedRuntimeAttribute type="image" keyPath="imageRating" value="SelectedEvaluate"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vip" translatesAutoresizingMaskIntoConstraints="NO" id="qJh-bd-BsD">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qJh-bd-BsD">
                                         <rect key="frame" x="200" y="75" width="17" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="grd-Fq-22b"/>
@@ -352,6 +352,5 @@
         <image name="back" width="13" height="22"/>
         <image name="fc_transport" width="20" height="20"/>
         <image name="sendCargo" width="20" height="20"/>
-        <image name="vip" width="18" height="18"/>
     </resources>
 </document>

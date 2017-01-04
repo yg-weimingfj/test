@@ -10,6 +10,7 @@ import UIKit
 
 class EmptyCarTableListView: UIViewController {
 
+    @IBOutlet weak var areaNavigationItem: UINavigationItem!
     @IBOutlet weak var emptyTimeSegmented: UISegmentedControl!
     @IBOutlet weak var tableListNavigationBar: UINavigationBar!
     var emptyCarCargoPageController : UIPageViewController!
@@ -18,23 +19,56 @@ class EmptyCarTableListView: UIViewController {
     var twoDayCargoController : EmptyCarCargoTable!
     var threeDayCargoController: EmptyCarCargoTable!
     var fourDayCargoController: EmptyCarCargoTable!
+    var sourceAreaCode : String! = ""
+    var destAreaCode : String! = ""
+    var sourceAreaValue :  String! = ""
+    var destAreaValue : String! = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.areaNavigationItem.title = sourceAreaValue + "--" + destAreaValue
         //获取到嵌入的UIPageViewController
         emptyCarCargoPageController = self.childViewControllers.first as! UIPageViewController
         
         let sb = UIStoryboard(name: "emptyCarUpload", bundle:nil)
-        
         todayCargoController = sb.instantiateViewController(withIdentifier: "emptyCarCargoTable") as! EmptyCarCargoTable
         oneDayCargoController = sb.instantiateViewController(withIdentifier: "emptyCarCargoTable") as! EmptyCarCargoTable
         twoDayCargoController = sb.instantiateViewController(withIdentifier: "emptyCarCargoTable") as! EmptyCarCargoTable
         threeDayCargoController = sb.instantiateViewController(withIdentifier: "emptyCarCargoTable") as! EmptyCarCargoTable
         fourDayCargoController = sb.instantiateViewController(withIdentifier: "emptyCarCargoTable") as! EmptyCarCargoTable
+        
+        let timeFormatter = DateFormatter()
+        let todayValue = Date()
+        timeFormatter.dateFormat = "YYYY-MM-dd"
+        todayCargoController.chooseTime = timeFormatter.string(from: todayValue) as String
+        oneDayCargoController.chooseTime = timeFormatter.string(from: Date(timeIntervalSinceNow: 24*60*60))
+        twoDayCargoController.chooseTime = timeFormatter.string(from: Date(timeIntervalSinceNow: 24*60*60*2))
+        threeDayCargoController.chooseTime = timeFormatter.string(from: Date(timeIntervalSinceNow: 24*60*60*3))
+        fourDayCargoController.chooseTime = timeFormatter.string(from: Date(timeIntervalSinceNow: 24*60*60*4))
+        
+        timeFormatter.dateFormat = "MM月dd日"
+        let twoDay = Date(timeIntervalSinceNow: 24*60*60*2)
+        let threeDay = Date(timeIntervalSinceNow: 24*60*60*3)
+        let fourDay = Date(timeIntervalSinceNow: 24*60*60*4)
         todayCargoController.index = 0
         oneDayCargoController.index = 1
         twoDayCargoController.index = 2
         threeDayCargoController.index = 3
         fourDayCargoController.index = 4
+        todayCargoController.sourceAreaCode = sourceAreaCode
+        todayCargoController.destAreaCode = destAreaCode
+        oneDayCargoController.sourceAreaCode = sourceAreaCode
+        oneDayCargoController.destAreaCode = destAreaCode
+        twoDayCargoController.sourceAreaCode = sourceAreaCode
+        twoDayCargoController.destAreaCode = destAreaCode
+        threeDayCargoController.sourceAreaCode = sourceAreaCode
+        threeDayCargoController.destAreaCode = destAreaCode
+        fourDayCargoController.sourceAreaCode = sourceAreaCode
+        fourDayCargoController.destAreaCode = destAreaCode
+        
+        
+        emptyTimeSegmented.setTitle(timeFormatter.string(from: twoDay) as String, forSegmentAt: 2)
+        emptyTimeSegmented.setTitle(timeFormatter.string(from: threeDay) as String, forSegmentAt: 3)
+        emptyTimeSegmented.setTitle(timeFormatter.string(from: fourDay) as String, forSegmentAt: 4)
         //设置pageViewController的数据源代理为当前Controller
         emptyCarCargoPageController.dataSource = self
         

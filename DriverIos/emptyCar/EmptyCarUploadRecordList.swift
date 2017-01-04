@@ -1,7 +1,7 @@
 //
 //  EmptyCarUploadRecordList.swift
 //  DriverIos
-//
+//  空车最新列表
 //  Created by my on 2016/12/28.
 //  Copyright © 2016年 weiming. All rights reserved.
 //
@@ -13,12 +13,11 @@ class EmptyCarUploadRecordList: UIViewController {
     @IBOutlet weak var emptyShareImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let shareAction = UITapGestureRecognizer(target: self, action: #selector(shareEmptyCar))
         emptyShareImageView.addGestureRecognizer(shareAction)
         emptyShareImageView.isUserInteractionEnabled = true
-        // Do any additional setup after loading the view.
     }
-
     
     
     override func didReceiveMemoryWarning() {
@@ -41,14 +40,5 @@ class EmptyCarUploadRecordList: UIViewController {
         let vc = sb.instantiateViewController(withIdentifier: "shareEmptyCarView") as! ShareEmptyCarView
         self.present(vc, animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

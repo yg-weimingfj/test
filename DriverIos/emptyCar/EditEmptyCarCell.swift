@@ -1,7 +1,7 @@
 //
 //  EditEmptyCarCell.swift
 //  DriverIos
-//
+//  空车上报列表可编辑cell
 //  Created by my on 2016/12/28.
 //  Copyright © 2016年 weiming. All rights reserved.
 //
