@@ -98,7 +98,7 @@ class AreaDropDownView: UIView,UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func chooseShow(){
-        if(areaCode != nil){
+        if(areaCode != nil && !areaCode.isEmpty){
             if(areaCode.range(of: "0000") != nil){
                 provinceSelected()
             }else if (areaCode.range(of: "00") != nil){
@@ -119,11 +119,11 @@ class AreaDropDownView: UIView,UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func citySelected(){
-        if(areaCode != nil){
-            if(!areaCode.isEmpty){
+        if(areaCode != nil && !areaCode.isEmpty){
+            
                 cityLabel.textColor = UIColor.black
                 townLabel.textColor = UIColor.gray
-                if(areaCode != nil){
+            
                     if(areaCode.range(of: "0000") != nil){
                         cityLabel.text = "城市"
                         cityValue = "城市"
@@ -132,32 +132,31 @@ class AreaDropDownView: UIView,UICollectionViewDataSource, UICollectionViewDeleg
                         townLabel.text = "区/镇"
                         townValue = "区/镇"
                     }
-                }
+            
                 let index = areaCode.index(areaCode.startIndex, offsetBy: 2)
                 var cityAreaCode = areaCode.substring(to: index)
                 cityAreaCode += "0000"
                 getAreaData(cityAreaCode)
                 createView()
-            }
+            
         }
     }
     
     func townSelected(){
-        if(areaCode != nil){
-            if(!areaCode.isEmpty){
+        if(areaCode != nil && !areaCode.isEmpty){
                 townLabel.textColor = UIColor.black
-                if(areaCode != nil){
+            
                     if (areaCode.range(of: "00") != nil){
                         townLabel.text = "区/镇"
                         townValue = "区/镇"
                     }
-                }
+            
                 let index = areaCode.index(areaCode.startIndex, offsetBy: 4)
                 var townAreaCode = areaCode.substring(to: index)
                 townAreaCode += "00"
                 getAreaData(townAreaCode)
                 createView()
-            }
+            
         }
     }
     
@@ -240,7 +239,7 @@ class AreaDropDownView: UIView,UICollectionViewDataSource, UICollectionViewDeleg
         cell.layer.borderColor = UIColor(red: 200/255, green: 199/255, blue: 204/255, alpha: 0.5).cgColor
         cell.addSubview(lbl)
         let mymodel:AreaModel = areaArr[indexPath.item] as! AreaModel
-        if(areaCode != nil){
+        if(areaCode != nil && !areaCode.isEmpty){
             if(areaCode.substring(to: areaCode.index(areaCode.startIndex, offsetBy: 2))+"0000" == mymodel.areaCode){
                 provinceLabel.text = mymodel.text
                 cell.backgroundColor = UIColor(red: 51/255, green: 145/255, blue: 252/255, alpha: 1)

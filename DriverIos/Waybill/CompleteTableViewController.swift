@@ -136,7 +136,7 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
         
         if placeMap != nil{
             cell.WayBillPlaceOfDeparture.text = placeMap!["TEXT"] as! String?
-                }
+        }
         if placeMap != nil{
             cell.WaybillDestination.text = DestinationMap!["TEXT"] as! String?
                 }
