@@ -14,9 +14,15 @@ class AccountInfoController: UIViewController,UITableViewDelegate,UITableViewDat
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
+    @IBOutlet weak var labelOrderNo: UILabel!
+    @IBOutlet weak var labelDate: UILabel!
+    @IBOutlet weak var labelMile: UILabel!
+    @IBOutlet weak var labelDepa: UILabel!
+    @IBOutlet weak var labelDest: UILabel!
     @IBOutlet weak var tableView: UITableView!
     private let cellId = "accountInfoCell"
     var orderId :String = ""
+    var orderMap:Dictionary<String,Any> = [:]
     private var models = [Any]()
     private let defaulthttp = DefaultHttp()
     override func viewDidLoad() {
@@ -51,6 +57,13 @@ class AccountInfoController: UIViewController,UITableViewDelegate,UITableViewDat
                 self.accountInfo(token: obj.token!)
             }
         }
+        
+        labelMile.text = orderMap["estimated_distance"] as! String!
+        labelOrderNo.text = orderMap["order_no"] as! String?
+        labelDepa.text = orderMap["depa"] as! String?
+        labelDest.text = orderMap["dest"] as! String?
+        labelDate.text = orderMap["carrier_order_taking_time"] as! String?
+
     }
     /**
      * 获取运单账单信息
@@ -65,9 +78,8 @@ class AccountInfoController: UIViewController,UITableViewDelegate,UITableViewDat
         defaulthttp.httopost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
-                    let obj = results["resultObj"]  as! [String:Any]
-                    let list = obj["list"] as! [Any]
-                    self.models = list
+                    let obj = results["resultObj"]  as! [Any]
+                    self.models = obj
                     self.tableView.reloadData()
                     
                 }else{
@@ -110,6 +122,7 @@ class AccountInfoController: UIViewController,UITableViewDelegate,UITableViewDat
         cell.labelDate.text = cellMap["action_date"] as! String!
         cell.labelType.text = type
         cell.labelCash.text = cellMap["expense_cash"] as! String!
+        cell.labelCashType.text = cellMap["expense_type_desc"] as! String!
         cell.labelCashType.text = cellMap["expense_type_desc"] as! String!
         return cell
     }

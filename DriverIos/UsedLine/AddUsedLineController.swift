@@ -101,13 +101,19 @@ class AddUsedLineController: UIViewController {
             let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
             let strNowTime = timeFormatter.string(from: date) as String
-            
-            let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.route.add","time":strNowTime,"place_from_code":self.sourceAreaCode,"place_to_code":self.destAreaCode]
+            var needBack = "0"//是否添加返程路线 0不添加 1添加
+            if(isAddBackLine){
+                needBack = "1"
+            }else{
+                needBack = "0"
+            }
+            let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.route.add","time":strNowTime,"place_from_code":self.sourceAreaCode,"place_to_code":self.destAreaCode,"need_back":needBack]
             
             defaulthttp.httopost(parame: des){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
-                        self.hint(hintCon: "添加成功")
+//                        self.dialog(hintCon: "添加成功")
+                        self.close()
                     }else{
                         let info:String = results["resultInfo"] as! String!
                         self.hint(hintCon: info)
@@ -119,7 +125,30 @@ class AddUsedLineController: UIViewController {
         }
         
     }
-    
+    /**
+     * 确认弹窗
+     */
+    func dialog(hintCon: String){
+        let width = self.view.frame.width
+        let height = self.view.frame.height
+        let viewWidth = width-40
+        let viewHeight :CGFloat = 50
+        let baseView = UIView(frame: CGRect(x: 20, y: (height-viewHeight)/2, width: viewWidth, height: viewHeight))
+        baseView.backgroundColor = UIColor.white
+        let labelCon = UILabel(frame: CGRect(x: 0, y: 0, width: viewWidth, height: 20))
+        labelCon.text = hintCon
+        labelCon.textAlignment = NSTextAlignment.center
+        let btnSure = UIButton(frame: CGRect(x: 0, y: 30, width: viewWidth, height: 20))
+        btnSure.backgroundColor = UIColor.rgb(red: 51, green: 142, blue: 255)
+        btnSure.setTitle("确定", for: UIControlState.normal)
+        btnSure.addTarget(self, action: #selector(close), for: UIControlEvents.touchUpInside)
+        baseView.addSubview(labelCon)
+        baseView.addSubview(btnSure)
+        self.view.addSubview(baseView)
+    }
+    func close() {
+        self.dismiss(animated: true, completion: nil)
+    }
     /**
      * 错误提示
      */
