@@ -52,6 +52,9 @@ class UnderDetailsViewController: UIViewController , UIImagePickerControllerDele
         detailsScroll.isHidden = true
         serviceButton.layer.masksToBounds = true
         serviceButton.layer.cornerRadius = 5
+        
+        HeadPortrait.layer.masksToBounds = true
+        HeadPortrait.layer.cornerRadius = 30
 
         serviceButton.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1)
         serviceButton.isEnabled = false
@@ -184,9 +187,25 @@ class UnderDetailsViewController: UIViewController , UIImagePickerControllerDele
         if obj["consignor_ phone"] != nil{
             tel = obj["consignor_ phone"] as! String
         }
-        
-//        HeadPortrait//头像
-//        receiptImage／／回单图片
+        if obj["delivered"] != nil  {
+            if (obj["delivered"] as! String)  == "1" {
+                receiptImage.isUserInteractionEnabled = false
+            }
+        }
+        if obj["driver_sign_name_pic"] != nil  {
+            defaulthttp.downImage(imageUrl: (obj["driver_sign_name_pic"] as! String)){ results in
+                self.receiptImage.image = results
+              }
+        }
+        if obj["avatar"] != nil  {
+            let imageUrl = obj["avatar"] as! String
+            print("url==\(imageUrl)")
+            defaulthttp.downImage(imageUrl:imageUrl){ results in
+                self.HeadPortrait.image = results
+            }
+        }
+//        avatar
+//        driver_sign_name_pic
     }
     func uploadingImage(image:UIImage){
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.common.v1.upload.image.file","imgname":".png","time":strNowTime]
