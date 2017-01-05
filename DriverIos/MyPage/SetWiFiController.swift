@@ -54,7 +54,7 @@ class SetWiFiController: UIViewController {
             
             let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.line.magicbox.wifi.config","time":strNowTime,"wifi_name":textWiFiName.text!,"wifi_pass":textWiFiPwd.text!]
             
-            defaulthttp.httopost(parame: params){results in
+            defaulthttp.httpPost(parame: params){results in
                 let info:String = results["resultInfo"] as! String!
                 self.hint(hintCon: info)
             }

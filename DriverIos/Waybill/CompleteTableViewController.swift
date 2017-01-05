@@ -68,7 +68,7 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
         
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.orders.list.get","time":strNowTime,"order_status":"6","page_start":String(pageStart),"page_num":String(pageNum)]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let obj = results["resultObj"]  as! [String:Any]
@@ -136,7 +136,7 @@ class CompleteTableViewController: UIViewController,UITableViewDelegate,UITableV
         
         if placeMap != nil{
             cell.WayBillPlaceOfDeparture.text = placeMap!["TEXT"] as! String?
-                }
+        }
         if placeMap != nil{
             cell.WaybillDestination.text = DestinationMap!["TEXT"] as! String?
                 }

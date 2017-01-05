@@ -143,7 +143,7 @@ class TakeAccountController: UIViewController {
         let remark = textRemark.text! as String
         let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.accounting.income.update","time":strNowTime,"order_id":orderId,"income_cash":cash,"income_petrol":oilCard,"income_comment":remark]
         
-        defaulthttp.httopost(parame: params){results in
+        defaulthttp.httpPost(parame: params){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
 //                    self.hint(hintCon: "记账成功")
@@ -167,7 +167,7 @@ class TakeAccountController: UIViewController {
         let cash = textOutCash.text! as String
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.accounting.expense.update","time":strNowTime,"order_id":orderId,"expense_cash":cash,"expense_type":costType]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
 //                    self.hint(hintCon: "记账成功")

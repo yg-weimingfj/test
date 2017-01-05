@@ -103,7 +103,7 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.routes.list.get","time":strNowTime]
         
-        defaulthttp.httopost(parame: params){results in
+        defaulthttp.httpPost(parame: params){results in
             print("JSON: \(results)")
             if let result:String = results["result"] as! String?{
                 if result == "1"{
@@ -128,6 +128,7 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
      */
     func deleteUsedLine() {
         
+
         var oftenIdList:[String] = []
         for map in self.models{
             var cellMap:Dictionary<String,Any> = map as! [String:Any]
@@ -154,7 +155,7 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.route.delete","time":strNowTime,"often_id":oftenId]
             
-            defaulthttp.httopost(parame: params){results in
+            defaulthttp.httpPost(parame: params){results in
                 print("JSON: \(results)")
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
@@ -168,6 +169,7 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         let info:String = results["resultInfo"] as! String!
                         self.hint(hintCon: info)
                     }
+
                 }
             }
         }

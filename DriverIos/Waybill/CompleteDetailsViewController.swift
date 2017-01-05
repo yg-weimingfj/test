@@ -37,6 +37,7 @@ class CompleteDetailsViewController: UIViewController {
     @IBOutlet var submitButton: UIButton!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var detailsScroll: UIScrollView!
+    @IBOutlet var ratingNum: RatingBar!
     private var token = ""
     private let  defaulthttp = DefaultHttp()
     private var areamap:Dictionary<String,Any> = [:]
@@ -60,12 +61,36 @@ class CompleteDetailsViewController: UIViewController {
         getAreaData()
         // Do any additional setup after loading the view.
     }
+    @IBAction func submitButton(_ sender: UIButton) {
+        WaybillRating()
+    }
     private func getAreaData(){
         let querySQL = "SELECT CODE,PARENT_CODE,TEXT,PIN_YIN,REMARK,SIMPLE_TEXT,PROVINCE,SIMPLE_CITY,PROVINCE,SIMPLE_CITY,LEVEL,FULL_TEXT,CITY_TEXT,LON,LAT,IS_DIRECTLY_UNDER FROM 'base_area_tab'"
         // 取出查询到的结果
         let resultDataArr = SQLManager.shareInstance().queryDataBase(querySQL: querySQL)
         for dict in resultDataArr! {
             areamap[dict["CODE"] as! String] = dict
+        }
+    }
+    private func WaybillRating() {
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String
+        
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.rating.update","time":strNowTime,"order_id":orderId,"shipper_rating_to_carrier":String(describing: ratingNum.rating)]
+        
+        defaulthttp.httpPost(parame: des){results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    self.WaybillInfo()
+                    
+                }else{
+                    //                    let info:String = results["resultInfo"] as! String!
+                }
+            }
+            print("JSON: \(results)")
+            
         }
     }
     private func WaybillInfo() {
@@ -76,7 +101,7 @@ class CompleteDetailsViewController: UIViewController {
         
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.order.get","time":strNowTime,"order_id":orderId]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true

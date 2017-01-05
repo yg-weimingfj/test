@@ -1,20 +1,18 @@
 //
-//  EmptyCarUpload.swift
+//  EmptyCell.swift
 //  DriverIos
-//  空车上报按钮cell
-//  Created by my on 2016/12/28.
-//  Copyright © 2016年 weiming. All rights reserved.
+//
+//  Created by my on 2017/1/3.
+//  Copyright © 2017年 weiming. All rights reserved.
 //
 
 import UIKit
 
-class EmptyCarUpload: UITableViewCell {
+class EmptyCell: UITableViewCell {
 
-    @IBOutlet weak var uploadButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        uploadButton.layer.cornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

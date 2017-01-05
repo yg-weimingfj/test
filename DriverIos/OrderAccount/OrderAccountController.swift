@@ -90,7 +90,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         
         let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.accounting.get","time":strNowTime]
         
-        defaulthttp.httopost(parame: params){results in
+        defaulthttp.httpPost(parame: params){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let resultObj = results["resultObj"] as! Dictionary<String,Any>
@@ -132,7 +132,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         let strNowTime = timeFormatter.string(from: date) as String        
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.orders.list.get","time":strNowTime,"order_status":"6","page_start":String(pageStart),"page_num":String(pageNum)]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let obj = results["resultObj"]  as! [String:Any]

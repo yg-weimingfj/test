@@ -75,7 +75,7 @@ class AccountInfoController: UIViewController,UITableViewDelegate,UITableViewDat
         let strNowTime = timeFormatter.string(from: date) as String
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.accounting.new.bill.list","time":strNowTime,"order_id":orderId]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let obj = results["resultObj"]  as! [Any]

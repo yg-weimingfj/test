@@ -31,6 +31,8 @@ class FindCargoCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        userLogoImage.layer.cornerRadius = 36
+        userLogoImage.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,5 +40,7 @@ class FindCargoCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+    func showUserInfo(){
+        print(12)
+    }
 }

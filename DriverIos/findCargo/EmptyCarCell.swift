@@ -10,8 +10,8 @@ import UIKit
 
 class EmptyCarCell: UITableViewCell {
 
+    @IBOutlet weak var sourceAreaLabel: UILabel!
     @IBOutlet weak var destAreaLabel: UILabel!
-    @IBOutlet weak var sourceAreaLabel: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
