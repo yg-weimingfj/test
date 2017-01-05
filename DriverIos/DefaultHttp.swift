@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 
 //let httpurl = "http://192.168.1.248:8082/liner-client/liner/android"
 let httpurl = "http://apitest.yunba.com:20082/service_client/open/cargoapp/ios"
@@ -99,5 +100,17 @@ class DefaultHttp{
         }
 
         
+    }
+    func downImage(imageUrl:String,call:@escaping (_ results:UIImage)->Void){
+        if !imageUrl.isEmpty{
+            Alamofire.request(imageUrl).responseImage { response in
+                debugPrint(response)
+                debugPrint(response.result)
+                
+                if let image = response.result.value {
+                    call(image)
+                }
+            }
+        }
     }
 }
