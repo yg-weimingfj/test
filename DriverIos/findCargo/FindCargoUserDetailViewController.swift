@@ -23,7 +23,14 @@ class FindCargoUserDetailViewController: UIViewController {
         super.viewDidLoad()
         userLogo.layer.masksToBounds = true
         userLogo.layer.cornerRadius = 36
-        userDetail()
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                self.token = obj.token!
+                self.userDetail()
+            }
+        }
+        ()
         // Do any additional setup after loading the view.
     }
 

@@ -11,8 +11,8 @@ import UIKit
 class EmptyCarTransportDetail: UIViewController {
 
     private let  defaulthttp = DefaultHttp()
-    private var token = "D681CD4B984048C6B8FE785F82FD9ADA"
-    private var driverId = "58cb4359-253c-420b-a623-3e065489f4b6"
+    private var token = ""
+    private var driverId = ""
     @IBOutlet weak var sourceAreaLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var destAreaLabel: UILabel!
@@ -48,7 +48,14 @@ class EmptyCarTransportDetail: UIViewController {
         self.thumsUpImage.addGestureRecognizer(thumsUpImageAction)
         self.thumsUpImage.isUserInteractionEnabled = true
         orderImage.image=LBXScanWrapper.createCode(codeType: "CIQRCodeGenerator", codeString: transportId, size: CGSize(width: 64,height: 64), qrColor: UIColor.black, bkColor: UIColor.white)
-        self.transportDetail(ustoken: self.token)
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                self.token = obj.token!
+                self.driverId = obj.userId!
+                self.transportDetail(ustoken:(self.token))
+            }
+        }
     }
     
     @objc fileprivate func thumsUpMethod(recognizer:UIPanGestureRecognizer) {
@@ -150,12 +157,22 @@ class EmptyCarTransportDetail: UIViewController {
     }
     @objc fileprivate func cellPhone(recognizer:UIPanGestureRecognizer) {
         if(phoneNum != nil && !(phoneNum?.isEmpty)!){
-            if #available(iOS 10, *) {
-                print("跳转电话界面")
-                UIApplication.shared.open(URL(string: "tel://"+phoneNum!)!, options: [:], completionHandler: nil)
-            }else{
-                UIApplication.shared.openURL(URL(string: "tel://"+phoneNum!)!)
-            }
+            let alertController = UIAlertController(title: phoneNum,
+                                                    message: nil, preferredStyle: .alert)
+            let alertCancelAction = UIAlertAction(title:"取消",style: .cancel,handler: nil)
+            let alertActionOK = UIAlertAction(title: "拨打", style: .default, handler: {
+                action in
+                if #available(iOS 10, *) {
+                    print("跳转电话界面")
+                    UIApplication.shared.open(URL(string: "tel://"+self.phoneNum!)!, options: [:], completionHandler: nil)
+                }else{
+                    UIApplication.shared.openURL(URL(string: "tel://"+self.phoneNum!)!)
+                }
+            })
+            alertController.addAction(alertCancelAction)
+            alertController.addAction(alertActionOK)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     

@@ -117,7 +117,7 @@
                                                             <constraint firstAttribute="width" constant="80" id="m86-yV-DgS"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="长跑路线" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsA-0o-ZJd">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="常跑路线" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsA-0o-ZJd">
                                                         <rect key="frame" x="0.0" y="102" width="104" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -350,7 +350,7 @@
                                                 <rect key="frame" x="16" y="36" width="343" height="34"/>
                                                 <segments>
                                                     <segment title="全部货源"/>
-                                                    <segment title="长跑路线"/>
+                                                    <segment title="常跑路线"/>
                                                 </segments>
                                                 <connections>
                                                     <action selector="findCargoChange:" destination="Bnr-IY-a81" eventType="valueChanged" id="ECe-Zs-vdu"/>
@@ -1149,7 +1149,7 @@
                                     <constraint firstAttribute="height" constant="1" id="dH5-16-den"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q9S-rk-5Km">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q9S-rk-5Km">
                                 <rect key="frame" x="0.0" y="105" width="375" height="513"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>

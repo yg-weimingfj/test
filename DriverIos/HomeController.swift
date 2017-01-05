@@ -10,7 +10,7 @@ import UIKit
 
 class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollViewDelegate{
     private let  defaulthttp = DefaultHttp()
-    private var token = "D681CD4B984048C6B8FE785F82FD9ADA"
+    private var token = ""
     
     @IBOutlet weak var auditView: UIView!
     
@@ -42,7 +42,7 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadImageData()
+        
         auditView.layer.masksToBounds = true
         auditView.layer.cornerRadius = 10
         
@@ -63,7 +63,13 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
         
         helpView.layer.masksToBounds = true
         helpView.layer.cornerRadius = 10
-        
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")                
+                self.token = obj.token!
+                self.loadImageData()
+            }
+        }
 //        print("\("码的类型:" + (codeResult?.strBarCodeType)!+"==="+"码的内容:" + (codeResult?.strScanned)!)")
         
         registerData()
@@ -139,6 +145,10 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
      */
     func registerData() {
         
+        let emptyCarAction = UITapGestureRecognizer(target: self, action: #selector(gotoEmptyCar))
+        emptyCarView.addGestureRecognizer(emptyCarAction)
+        emptyCarView.isUserInteractionEnabled = true
+        
         let myAccountUI = UITapGestureRecognizer(target: self, action: #selector(gotoMyAccount))
         myWalletPageView.addGestureRecognizer(myAccountUI)
         myWalletPageView.isUserInteractionEnabled = true
@@ -155,6 +165,13 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
         auditView.addGestureRecognizer(auditViewUI)
         auditView.isUserInteractionEnabled = true
     }
+    
+    @objc private func gotoEmptyCar(){
+        let sb = UIStoryboard(name: "emptyCarUpload", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "emptyCarUpload") as! EmptyCarController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     /**
      * 跳转到我的记账页面
      */

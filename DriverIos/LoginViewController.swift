@@ -316,12 +316,23 @@ class LoginViewController: UIViewController ,UITextFieldDelegate{
         self.performSegue(withIdentifier: "registerViewController", sender: self)
     }
     func cellPhone() {
-        if #available(iOS 10, *) {
-            print("跳转电话界面")
-            UIApplication.shared.open(URL(string: "tel://4008856913")!, options: [:], completionHandler: nil)
-        }else{
-            UIApplication.shared.openURL(URL(string: "tel://4008856913")!)
-        }
+            let phone = "4008856913"
+            let alertController = UIAlertController(title: phone,
+                                                    message: nil, preferredStyle: .alert)
+            let alertCancelAction = UIAlertAction(title:"取消",style: .cancel,handler: nil)
+            let alertActionOK = UIAlertAction(title: "拨打", style: .default, handler: {
+                action in
+                if #available(iOS 10, *) {
+                    print("跳转电话界面")
+                    UIApplication.shared.open(URL(string: "tel://"+phone)!, options: [:], completionHandler: nil)
+                }else{
+                    UIApplication.shared.openURL(URL(string: "tel://"+phone)!)
+                }
+            })
+            alertController.addAction(alertCancelAction)
+            alertController.addAction(alertActionOK)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
         
     }
     //密码加密

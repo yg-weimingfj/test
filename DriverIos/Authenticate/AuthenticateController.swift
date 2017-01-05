@@ -155,7 +155,7 @@ class AuthenticateController: UIViewController, UINavigationControllerDelegate, 
             defaulthttp.httpPost(parame: params){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
-                        surePopupView(hintCon: "申请认证成功")
+                        self.surePopupView(hintCon: "申请认证成功")
                     }else{
                         let info:String = results["resultInfo"] as! String!
                         self.hint(hintCon: info)
