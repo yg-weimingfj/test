@@ -19,7 +19,6 @@ class EmptyCarCargoTable: UIViewController {
     var destAreaCode : String! = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.matchCargos(ustoken: self.token)
         tableView.delegate = self
         tableView.dataSource = self
         let xib = UINib(nibName: "FindCargoCell", bundle: nil) //nibName指的是我们创建的Cell文件名
@@ -33,7 +32,7 @@ class EmptyCarCargoTable: UIViewController {
                self?.matchCargos(ustoken: (self?.token)!)
             })
         }
-        self.tableView.beginHeaderRefreshing()
+        self.matchCargos(ustoken: self.token)
     }
     func matchCargos(ustoken:String){
         let date = Date()
@@ -41,7 +40,7 @@ class EmptyCarCargoTable: UIViewController {
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.idlevechile.match.cargos","time":strNowTime,"load_date":chooseTime,"place_from_code":sourceAreaCode,"place_to_code":destAreaCode]
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let obj = results["resultObj"]  as! [String:Any]

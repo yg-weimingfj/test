@@ -466,6 +466,11 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate,AVCap
 
     
     //MARK: -- - 生成二维码，背景色及二维码颜色设置
+    //codeType :
+    //codeString : 要生成内容
+    //size:图片大小
+    //qrColor:图片消息
+    //bkColor:图片背景
     static open func createCode( codeType:String, codeString:String, size:CGSize,qrColor:UIColor,bkColor:UIColor )->UIImage?
     {
         //if #available(iOS 8.0, *)

@@ -42,7 +42,7 @@ class EditEmtpyCarRecordView: UIViewController {
             
             let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.idlevechile.delete","time":strNowTime,"report_id":emptyId]
             
-            defaulthttp.httopost(parame: des){results in
+            defaulthttp.httpPost(parame: des){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
                        self.editEmptyTable.viewDidLoad()

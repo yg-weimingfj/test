@@ -54,7 +54,7 @@ class EmptyCarTableController: UIViewController,UITableViewDelegate,UITableViewD
         
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.routes.match.cargos","time":strNowTime,"order_status":"3","page_start":String(pageStart),"page_num":String(pageNum)]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                    let list = results["resultObj"]  as! [Any]

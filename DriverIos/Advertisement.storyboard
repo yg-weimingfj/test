@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="g5E-W8-KSu">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Advertisement View Controller-->
+        <scene sceneID="QLR-KP-gco">
+            <objects>
+                <viewController storyboardIdentifier="advertisementViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g5E-W8-KSu" customClass="AdvertisementViewController" customModule="DriverIos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OQ3-b4-xh3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Nmr-jK-mP1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="m5q-5p-aPo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h3D-my-JVd">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="广告" id="V7h-Fs-TTc">
+                                        <barButtonItem key="leftBarButtonItem" image="back" id="fhS-4b-HVg">
+                                            <connections>
+                                                <action selector="back:" destination="g5E-W8-KSu" id="Bpg-R7-MSc"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZXP-zm-pIH">
+                                <rect key="frame" x="0.0" y="65" width="375" height="602"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZXP-zm-pIH" firstAttribute="top" secondItem="h3D-my-JVd" secondAttribute="bottom" constant="1" id="4Pq-TJ-7la"/>
+                            <constraint firstAttribute="trailing" secondItem="ZXP-zm-pIH" secondAttribute="trailing" id="7pS-A3-Rly"/>
+                            <constraint firstItem="ZXP-zm-pIH" firstAttribute="leading" secondItem="m5q-5p-aPo" secondAttribute="leading" id="8Xk-cv-S1y"/>
+                            <constraint firstAttribute="trailing" secondItem="h3D-my-JVd" secondAttribute="trailing" id="FMz-qR-ebl"/>
+                            <constraint firstItem="h3D-my-JVd" firstAttribute="top" secondItem="OQ3-b4-xh3" secondAttribute="bottom" id="KjW-ts-G4B"/>
+                            <constraint firstItem="Nmr-jK-mP1" firstAttribute="top" secondItem="ZXP-zm-pIH" secondAttribute="bottom" id="TDZ-D5-4pf"/>
+                            <constraint firstItem="h3D-my-JVd" firstAttribute="leading" secondItem="m5q-5p-aPo" secondAttribute="leading" id="bT9-Jo-qVh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="ZXP-zm-pIH" id="Vkb-Yu-01W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AAQ-ir-POo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-220" y="192"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="13" height="22"/>
+    </resources>
+</document>

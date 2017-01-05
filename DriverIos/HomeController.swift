@@ -9,7 +9,9 @@
 import UIKit
 
 class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollViewDelegate{
-
+    private let  defaulthttp = DefaultHttp()
+    private var token = "D681CD4B984048C6B8FE785F82FD9ADA"
+    
     @IBOutlet weak var auditView: UIView!
     
     @IBOutlet weak var emptyCarView: UIView!
@@ -26,14 +28,11 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     
     @IBOutlet weak var menuScrollView: UIScrollView!
     var codeResult:LBXScanResult?
-    
-  
-    @IBAction func homeScanner(_ sender: Any) {
-        
-    }
-    
+    var attr :[String] = []
     var menu1 : UIView?
 
+    var imageAttr : [Any] = []
+    
     //获取屏幕宽度
     let screenWidth =  UIScreen.main.bounds.size.width
     
@@ -43,7 +42,7 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        loadImageData()
         auditView.layer.masksToBounds = true
         auditView.layer.cornerRadius = 10
         
@@ -65,26 +64,45 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
         helpView.layer.masksToBounds = true
         helpView.layer.cornerRadius = 10
         
-        //初始化图片轮播组件
-        sliderGallery = SliderGalleryController()
-        sliderGallery.delegate = self
-        sliderGallery.view.frame = CGRect(x: 0, y: 64, width: screenWidth,
-                                          height: 160);
-        
-        //将图片轮播组件添加到当前视图
-        self.addChildViewController(sliderGallery)
-        self.view.addSubview(sliderGallery.view)
-        
-        //添加组件的点击事件
-        let tap = UITapGestureRecognizer(target: self,
-                                         action: #selector(HomeController.handleTapAction(_:)))
-        sliderGallery.view.addGestureRecognizer(tap)
 //        print("\("码的类型:" + (codeResult?.strBarCodeType)!+"==="+"码的内容:" + (codeResult?.strScanned)!)")
         
         registerData()
 
     }
-    
+    func loadImageData(){
+        
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.ads.list.get","time":strNowTime]
+        defaulthttp.httpPost(parame: des){results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    let list = results["resultObj"]  as! [Any]
+                    //                    let list = obj["vehicle_idle"] as! [String]
+                    self.imageAttr = list
+                    for map in list{
+                        var dict:Dictionary<String,Any> = map as! [String:Any]
+                        self.attr.append((dict["ad_pic_url"] as? String!)!)
+                    }
+                    //初始化图片轮播组件
+                    self.sliderGallery = SliderGalleryController()
+                    self.sliderGallery.delegate = self
+                    self.sliderGallery.view.frame = CGRect(x: 0, y: 64, width: self.screenWidth,
+                                                      height: 160);
+                    //将图片轮播组件添加到当前视图
+                    self.addChildViewController(self.sliderGallery)
+                    self.view.addSubview(self.sliderGallery.view)
+                    
+                    //添加组件的点击事件
+                    let tap = UITapGestureRecognizer(target: self,
+                                                     action: #selector(HomeController.handleTapAction(_:)))
+                    self.sliderGallery.view.addGestureRecognizer(tap)
+                }
+            }
+        }
+    }
     //图片轮播组件协议方法：获取内部scrollView尺寸
     func galleryScrollerViewSize() -> CGSize {
         return CGSize(width: screenWidth, height: 160)
@@ -92,16 +110,18 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     
     //图片轮播组件协议方法：获取数据集合
     func galleryDataSource() -> [String] {
-        return ["http://bizhi.zhuoku.com/bizhi2008/0516/3d/3d_desktop_13.jpg",
-                "http://tupian.enterdesk.com/2012/1015/zyz/03/5.jpg",
-                "http://img.web07.cn/UpImg/Desk/201301/12/desk230393121053551.jpg",
-                "http://wallpaper.160.com/Wallpaper/Image/1280_960/1280_960_37227.jpg",
-                "http://bizhi.zhuoku.com/wall/jie/20061124/cartoon2/cartoon014.jpg"]
+        return attr
     }
     
     //点击事件响应
     func handleTapAction(_ tap:UITapGestureRecognizer)->Void{
 //       SliderGalleryControllerDelegate.resetImageViewSource()
+        let index = sliderGallery.currentIndex
+        var dict:Dictionary<String,Any> = imageAttr[index] as! [String:Any]
+        let sb = UIStoryboard(name: "Advertisement", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "advertisementViewController") as! AdvertisementViewController
+        vc.urlString = (dict["ad_pic_link"] as? String!)!
+        self.present(vc, animated: true, completion: nil)
         sliderGallery.resetImageViewSource()
     }
     @IBAction func QRcode(_ sender: UIBarButtonItem) {
@@ -110,8 +130,6 @@ class HomeController: UIViewController,SliderGalleryControllerDelegate,UIScrollV
     //MARK: ---无边框，内嵌4个角------
     func weixinStyle()
     {
-        
-        
         let sb = UIStoryboard(name: "MyQRCode", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "myQRCodeNavigationController") as! MyQRCodeNavigationController
                 self.present(vc, animated: true, completion: nil)
