@@ -52,7 +52,7 @@ class EmptyCarTransportDetail: UIViewController {
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.cargo.get","time":strNowTime,"cargo_id":transportId]
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let list:Dictionary<String,Any> = results["resultObj"]  as! [String:Any]

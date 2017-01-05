@@ -592,6 +592,9 @@
                                                 <state key="normal" title="提交评价">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="submitButton:" destination="nIO-Dh-hZe" eventType="touchUpInside" id="7lg-pM-ZPi"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1118,6 +1121,7 @@
                         <outlet property="orderCode" destination="x67-Fj-Zwu" id="O3h-Wr-D4w"/>
                         <outlet property="placeOfDeparture" destination="3LP-1O-e2k" id="Akd-o2-Rbh"/>
                         <outlet property="ratingHeight" destination="4vX-bf-jOc" id="nKj-O4-Dwc"/>
+                        <outlet property="ratingNum" destination="IgU-iG-J2K" id="AMg-iZ-u5g"/>
                         <outlet property="ratingView" destination="z86-KP-TRb" id="pe0-g0-VEX"/>
                         <outlet property="receiptImage" destination="njP-eB-aZX" id="VOw-xm-MTg"/>
                         <outlet property="shipperName" destination="F6r-CS-pCd" id="yBT-ep-hxi"/>

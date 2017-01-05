@@ -33,7 +33,7 @@ class FindCargoUserDetailViewController: UIViewController {
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.user.shipper.get","time":strNowTime,"shipper_id":userId]
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let list:Dictionary<String,Any> = results["resultObj"]  as! [String:Any]
@@ -55,12 +55,12 @@ class FindCargoUserDetailViewController: UIViewController {
                         self.creditStar.rating = CGFloat(starNum!)
                     }
                     var cargoNum = String(describing: list["CARGO_NUM"] as! Int)
-                    if(cargoNum == nil || cargoNum.isEmpty){
+                    if(list["CARGO_NUM"] == nil || cargoNum.isEmpty){
                         cargoNum = "0"
                     }
                     self.publishCargoTimes.text = "累计发布"+cargoNum+"次"
                     var orderNum = String(describing: list["ORDER_NUM"] as! Int)
-                    if(orderNum == nil || orderNum.isEmpty){
+                    if(list["ORDER_NUM"] == nil || orderNum.isEmpty){
                         orderNum = "0"
                     }
                     self.finishTransportNums.text = "完成"+orderNum+"个运单"

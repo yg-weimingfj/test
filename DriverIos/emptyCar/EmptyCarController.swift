@@ -260,7 +260,7 @@ class EmptyCarController: UIViewController {
             
             let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.idlevechile.add","time":strNowTime,"lng":"116.396574","lat":"39.992706","addr":"123","idle_time":self.timeValue,"from_place":self.sourceAreaLabel.text! as String,"place_from_code":self.sourceAreaCode,"tareas":self.destAreaLabel.text! as String,"tcodes":self.destAreaCode]
             
-            defaulthttp.httopost(parame: des){results in
+            defaulthttp.httpPost(parame: des){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
                         self.dismiss(animated: true, completion: nil)
