@@ -85,7 +85,7 @@ class findCargoTableViewController: UIViewController,UITableViewDelegate,UITable
         
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.cargos.list.get","time":strNowTime,"order_status":"3","place_from_code":sourceAreaCode,"place_to_code":destAreaCode,"vehicle_type":carTypeValue,"vehicle_length":carLengthValue,"page_start":String(pageStart),"page_num":String(pageNum)]
         
-        defaulthttp.httopost(parame: des){results in
+        defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
                     let list = results["resultObj"]  as! [Any]
