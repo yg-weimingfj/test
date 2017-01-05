@@ -155,7 +155,7 @@ class AuthenticateController: UIViewController, UINavigationControllerDelegate, 
             defaulthttp.httpPost(parame: params){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
-                        self.hint(hintCon: "申请成功")
+                        surePopupView(hintCon: "申请认证成功")
                     }else{
                         let info:String = results["resultInfo"] as! String!
                         self.hint(hintCon: info)
@@ -240,6 +240,21 @@ class AuthenticateController: UIViewController, UINavigationControllerDelegate, 
         alert.addAction(photoAction)
         alert.addAction(choseAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    /**
+     * 确认弹窗
+     */
+    func surePopupView(hintCon: String){
+        var alert: UIAlertController!
+        alert = UIAlertController(title: hintCon, message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let sureAction = UIAlertAction(title: "确定", style: UIAlertActionStyle.default){ (action:UIAlertAction)in
+            self.back()
+        }
+        alert.addAction(sureAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    func back() {
+        self.dismiss(animated: true, completion: nil)
     }
     /**
      * 监听键盘
