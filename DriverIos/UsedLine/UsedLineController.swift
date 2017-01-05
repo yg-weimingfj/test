@@ -28,11 +28,7 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
         self.tableView.reloadData()
     }
     @IBAction func btnSureLisener(_ sender: UIButton) {
-//        deleteUsedLine(oftenId: oftenId!,index: indexPath.row)
-        viewDelete.isHidden = true
-        btnDelete.isHidden = false
-        isDelete = false
-        self.tableView.reloadData()
+        deleteUsedLine()
     }
     @IBAction func btnCancelLisener(_ sender: UIButton) {
         viewDelete.isHidden = true
@@ -57,7 +53,14 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                self.token = obj.token!
+                self.tableView.beginHeaderRefreshing()
+            }
+        }
+    }
     /**
      * 初始化
      */
@@ -66,18 +69,13 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
         tableView.register(xib, forCellReuseIdentifier: cellId)
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
         let curveHeader = CurveRefreshHeader(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
         _ = tableView.setUpHeaderRefresh(curveHeader) { [weak self] in
             delay(1.5, closure: {
-                self?.tableView.reloadData()
+                self?.getUsedLine()
                 self?.tableView.endHeaderRefreshing(delay: 0.5)
             })
-        }
-        $.getObj("driverUserInfo") { (obj) -> () in
-            if let obj = obj as? Student{
-                self.token = obj.token!
-                self.getUsedLine()
-            }
         }
         getAreaData()
     }
@@ -109,10 +107,14 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
             print("JSON: \(results)")
             if let result:String = results["result"] as! String?{
                 if result == "1"{
-                    var obj:[Any] = results["resultObj"] as! [Any]
-                    let cellMap:Dictionary<String,String> = ["isDelete":"N"]
-                    obj.append(cellMap)
-                    self.models = obj
+                    let obj:[Any] = results["resultObj"] as! [Any]
+                    var cellList:[Any] = []
+                    for map in obj{
+                        var cellMap:Dictionary<String,Any> = map as! [String:Any]
+                        cellMap["isDelete"] = "N"
+                        cellList.append(cellMap)
+                    }
+                    self.models = cellList
                     self.tableView.reloadData()
                 }else{
                     let info:String = results["resultInfo"] as! String!
@@ -124,27 +126,54 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
     /**
      * 删除常跑路线
      */
-    func deleteUsedLine(oftenId:String,index:Int) {
-        let date = Date()
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
-        let strNowTime = timeFormatter.string(from: date) as String
+    func deleteUsedLine() {
         
-        let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.route.delete","time":strNowTime,"often_id":strNowTime]
-        
-        defaulthttp.httpPost(parame: params){results in
-            print("JSON: \(results)")
-            if let result:String = results["result"] as! String?{
-                if result == "1"{
-                    self.models.remove(at: index)
-                    self.tableView.reloadData()
-                    self.hint(hintCon: "删除成功")
-                }else{
-                    let info:String = results["resultInfo"] as! String!
-                    self.hint(hintCon: info)
+
+        var oftenIdList:[String] = []
+        for map in self.models{
+            var cellMap:Dictionary<String,Any> = map as! [String:Any]
+            let isDeleteLine = cellMap["isDelete"] as! String!
+            if(isDeleteLine == "Y"){
+                let oftenId = cellMap["often_id"] as! String!
+                oftenIdList.append(oftenId!)
+            }
+        }
+        if(oftenIdList.count == 0){
+            self.hint(hintCon: "请选择要删除的路线")
+        }else{
+            var oftenId = ""
+            for id in oftenIdList{
+                oftenId += id+","
+            }
+            let index = oftenId.index(oftenId.startIndex, offsetBy: (oftenId.characters.count-1))
+            oftenId = oftenId.substring(to: index)
+            print("oftenId: \(oftenId)")
+            let date = Date()
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+            let strNowTime = timeFormatter.string(from: date) as String
+            
+            let params : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.route.delete","time":strNowTime,"often_id":oftenId]
+            
+            defaulthttp.httpPost(parame: params){results in
+                print("JSON: \(results)")
+                if let result:String = results["result"] as! String?{
+                    if result == "1"{
+                        self.hint(hintCon: "删除成功")
+                        self.getUsedLine()
+                        self.viewDelete.isHidden = true
+                        self.btnDelete.isHidden = false
+                        self.isDelete = false
+                        self.tableView.reloadData()
+                    }else{
+                        let info:String = results["resultInfo"] as! String!
+                        self.hint(hintCon: info)
+                    }
+
                 }
             }
         }
+        
     }
     /**
      * 错误提示
@@ -168,12 +197,19 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! UsedLineItemCell
+        
+        var cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+        let isDeleteLine = cellMap["isDelete"] as! String!
         if(isDelete){
             cell.ivDelete.isHidden = false
+            if(isDeleteLine == "Y"){
+                cell.ivDelete.image = UIImage(named: "circle_selected")
+            }else{
+                cell.ivDelete.image = UIImage(named: "circle_default")
+            }
         }else{
             cell.ivDelete.isHidden = true
         }
-        let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
         let depaMap = areamap[cellMap["place_from_code"] as! String!] as! [String:AnyObject]?
         let destMap = areamap[cellMap["place_to_code"] as! String!] as! [String:AnyObject]?
         if depaMap != nil{
@@ -184,28 +220,20 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         cell.labelDepaDetail.text = cellMap["from_place"] as! String!
         cell.labelDestDetail.text = cellMap["to_place"] as! String!
-        cell.labelMile.text = cellMap["to_place"] as! String!
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(isDelete){
-            let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! UsedLineItemCell
             var cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
-            let isDelete = cellMap["isDelete"] as! String!
-            if(isDelete == "Y"){
-                cell.ivDelete.image = UIImage(named: "circle_default")
+            let isDeleteLine = cellMap["isDelete"] as! String!
+            if(isDeleteLine == "Y"){
                 cellMap["isDelete"] = "N"
             }else{
-                cell.ivDelete.image = UIImage(named: "circle_selected")
                 cellMap["isDelete"] = "Y"
             }
-            self.models.append(cellMap)
+            self.models[indexPath.row] = cellMap
             self.tableView.reloadData()
         }
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
-//        let oftenId = cellMap["often_id"] as! String!
-//        deleteUsedLine(oftenId: oftenId!,index: indexPath.row)
     }
     /**
      * 添加常跑路线

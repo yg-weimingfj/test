@@ -21,6 +21,8 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     private var models = [Any]()
     private let cellId = "orderAccountCell"
     private var areamap:Dictionary<String,Any> = [:]
+    private var orderMap:Dictionary<String,Any> = [:]
+    private var token = ""
     private var orderId = ""
     private var pageStart = 1
     private var pageNum = 10
@@ -33,6 +35,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "currentPageChanged"), object: 0)
+        self.tableView.beginHeaderRefreshing()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -50,14 +53,15 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         let curveHeader = CurveRefreshHeader(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
         _ = tableView.setUpHeaderRefresh(curveHeader) { [weak self] in
             delay(1.5, closure: {
-                self?.tableView.reloadData()
+                self?.accountInfo()
+                self?.getOrderList()
                 self?.tableView.endHeaderRefreshing(delay: 0.5)
             })
         }
         $.getObj("driverUserInfo") { (obj) -> () in
             if let obj = obj as? Student{
-                self.accountInfo(token: obj.token!)
-                self.WaybillInfo(token: obj.token!)
+                self.token = obj.token!
+                self.tableView.beginHeaderRefreshing()
             }
         }
         getAreaData()
@@ -78,7 +82,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     /**
      * 获取记账信息
      */
-    func accountInfo(token:String) {
+    func accountInfo() {
         let date = Date()
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
@@ -100,7 +104,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
                     }
                     self.labelInCome.text = "+"+totalIncome!
                     self.labelCost.text = "-"+totalExpense!
-                    let balance = Double(totalIncome!)! + Double(totalExpense!)!
+                    let balance = Double(totalIncome!)! - Double(totalExpense!)!
                     if(balance > 0){
                         self.labelBalance.text = "+"+String(balance)
                     }else if(balance < 0){
@@ -121,7 +125,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     /**
      * 获取运单信息
      */
-    private func WaybillInfo(token:String) {
+    private func getOrderList() {
         let date = Date()
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
@@ -182,26 +186,32 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! OrderAccountItemCell
-        let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+        var cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
         let placeMap = areamap[cellMap["s_code"] as! String!] as! [String:AnyObject]?
         let DestinationMap = areamap[cellMap["t_code"] as! String!] as! [String:AnyObject]?
         
-        
         if placeMap != nil{
             cell.labelDepa.text = placeMap!["TEXT"] as! String?
+            cellMap["depa"] = placeMap!["TEXT"] as! String?
         }
         if placeMap != nil{
             cell.labelDest.text = DestinationMap!["TEXT"] as! String?
+            cellMap["dest"] = DestinationMap!["TEXT"] as! String?
         }
-        cell.labelMile.text = cellMap["estimated_distance"] as! String!+"公里"
+        self.models[indexPath.row] = cellMap
+        cell.labelMile.text = cellMap["estimated_distance"] as! String!
         cell.labelOrderNo.text = cellMap["order_no"] as! String?
         cell.labelFinishDate.text = cellMap["carrier_order_taking_time"] as! String?
-
+        let inCome = cellMap["bk_income"] as! String!
+        let cost = cellMap["bk_payment"] as! String!
+        cell.labelInCome.text = "+"+inCome!
+        cell.labelCost.text = "-"+cost!
+        orderId = (cellMap["order_id"] as! String?)!
         let takeAccountUI = UITapGestureRecognizer(target: self, action: #selector(takeAccountLinener))
         cell.viewAccount.addGestureRecognizer(takeAccountUI)
         cell.viewAccount.isUserInteractionEnabled = true
                 
-        if(indexPath.row%2 == 0){
+        if((inCome?.isEmpty)! && (cost?.isEmpty)!){
             cell.viewMoney.isHidden = true
             cell.viewAccount.isHidden = false
         }else{
@@ -213,6 +223,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+        orderMap = cellMap
         orderId = (cellMap["order_id"] as! String?)!
         accountInfoLinener()
     }
@@ -234,6 +245,7 @@ class OrderAccountController: UIViewController,UITableViewDelegate,UITableViewDa
         let sb = UIStoryboard(name: "OrderAccount", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "accountInfoController") as! AccountInfoController
         vc.orderId = orderId
+        vc.orderMap = orderMap
         self.present(vc, animated: true, completion: nil)
     }
 

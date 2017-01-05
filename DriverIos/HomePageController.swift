@@ -27,23 +27,24 @@ class HomePageController: RAMAnimatedTabBarController , AMapLocationManagerDeleg
         super.viewDidLoad()
         
         setUpTabBar()
+        setControllers()
         self.delegate = self
         
         
-        locationManager.pausesLocationUpdatesAutomatically = false//是否允许系统关闭
-        locationManager.allowsBackgroundLocationUpdates = true//是否允许后台运行
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters//精度
-        locationManager.locationTimeout = defaultLocationTimeout//超时时间
-        locationManager.reGeocodeTimeout = defaultReGeocodeTimeout//超时时间
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.locationTimeout = defaultLocationTimeout
+        locationManager.reGeocodeTimeout = defaultReGeocodeTimeout
         locationManager.delegate = self
         initCompleteBlock()
         $.getObj("driverUserInfo") { (obj) -> () in
             if let obj = obj as? Student{
                 print("\(obj.userId) , \(obj.name)")
                 self.token = obj.token!
-//                self.getLocation()
-//                self.time = Timer(timeInterval: 60, target: self, selector: #selector(self.getLocation), userInfo: nil, repeats: true)
-//                RunLoop.main.add(self.time!, forMode:RunLoopMode.commonModes)
+                self.getLocation()
+                self.time = Timer(timeInterval: 60, target: self, selector: #selector(self.getLocation), userInfo: nil, repeats: true)
+                RunLoop.main.add(self.time!, forMode:RunLoopMode.commonModes)
             }
         }
     }
@@ -61,12 +62,14 @@ class HomePageController: RAMAnimatedTabBarController , AMapLocationManagerDeleg
                     return;
                 }
             }
-            if let location = location {
+                          if let location = location {
+                
                 if let regeocode = regeocode {
+//                    print("\(regeocode.formattedAddress) \n \(regeocode.citycode!)-\(regeocode.adcode!)-\(location.horizontalAccuracy)m")
                     print("cc====\(regeocode)")
-                }
-                self?.locationPost(location: location,regeocode: regeocode!)
-                print("lat:\(location.coordinate.latitude); lon:\(location.coordinate.longitude); accuracy:\(location.horizontalAccuracy)m")
+                    self?.locationPost(location: location,regeocode: regeocode)
+                    }
+                    print("lat:\(location.coordinate.latitude); lon:\(location.coordinate.longitude); accuracy:\(location.horizontalAccuracy)m")
                 
             }
             
@@ -169,7 +172,8 @@ private extension HomePageController {
         let  mouthHeigh = skullRadius*4
         let  mouthOffset = skullRadius
         let mouthRect = CGRect(x: skullCenter.x - mouthWidth/2, y: skullCenter.y - mouthOffset, width: mouthWidth, height: mouthHeigh)
-
+//        let startPoint = CGPoint(x: mouthRect.minX, y: mouthRect.minY)
+//        let endPoint = CGPoint(x: mouthRect.maxX, y: mouthRect.minY)
         let  mouthCurvature = 0.0
 
         let smileOffset = CGFloat(max(-1, min(mouthCurvature, 1)))*mouthRect.height
@@ -189,6 +193,75 @@ private extension HomePageController {
         //隐藏阴影线---缺一不可
         self.tabBar.shadowImage = UIImage()
         self.tabBar.backgroundImage = UIImage()
+    }
+//    @IBInspectable
+//    var scale:CGFloat = 0.90
+//    @IBInspectable
+//    var lineWidth:CGFloat = 1.0
+//    @IBInspectable
+//    var color:UIColor = UIColor.blue
+//    
+//    var skullRadius:CGFloat{
+//        return min(bounds.size.width,bounds.size.height)/2*scale//获取原的半径为父View的一半
+//    }
+//    var skullCenter:CGPoint{
+//        return CGPoint(x:bounds.midX,y:bounds.midY)////获取中心点
+//        
+//    }
+//    private struct Ratios{
+//        static let  skullRadiusToMouthWidth:CGFloat = 1
+//        static let  skullRadiusToMouthHeigh:CGFloat = 3
+//        static let  skullRadiusToMouthOffset:CGFloat = 3
+//    }
+//    func pathForMouth() -> UIBezierPath {
+//        let  mouthWidth = skullRadius/Ratios.skullRadiusToMouthWidth
+//        let  mouthHeigh = skullRadius/Ratios.skullRadiusToMouthHeigh
+//        let  mouthOffset = skullRadius/Ratios.skullRadiusToMouthOffset
+//        
+//        let mouthRect = CGRect(x: skullCenter.x - mouthWidth/2, y: skullCenter.y + mouthOffset, width: mouthWidth, height: mouthHeigh)
+//        
+//        let  mouthCurvature = 0.0
+//        
+//        let smileOffset = CGFloat(max(-1, min(mouthCurvature, 1)))*mouthRect.height
+//        let start = CGPoint(x: mouthRect.minX, y: mouthRect.minY)
+//        let end = CGPoint(x: mouthRect.maxX, y: mouthRect.minY)
+//        let cp1 = CGPoint(x: mouthRect.minX + mouthRect.width/3, y: mouthRect.minY+smileOffset)
+//        let cp2 = CGPoint(x: mouthRect.maxX - mouthRect.width/3, y: mouthRect.minY+smileOffset)
+//        
+//        let path = UIBezierPath()
+//        path.move(to: start)
+//        path.lineWidth = lineWidth
+//        path.addCurve(to: end, controlPoint1: cp1, controlPoint2: cp2)
+//        
+//        return path
+//        //
+//        //        return UIBezierPath(rect: mouthRect)
+//        
+//    }
+    
+    func setControllers() {
+        
+        //        //MARK: imageInsets 改变item图像的位置
+        //        let vc1 = FirstViewController()
+        //
+        //        let na1 = UINavigationController(rootViewController: vc1)
+        //        vc1.navigationItem.title = "一"
+        //
+        //        na1.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
+        //        na1.tabBarItem.image = UIImage(named: "tab_bar_look_nor")
+        //
+//                let editVC = ViewController()
+//                editVC.tabBarItem.imageInsets = UIEdgeInsetsMake(-6, 0, 6, 0)
+        //
+        //
+        //        let meVC = ThirdViewController()
+        //        let meNavi = UINavigationController(rootViewController: meVC)
+        //        meVC.navigationItem.title = "三"
+        //        meNavi.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
+        //        meNavi.tabBarItem.image = UIImage(named: "tab_bar_me_nor")
+        
+        
+        //        viewControllers = [na1, editVC, meNavi];
     }
 }
 

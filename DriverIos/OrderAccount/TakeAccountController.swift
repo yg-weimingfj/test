@@ -146,7 +146,8 @@ class TakeAccountController: UIViewController {
         defaulthttp.httpPost(parame: params){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
-                    self.hint(hintCon: "记账成功")
+//                    self.hint(hintCon: "记账成功")
+                    self.dismiss(animated: true, completion: nil)
                 }else{
                     let info:String = results["resultInfo"] as! String!
                     self.hint(hintCon: info)
@@ -163,14 +164,14 @@ class TakeAccountController: UIViewController {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         let strNowTime = timeFormatter.string(from: date) as String
-        let orderId = "012f3d64-e79b-4637-80bf-3fcb0b963d09"
         let cash = textOutCash.text! as String
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.accounting.expense.update","time":strNowTime,"order_id":orderId,"expense_cash":cash,"expense_type":costType]
         
         defaulthttp.httpPost(parame: des){results in
             if let result:String = results["result"] as! String?{
                 if result == "1"{
-                    self.hint(hintCon: "记账成功")
+//                    self.hint(hintCon: "记账成功")
+                    self.dismiss(animated: true, completion: nil)
                 }else{
                     let info:String = results["resultInfo"] as! String!
                     self.hint(hintCon: info)

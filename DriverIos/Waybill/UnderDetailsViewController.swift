@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UnderDetailsViewController: UIViewController {
+class UnderDetailsViewController: UIViewController , UIImagePickerControllerDelegate , UINavigationControllerDelegate{
     var orderId:String = ""
 
     private let  defaulthttp = DefaultHttp()
@@ -36,11 +36,25 @@ class UnderDetailsViewController: UIViewController {
     private var areamap:Dictionary<String,Any> = [:]
     private var tel = ""
     private var token = ""
+    var strNowTime = ""
+    var imagePickerController:UIImagePickerController!
+    var uploadAlertController:UIAlertController!
+    private var receiptUrl = ""{
+        willSet{
+            if newValue != ""{
+                serviceButton.backgroundColor = UIColor(red: 51/255, green: 145/255, blue: 252/255, alpha: 1)
+                serviceButton.isEnabled = true
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         detailsScroll.isHidden = true
         serviceButton.layer.masksToBounds = true
         serviceButton.layer.cornerRadius = 5
+        
+        HeadPortrait.layer.masksToBounds = true
+        HeadPortrait.layer.cornerRadius = 30
 
         serviceButton.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1)
         serviceButton.isEnabled = false
@@ -61,9 +75,16 @@ class UnderDetailsViewController: UIViewController {
 
         goodsType.layer.borderColor = UIColor(red: 255/255, green: 192/255, blue: 0/255, alpha: 1).cgColor
         
+        initAlertController()
+        initImagePickerController()
+        
         let CellUI = UITapGestureRecognizer(target: self, action: #selector(cellPhone))
         callPhone.addGestureRecognizer(CellUI)
         callPhone.isUserInteractionEnabled = true
+        
+        let receiptOpen = UITapGestureRecognizer(target: self, action: #selector(presentUpload))
+        receiptImage.addGestureRecognizer(receiptOpen)
+        receiptImage.isUserInteractionEnabled = true
         
         activityIndicator.startAnimating()
         $.getObj("driverUserInfo") { (obj) -> () in
@@ -74,9 +95,31 @@ class UnderDetailsViewController: UIViewController {
             }
         }
         getAreaData()
+        
+    }
+    @IBAction func serviceButton(_ sender: UIButton) {
+        wallbillReach()
+        
+    }
+    private func wallbillReach(){
+        
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.order.finish","time":strNowTime,"order_id":orderId]
+        
+        defaulthttp.httpPost(parame: des){results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    self.serviceButton.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1)
+                    self.serviceButton.isEnabled = false
+                    self.receiptImage.isUserInteractionEnabled = false
+                    
+                }else{
+                    //                    let info:String = results["resultInfo"] as! String!
+                }
+            }
+            print("JSON: \(results)")
+            
+        }
 
-        
-        
     }
     private func getAreaData(){
         let querySQL = "SELECT CODE,PARENT_CODE,TEXT,PIN_YIN,REMARK,SIMPLE_TEXT,PROVINCE,SIMPLE_CITY,PROVINCE,SIMPLE_CITY,LEVEL,FULL_TEXT,CITY_TEXT,LON,LAT,IS_DIRECTLY_UNDER FROM 'base_area_tab'"
@@ -95,7 +138,7 @@ class UnderDetailsViewController: UIViewController {
         let date = Date()
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
-        let strNowTime = timeFormatter.string(from: date) as String
+        strNowTime = timeFormatter.string(from: date) as String
         
         let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.order.get","time":strNowTime,"order_id":orderId]
         
@@ -144,9 +187,41 @@ class UnderDetailsViewController: UIViewController {
         if obj["consignor_ phone"] != nil{
             tel = obj["consignor_ phone"] as! String
         }
-        
-//        HeadPortrait//头像
-//        receiptImage／／回单图片
+        if obj["delivered"] != nil  {
+            if (obj["delivered"] as! String)  == "1" {
+                receiptImage.isUserInteractionEnabled = false
+            }
+        }
+        if obj["driver_sign_name_pic"] != nil  {
+            defaulthttp.downImage(imageUrl: (obj["driver_sign_name_pic"] as! String)){ results in
+                self.receiptImage.image = results
+              }
+        }
+        if obj["avatar"] != nil  {
+            let imageUrl = obj["avatar"] as! String
+            print("url==\(imageUrl)")
+            defaulthttp.downImage(imageUrl:imageUrl){ results in
+                self.HeadPortrait.image = results
+            }
+        }
+//        avatar
+//        driver_sign_name_pic
+    }
+    func uploadingImage(image:UIImage){
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.common.v1.upload.image.file","imgname":".png","time":strNowTime]
+        defaulthttp.httpPostImage(parame: des, image: image){ results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    let obj = results["resultObj"]  as! String
+                    print("resultObj==\(obj)")
+                    self.receiptUrl = obj
+                }else{
+                    //                    let info:String = results["resultInfo"] as! String!
+                }
+            }
+            print("JSON: \(results)")
+
+        }
     }
     func cellPhone() {
         if #available(iOS 10, *) {
@@ -157,9 +232,69 @@ class UnderDetailsViewController: UIViewController {
         }
         
     }
+    func presentUpload() {
+        present(self.uploadAlertController, animated:true, completion: nil)
+    }
+    func initAlertController()
+    {
+        weak var blockSelf = self
+        self.uploadAlertController = UIAlertController(title:nil, message: nil, preferredStyle:UIAlertControllerStyle.actionSheet)
+        let takePhoto = UIAlertAction(title:"拍照", style:UIAlertActionStyle.default) { (action:UIAlertAction)in
+            blockSelf?.actionAction(action: action)
+        }
+        let photoLib = UIAlertAction(title:"从相册选择", style:UIAlertActionStyle.default) { (action:UIAlertAction)in
+            blockSelf?.actionAction(action: action)
+        }
+        let cancel = UIAlertAction(title:"取消", style:UIAlertActionStyle.cancel) { (action:UIAlertAction)in
+            blockSelf?.actionAction(action: action)
+        }
+        self.uploadAlertController?.addAction(takePhoto)
+        self.uploadAlertController?.addAction(photoLib)
+        self.uploadAlertController?.addAction(cancel)
+    }
+    func actionAction(action:UIAlertAction)
+    {
+        if action.title == "拍照" {
+            self.getImageFromPhotoLib(type:.camera)
+        }else if action.title == "从相册选择"{
+            self.getImageFromPhotoLib(type:.photoLibrary)
+        }
+         
+    }
+    func initImagePickerController()
+    {
+        self.imagePickerController = UIImagePickerController()
+        self.imagePickerController.delegate = self
+        // 设置是否可以管理已经存在的图片或者视频
+        self.imagePickerController.allowsEditing = true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func getImageFromPhotoLib(type:UIImagePickerControllerSourceType)
+    {
+        self.imagePickerController.sourceType = type
+        //判断是否支持相册
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            self.present(self.imagePickerController, animated: true, completion:nil)
+        }
+    }
+    //MARK:- UIImagePickerControllerDelegate
+    func imagePickerController(_ picker:UIImagePickerController, didFinishPickingMediaWithInfo info: [String :Any]){
+        
+        let type:String = (info[UIImagePickerControllerMediaType] as! String)
+        //当选择的类型是图片
+        if type=="public.image"
+        {
+            let img = info[UIImagePickerControllerOriginalImage] as? UIImage
+            self.receiptImage.image = img
+            uploadingImage(image: img!)
+            picker.dismiss(animated:true, completion:nil)
+        }
+    }
+    func imagePickerControllerDidCancel(_ picker:UIImagePickerController){
+        picker.dismiss(animated:true, completion:nil)
     }
     
 
