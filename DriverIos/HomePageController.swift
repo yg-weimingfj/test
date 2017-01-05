@@ -67,8 +67,8 @@ class HomePageController: RAMAnimatedTabBarController , AMapLocationManagerDeleg
                 if let regeocode = regeocode {
 //                    print("\(regeocode.formattedAddress) \n \(regeocode.citycode!)-\(regeocode.adcode!)-\(location.horizontalAccuracy)m")
                     print("cc====\(regeocode)")
+                    self?.locationPost(location: location,regeocode: regeocode)
                     }
-                    self?.locationPost(location: location,regeocode: regeocode!)
                     print("lat:\(location.coordinate.latitude); lon:\(location.coordinate.longitude); accuracy:\(location.horizontalAccuracy)m")
                 
             }
