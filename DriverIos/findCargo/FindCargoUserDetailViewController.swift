@@ -23,7 +23,14 @@ class FindCargoUserDetailViewController: UIViewController {
         super.viewDidLoad()
         userLogo.layer.masksToBounds = true
         userLogo.layer.cornerRadius = 36
-        userDetail()
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                self.token = obj.token!
+                self.userDetail()
+            }
+        }
+        ()
         // Do any additional setup after loading the view.
     }
 
@@ -54,16 +61,16 @@ class FindCargoUserDetailViewController: UIViewController {
                     if(starNum != nil){
                         self.creditStar.rating = CGFloat(starNum!)
                     }
-                    var cargoNum = String(describing: list["CARGO_NUM"] as! Int)
-                    if(list["CARGO_NUM"] == nil || cargoNum.isEmpty){
+                    var cargoNum = list["CARGO_NUM"] as? String
+                    if(cargoNum == nil || (cargoNum?.isEmpty)!){
                         cargoNum = "0"
                     }
-                    self.publishCargoTimes.text = "累计发布"+cargoNum+"次"
-                    var orderNum = String(describing: list["ORDER_NUM"] as! Int)
-                    if(list["ORDER_NUM"] == nil || orderNum.isEmpty){
+                    self.publishCargoTimes.text = "累计发布"+cargoNum!+"次"
+                    var orderNum = list["ORDER_NUM"] as? String
+                    if(orderNum == nil || (orderNum?.isEmpty)!){
                         orderNum = "0"
                     }
-                    self.finishTransportNums.text = "完成"+orderNum+"个运单"
+                    self.finishTransportNums.text = "完成"+orderNum!+"个运单"
                 }
             }
         }

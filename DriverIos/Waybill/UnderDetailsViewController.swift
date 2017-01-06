@@ -224,13 +224,24 @@ class UnderDetailsViewController: UIViewController , UIImagePickerControllerDele
         }
     }
     func cellPhone() {
-        if #available(iOS 10, *) {
-            print("跳转电话界面")
-            UIApplication.shared.open(URL(string: "tel://"+tel)!, options: [:], completionHandler: nil)
-        }else{
-            UIApplication.shared.openURL(URL(string: "tel://"+tel)!)
+        if(tel != nil && !(tel.isEmpty)){
+            let alertController = UIAlertController(title: tel,
+                                                    message: nil, preferredStyle: .alert)
+            let alertCancelAction = UIAlertAction(title:"取消",style: .cancel,handler: nil)
+            let alertActionOK = UIAlertAction(title: "拨打", style: .default, handler: {
+                action in
+                if #available(iOS 10, *) {
+                    print("跳转电话界面")
+                    UIApplication.shared.open(URL(string: "tel://"+self.tel)!, options: [:], completionHandler: nil)
+                }else{
+                    UIApplication.shared.openURL(URL(string: "tel://"+self.tel)!)
+                }
+            })
+            alertController.addAction(alertCancelAction)
+            alertController.addAction(alertActionOK)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
         }
-        
     }
     func presentUpload() {
         present(self.uploadAlertController, animated:true, completion: nil)

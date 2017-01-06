@@ -11,15 +11,17 @@ import UIKit
 class EmptyCarListViewController: UIViewController {
     fileprivate var models = [Any]()
     
-    private let  defaulthttp = DefaultHttp()
-    private var token = "D681CD4B984048C6B8FE785F82FD9ADA"
-    
+    fileprivate let  defaulthttp = DefaultHttp()
+    fileprivate var token = ""
+
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.emptyCargoInfo(ustoken:(self.token))
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.showsHorizontalScrollIndicator = false
         let buttonXib  = UINib(nibName : "EmptyCarUpload",bundle: nil)
         self.tableView.register(buttonXib,forCellReuseIdentifier: "emptyCarUpload")
         
@@ -30,6 +32,13 @@ class EmptyCarListViewController: UIViewController {
         let taobaoHeader = QQVideoRefreshHeader(frame: CGRect(x: 0,y: 0,width: self.view.bounds.width,height: 50))
         _ = self.tableView.setUpHeaderRefresh(taobaoHeader) { [weak self] in
             self?.emptyCargoInfo(ustoken:(self?.token)!)
+        }
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                self.token = obj.token!
+                self.emptyCargoInfo(ustoken:(self.token))
+            }
         }
     }
 
@@ -118,6 +127,7 @@ extension EmptyCarListViewController : UITableViewDataSource,UITableViewDelegate
             cell.destAreaLabel.frame = destAreaFrame
             cell.destAreaLabel.text = cellMap["to_place"] as! String?
             cell.destAreaLabel.sizeToFit()
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
             return cell
         }
     }
@@ -133,6 +143,49 @@ extension EmptyCarListViewController : UITableViewDataSource,UITableViewDelegate
             vc.destAreaValue = cellMap["to_place"] as! String?
             self.present(vc, animated: true, completion: nil)
         }
+    }
+    //允许编辑cell
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if(indexPath.row != models.count){
+            return true
+        }
+        return false
+    }
+    
+    //右滑触发删除按钮
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.init(rawValue: 1)!
+    }
+    
+    //点击删除cell时触发
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
+        let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+        let emptyId = cellMap["report_id"] as! String
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String
         
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.idlevechile.delete","time":strNowTime,"report_id":emptyId]
+        
+        defaulthttp.httpPost(parame: des){results in
+            if let result:String = results["result"] as! String?{
+                if result == "1"{
+                    self.emptyCargoInfo(ustoken:(self.token))
+                }else{
+                    let info:String = results["resultInfo"] as! String!
+                    self.alertMsg(st: info)
+                }
+            }
+            print("JSON: \(results)")
+        }
+    }
+    private func alertMsg(st:String){
+        let alertController = UIAlertController(title: st,message: nil, preferredStyle: .alert)
+        
+        let timeAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+        alertController.addAction(timeAction)
+        //显示提示框
+        self.present(alertController, animated: true, completion: nil)
     }
 }

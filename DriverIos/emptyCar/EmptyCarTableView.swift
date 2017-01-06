@@ -12,13 +12,12 @@ class EmptyCarTableView: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     fileprivate var models = [Any]()
     private let  defaulthttp = DefaultHttp()
-    private var token = "D681CD4B984048C6B8FE785F82FD9ADA"
+    private var token = ""
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.emptyCargoHistoryInfo(ustoken:(self.token))
         tableView.delegate = self
         tableView.dataSource = self
         let xib = UINib(nibName: "EmptyCarRecordCell", bundle: nil) //nibName指的是我们创建的Cell文件名
@@ -29,6 +28,13 @@ class EmptyCarTableView: UIViewController,UITableViewDelegate,UITableViewDataSou
         let taobaoHeader = QQVideoRefreshHeader(frame: CGRect(x: 0,y: 0,width: self.view.bounds.width,height: 50))
         _ = self.tableView.setUpHeaderRefresh(taobaoHeader) { [weak self] in
             self?.emptyCargoHistoryInfo(ustoken:(self?.token)!)
+        }
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                self.token = obj.token!
+                self.emptyCargoHistoryInfo(ustoken:(self.token))
+            }
         }
     }
 

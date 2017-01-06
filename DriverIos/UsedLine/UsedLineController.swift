@@ -36,7 +36,6 @@ class UsedLineController: UIViewController,UITableViewDelegate,UITableViewDataSo
         isDelete = false
         self.tableView.reloadData()
     }
-
     
     private let cellId = "usedLineItemCell"
     private var token = ""

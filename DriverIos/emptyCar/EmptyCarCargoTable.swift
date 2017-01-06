@@ -11,7 +11,7 @@ import UIKit
 class EmptyCarCargoTable: UIViewController {
     fileprivate var models = [Any]()
     private let  defaulthttp = DefaultHttp()
-    private var token = "D681CD4B984048C6B8FE785F82FD9ADA"
+    private var token = ""
     @IBOutlet weak var tableView: UITableView!
     var index = 0
     var chooseTime : String = ""
@@ -19,7 +19,6 @@ class EmptyCarCargoTable: UIViewController {
     var destAreaCode : String! = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.matchCargos(ustoken: self.token)
         tableView.delegate = self
         tableView.dataSource = self
         let xib = UINib(nibName: "FindCargoCell", bundle: nil) //nibName指的是我们创建的Cell文件名
@@ -33,7 +32,13 @@ class EmptyCarCargoTable: UIViewController {
                self?.matchCargos(ustoken: (self?.token)!)
             })
         }
-        self.tableView.beginHeaderRefreshing()
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                self.token = obj.token!
+                self.matchCargos(ustoken:(self.token))
+            }
+        }
     }
     func matchCargos(ustoken:String){
         let date = Date()
@@ -129,6 +134,15 @@ extension EmptyCarCargoTable :UITableViewDelegate,UITableViewDataSource{
         }
         cell.weightLabel.text = weigthValue
         cell.carTypeLabel.text = cartypeValue
+        let userLogoAction = UITapGestureRecognizer(target:self,action:#selector(userMsgDetail(recognizer :)))
+        cell.userLogoImage.addGestureRecognizer(userLogoAction)
+        cell.userLogoImage.isUserInteractionEnabled = true
+        cell.userLogoImage.accessibilityValue = cellMap["user_id"] as? String
+        
+        let phoneAction = UITapGestureRecognizer(target:self,action:#selector(cellPhone(recognizer :)))
+        cell.phoneImage.addGestureRecognizer(phoneAction)
+        cell.phoneImage.isUserInteractionEnabled = true
+        cell.phoneImage.accessibilityValue = cellMap["con_phone"] as? String
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -137,6 +151,38 @@ extension EmptyCarCargoTable :UITableViewDelegate,UITableViewDataSource{
         let sb = UIStoryboard(name: "emptyCarUpload", bundle:nil)
         let vc = sb.instantiateViewController(withIdentifier: "emptyCarTransportDetail") as! EmptyCarTransportDetail
         vc.transportId = cellMap["cargo_id"] as? String
+        self.present(vc, animated: true, completion: nil)
+    }
+    @objc fileprivate func cellPhone(recognizer:UIPanGestureRecognizer) {
+        let phone = recognizer.view?.accessibilityValue
+        //        let cellMap:Dictionary<String,Any> = self.dataAtrr[index!] as! [String:Any]
+        //        let phone = cellMap["receiver_phone"] as! String?
+        if(phone != nil && !(phone?.isEmpty)!){
+            let alertController = UIAlertController(title: phone,
+                                                    message: nil, preferredStyle: .alert)
+            let alertCancelAction = UIAlertAction(title:"取消",style: .cancel,handler: nil)
+            let alertActionOK = UIAlertAction(title: "拨打", style: .default, handler: {
+                action in
+                if #available(iOS 10, *) {
+                    print("跳转电话界面")
+                    UIApplication.shared.open(URL(string: "tel://"+phone!)!, options: [:], completionHandler: nil)
+                }else{
+                    UIApplication.shared.openURL(URL(string: "tel://"+phone!)!)
+                }
+            })
+            alertController.addAction(alertCancelAction)
+            alertController.addAction(alertActionOK)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    @objc fileprivate func userMsgDetail(recognizer:UIPanGestureRecognizer){
+        //        let index = recognizer.view?.tag
+        //        let cellMap:Dictionary<String,Any> = self.models[index!] as! [String:Any]
+        let sb = UIStoryboard(name: "findCargoTable", bundle:nil)
+        let vc = sb.instantiateViewController(withIdentifier: "findCargoUserDetailView") as! FindCargoUserDetailViewController
+        vc.userId = recognizer.view?.accessibilityValue
         self.present(vc, animated: true, completion: nil)
     }
 }

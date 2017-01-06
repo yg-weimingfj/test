@@ -13,13 +13,13 @@ class EditEmptyCarRecordTableView: UIViewController {
     var valueChange :((_ emptyId:String)->Void)?
     fileprivate var models = [Any]()
     private let  defaulthttp = DefaultHttp()
-    private var token = "D681CD4B984048C6B8FE785F82FD9ADA"
-    
+    private var token = ""
+    var checkArray : [String] = []
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.editEmptyCarRecord(ustoken:(self.token))
+
         tableView.delegate = self
         tableView.dataSource = self
         let xib = UINib(nibName: "EditEmptyCarCell", bundle: nil) //nibName指的是我们创建的Cell文件名
@@ -30,6 +30,13 @@ class EditEmptyCarRecordTableView: UIViewController {
         let taobaoHeader = QQVideoRefreshHeader(frame: CGRect(x: 0,y: 0,width: self.view.bounds.width,height: 50))
         _ = self.tableView.setUpHeaderRefresh(taobaoHeader) { [weak self] in
             self?.editEmptyCarRecord(ustoken:(self?.token)!)
+        }
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                self.token = obj.token!
+                self.editEmptyCarRecord(ustoken:(self.token))
+            }
         }
     }
     func editEmptyCarRecord(ustoken:String){
@@ -43,7 +50,13 @@ class EditEmptyCarRecordTableView: UIViewController {
                 if result == "1"{
                     let obj = results["resultObj"]  as! [String:Any]
                     let list = obj["vehicle_idle"] as! [Any]
-                    self.models = list
+                    var cellList:[Any] = []
+                    for map in list{
+                        var cellMap:Dictionary<String,Any> = map as! [String:Any]
+                        cellMap["isCheck"] = "N"
+                        cellList.append(cellMap)
+                    }
+                    self.models = cellList
                     self.tableView.reloadData()
                     self.tableView.endHeaderRefreshing(delay: 0.5)
                 }else{
@@ -52,7 +65,6 @@ class EditEmptyCarRecordTableView: UIViewController {
                 }
             }
             print("JSON: \(results)")
-            
         }
     }
     private func tishi(st:String){
@@ -89,6 +101,12 @@ extension EditEmptyCarRecordTableView : UITableViewDelegate,UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "editEmptyCarCell", for: indexPath) as! EditEmptyCarCell
         let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+        let isCheck = (cellMap["isCheck"] as? String!)!
+        if("N" == isCheck){
+            cell.checkImageView.image = UIImage(named:"no_check")
+        }else if("Y" == isCheck){
+            cell.checkImageView.image = UIImage(named:"check")
+        }
         cell.sourceAreaLabel.text = cellMap["from_place"] as! String?
         cell.sourceAreaLabel.sizeToFit()
         var fromIamgeFrame = cell.fromImageView.frame
@@ -103,7 +121,25 @@ extension EditEmptyCarRecordTableView : UITableViewDelegate,UITableViewDataSourc
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
-        valueChange?((cellMap["report_id"] as? String!)!)
+        let cell = tableView.cellForRow(at: indexPath) as! EditEmptyCarCell
+        var cellMap:Dictionary<String,Any> = self.models[indexPath.row] as! [String:Any]
+        let reportId = (cellMap["report_id"] as? String!)!
+        let isCheck = cellMap["isCheck"] as? String!
+        if(isCheck == "N"){
+            checkArray.append(reportId!)
+            cell.checkImageView.image = UIImage(named:"check")
+            cellMap["isCheck"] = "Y"
+        }else if(isCheck == "Y"){
+            for i in 0..<checkArray.count{
+                if(reportId == checkArray[i]){
+                    checkArray.remove(at: i)
+                    break
+                }
+            }
+            cell.checkImageView.image = UIImage(named:"no_check")
+            cellMap["isCheck"] = "N"
+        }
+        self.models[indexPath.row] = cellMap
+        valueChange?(checkArray.joined(separator: ","))
     }
 }

@@ -14,12 +14,18 @@ class EditEmtpyCarRecordView: UIViewController {
     
     private let  defaulthttp = DefaultHttp()
     
-    private var token = "D681CD4B984048C6B8FE785F82FD9ADA"
+    private var token = ""
     
     var editEmptyTable : EditEmptyCarRecordTableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                self.token = obj.token!
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,11 +46,13 @@ class EditEmtpyCarRecordView: UIViewController {
             timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
             let strNowTime = timeFormatter.string(from: date) as String
             
-            let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.idlevechile.delete","time":strNowTime,"report_id":emptyId]
+            let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.idlevechile.delete","time":strNowTime,"report_id":emptyId,"is_his":"1"]
             
             defaulthttp.httpPost(parame: des){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
+                       self.emptyId = ""
+                        self.editEmptyTable.checkArray = []
                        self.editEmptyTable.viewDidLoad()
                     }else{
                         let info:String = results["resultInfo"] as! String!

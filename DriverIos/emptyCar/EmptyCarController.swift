@@ -13,7 +13,7 @@ class EmptyCarController: UIViewController {
     
     private let  defaulthttp = DefaultHttp()
 
-    private var token = "D681CD4B984048C6B8FE785F82FD9ADA"
+    private var token = ""
     
     var parentController: EmptyCarListViewController!
     
@@ -34,7 +34,7 @@ class EmptyCarController: UIViewController {
     var destCityValue :String! = "城市"
     var destTownValue : String! = "区/镇"
 
-    var timeValue : String!
+    var timeValue : String! = ""
     
     var alertController : UIAlertController!
     var areaView : AreaDropDownView!
@@ -68,7 +68,12 @@ class EmptyCarController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                self.token = obj.token!
+            }
+        }
         // Do any additional setup after loading the view.
         let sourceAreaViewUI = UITapGestureRecognizer(target: self, action: #selector(sourceAreaPickViewShow))
         sourceAreaView.addGestureRecognizer(sourceAreaViewUI)
@@ -258,13 +263,15 @@ class EmptyCarController: UIViewController {
             timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
             let strNowTime = timeFormatter.string(from: date) as String
             
-            let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.idlevechile.add","time":strNowTime,"lng":"116.396574","lat":"39.992706","addr":"123","idle_time":self.timeValue,"from_place":self.sourceAreaLabel.text! as String,"place_from_code":self.sourceAreaCode,"tareas":self.destAreaLabel.text! as String,"tcodes":self.destAreaCode]
+            let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.idlevechile.add","time":strNowTime,"lng":self.getAreaInfo((self.sourceAreaCode)!)["LON"] as! String,"lat":self.getAreaInfo((self.sourceAreaCode)!)["LAT"] as! String,"addr":self.getAreaInfo((self.sourceAreaCode)!)["FULL_TEXT"] as! String,"idle_time":self.timeValue,"from_place":self.sourceAreaLabel.text! as String,"place_from_code":self.sourceAreaCode,"tareas":self.destAreaLabel.text! as String,"tcodes":self.destAreaCode]
             
             defaulthttp.httpPost(parame: des){results in
                 if let result:String = results["result"] as! String?{
                     if result == "1"{
                         self.dismiss(animated: true, completion: nil)
-                        self.parentController.emptyCargoInfo(ustoken: self.token)
+                        if(self.parentController != nil){
+                            self.parentController.emptyCargoInfo(ustoken: self.token)
+                        }
                     }else{
                         let info:String = results["resultInfo"] as! String!
                         self.alertMsg(st: info)
@@ -282,6 +289,13 @@ class EmptyCarController: UIViewController {
         alertController.addAction(timeAction)
         //显示提示框
         self.present(alertController, animated: true, completion: nil)
+    }
+    private func getAreaInfo(_ areaCode : String) ->[String : Any]{
+        let querySQL = "SELECT CODE,PARENT_CODE,TEXT,PIN_YIN,REMARK,SIMPLE_TEXT,PROVINCE,SIMPLE_CITY,PROVINCE,SIMPLE_CITY,LEVEL,FULL_TEXT,CITY_TEXT,LON,LAT,IS_DIRECTLY_UNDER FROM 'base_area_tab' where CODE = '\(areaCode)'"
+        // 取出查询到的结果
+        let resultDataArr = SQLManager.shareInstance().queryDataBase(querySQL: querySQL)
+        return resultDataArr![0]
+        
     }
     @IBAction func emptyCarBack(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

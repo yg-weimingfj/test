@@ -382,6 +382,14 @@
                                     <segue destination="UPx-ge-byw" kind="embed" id="ROM-jg-EYW"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVl-JZ-QeZ">
+                                <rect key="frame" x="0.0" y="106" width="375" height="1"/>
+                                <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="hOz-Xm-PhT"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="uVS-wn-Jmf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -394,10 +402,13 @@
                             <constraint firstItem="Mdo-KB-uR6" firstAttribute="leading" secondItem="QZs-kc-gHt" secondAttribute="leading" id="VkO-sm-awv"/>
                             <constraint firstItem="aHd-wU-tE2" firstAttribute="leading" secondItem="QZs-kc-gHt" secondAttribute="leading" id="aHw-AU-Hwd"/>
                             <constraint firstAttribute="trailing" secondItem="aHd-wU-tE2" secondAttribute="trailing" id="bJP-q6-lS1"/>
-                            <constraint firstItem="mWT-RT-CTh" firstAttribute="top" secondItem="Mdo-KB-uR6" secondAttribute="bottom" constant="10" id="beq-bQ-klv"/>
+                            <constraint firstItem="KVl-JZ-QeZ" firstAttribute="leading" secondItem="QZs-kc-gHt" secondAttribute="leading" id="dM8-rq-MZx"/>
+                            <constraint firstItem="KVl-JZ-QeZ" firstAttribute="top" secondItem="Mdo-KB-uR6" secondAttribute="bottom" constant="1" id="fNp-Gd-TGT"/>
                             <constraint firstAttribute="trailing" secondItem="mWT-RT-CTh" secondAttribute="trailing" id="k17-ut-PSB"/>
                             <constraint firstAttribute="trailing" secondItem="Mdo-KB-uR6" secondAttribute="trailing" id="mGU-YL-zxG"/>
+                            <constraint firstAttribute="trailing" secondItem="KVl-JZ-QeZ" secondAttribute="trailing" id="vjw-y0-F8C"/>
                             <constraint firstAttribute="trailing" secondItem="Rzs-uM-yNz" secondAttribute="trailing" id="vpt-A9-OVG"/>
+                            <constraint firstItem="mWT-RT-CTh" firstAttribute="top" secondItem="KVl-JZ-QeZ" secondAttribute="bottom" constant="8" symbolic="YES" id="xp4-F8-1bp"/>
                         </constraints>
                     </view>
                     <connections>
@@ -408,7 +419,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="efC-7b-NNO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2268" y="1548"/>
+            <point key="canvasLocation" x="2268" y="1547.6761619190406"/>
         </scene>
         <!--Empty Car Transport Detail-->
         <scene sceneID="CmR-3v-70e">
@@ -711,7 +722,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="callPhone" destination="wUD-qn-MbI" id="wA0-zh-dPH"/>
+                        <outlet property="callPhone" destination="QE6-IV-joZ" id="064-qm-0UI"/>
                         <outlet property="cargoOrderLabel" destination="sNJ-GK-sAA" id="qzv-6g-Ikw"/>
                         <outlet property="cargoSizeLabel" destination="WXC-HK-pbE" id="ywe-jD-Sbi"/>
                         <outlet property="cargoTypeLabel" destination="fnN-9n-op4" id="TDL-tz-89W"/>

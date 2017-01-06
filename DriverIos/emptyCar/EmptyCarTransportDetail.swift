@@ -11,8 +11,8 @@ import UIKit
 class EmptyCarTransportDetail: UIViewController {
 
     private let  defaulthttp = DefaultHttp()
-    private var token = "D681CD4B984048C6B8FE785F82FD9ADA"
-    
+    private var token = ""
+    private var driverId = ""
     @IBOutlet weak var sourceAreaLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var destAreaLabel: UILabel!
@@ -43,9 +43,40 @@ class EmptyCarTransportDetail: UIViewController {
         truckTypeLabel.layer.borderColor = UIColor(red: 255/255, green: 192/255, blue: 0/255, alpha: 0.5).cgColor
         userLogoImage.layer.cornerRadius = 32
         userLogoImage.layer.masksToBounds = true
-        self.transportDetail(ustoken: self.token)
+
+        let thumsUpImageAction = UITapGestureRecognizer(target:self,action:#selector(self.thumsUpMethod(recognizer :)))
+        self.thumsUpImage.addGestureRecognizer(thumsUpImageAction)
+        self.thumsUpImage.isUserInteractionEnabled = true
+        orderImage.image=LBXScanWrapper.createCode(codeType: "CIQRCodeGenerator", codeString: transportId, size: CGSize(width: 64,height: 64), qrColor: UIColor.black, bkColor: UIColor.white)
+        $.getObj("driverUserInfo") { (obj) -> () in
+            if let obj = obj as? Student{
+                print("\(obj.userId) , \(obj.name)")
+                self.token = obj.token!
+                self.driverId = obj.userId!
+                self.transportDetail(ustoken:(self.token))
+            }
+        }
     }
     
+    @objc fileprivate func thumsUpMethod(recognizer:UIPanGestureRecognizer) {
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd'T'HH:mm:ss"
+        let strNowTime = timeFormatter.string(from: date) as String
+        let des : Dictionary<String,Any> = ["token":token,"method":"yunba.carrier.v1.cargo.follow","time":strNowTime,"cargo_id":transportId,"driver_id":driverId]
+        defaulthttp.httpPost(parame: des){results in
+            if let result:String = results["result"] as! String?{
+                let info:String = results["resultInfo"] as! String!
+                if result == "1"{
+                    self.tishi(st: info)
+                }else{
+                    self.tishi(st: info)
+                }
+            }
+            print("JSON: \(results)")
+        }
+    }
+
     func transportDetail(ustoken:String){
         let date = Date()
         let timeFormatter = DateFormatter()
@@ -58,7 +89,7 @@ class EmptyCarTransportDetail: UIViewController {
                     let list:Dictionary<String,Any> = results["resultObj"]  as! [String:Any]
                     self.sourceAreaLabel.text = self.getAreaInfo((list["place_from_code"] as? String)!)["TEXT"] as! String?
                     self.destAreaLabel.text = self.getAreaInfo((list["place_to_code"] as? String)!)["TEXT"] as! String?
-                    self.distanceLabel.text = (list["estimated_distance"] as? String)! + "公里"
+                    self.distanceLabel.text = (list["estimated_distance"] as? String)!
                     self.cargoOrderLabel.text = list["order_no"] as? String
                     self.publishTimeLabel.text = list["post_time"] as? String
                     self.pickCargoTimeLabel.text = list["post_time"] as? String
@@ -78,7 +109,7 @@ class EmptyCarTransportDetail: UIViewController {
                     if(cargoType == nil || (cargoType?.isEmpty)!){
                         cargoType = "不限"
                     }
-                    self.cargoTypeLabel.text = truckType
+                    self.cargoTypeLabel.text = cargoType
                     var cargoSize = list["cargo_size"] as? String
                     let cargoUnit = list["cargo_unit"] as? String
                     if(cargoSize == nil || (cargoSize?.isEmpty)!){
@@ -126,12 +157,22 @@ class EmptyCarTransportDetail: UIViewController {
     }
     @objc fileprivate func cellPhone(recognizer:UIPanGestureRecognizer) {
         if(phoneNum != nil && !(phoneNum?.isEmpty)!){
-            if #available(iOS 10, *) {
-                print("跳转电话界面")
-                UIApplication.shared.open(URL(string: "tel://"+phoneNum!)!, options: [:], completionHandler: nil)
-            }else{
-                UIApplication.shared.openURL(URL(string: "tel://"+phoneNum!)!)
-            }
+            let alertController = UIAlertController(title: phoneNum,
+                                                    message: nil, preferredStyle: .alert)
+            let alertCancelAction = UIAlertAction(title:"取消",style: .cancel,handler: nil)
+            let alertActionOK = UIAlertAction(title: "拨打", style: .default, handler: {
+                action in
+                if #available(iOS 10, *) {
+                    print("跳转电话界面")
+                    UIApplication.shared.open(URL(string: "tel://"+self.phoneNum!)!, options: [:], completionHandler: nil)
+                }else{
+                    UIApplication.shared.openURL(URL(string: "tel://"+self.phoneNum!)!)
+                }
+            })
+            alertController.addAction(alertCancelAction)
+            alertController.addAction(alertActionOK)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
