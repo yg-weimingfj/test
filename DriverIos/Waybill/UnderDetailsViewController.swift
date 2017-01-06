@@ -224,7 +224,7 @@ class UnderDetailsViewController: UIViewController , UIImagePickerControllerDele
         }
     }
     func cellPhone() {
-        if(tel != nil && !(tel.isEmpty)){
+        if(!(tel.isEmpty)){
             let alertController = UIAlertController(title: tel,
                                                     message: nil, preferredStyle: .alert)
             let alertCancelAction = UIAlertAction(title:"取消",style: .cancel,handler: nil)
